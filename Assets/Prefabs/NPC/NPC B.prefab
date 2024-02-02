@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4165964616892623155}
   - component: {fileID: 779284021751839511}
   - component: {fileID: 7320732992014596335}
+  - component: {fileID: 6563368616513798739}
   m_Layer: 0
   m_Name: NPC B
   m_TagString: Untagged
@@ -124,3 +125,15 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &6563368616513798739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26592578192418320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2e544129c9ea11449d5559abb65b509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
