@@ -10,10 +10,12 @@ public class GUIController : MonoBehaviour
     [SerializeField]
     public MenuScriptableObject menuSO = null;
 
+    public MenuStateMachine menuStateMachine;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        menuStateMachine = new MenuStateMachine(this, menuSO);
     }
 
     // Update is called once per frame
@@ -25,13 +27,20 @@ public class GUIController : MonoBehaviour
     void OnGUI()
     {
         // Starts an area to draw elements
+        /*
         GUILayout.BeginArea(new Rect(10, 10, 100, 100));
         if (GUILayout.Button("Rotate Gun"))
         {
             Debug.Log("Rotating Gun");
             menuSO.rotateGun();
         }
-        //GUILayout.Button("Or me");
         GUILayout.EndArea();
+        */
+        menuStateMachine.Update();
+    }
+
+    public void rotateGun()
+    {
+        menuSO.rotateGun();
     }
 }
