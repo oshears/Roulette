@@ -43,11 +43,9 @@ public abstract class MenuState : IState
         this.owner = owner;
         this.menuSO = menuSO;
     }
-
     public virtual void Enter() { }
     public virtual void Execute() { }
     public virtual void Exit() { }
-
     protected void changeState(MenuState newState)
     {
         owner.menuStateMachine.ChangeState(newState);
@@ -137,18 +135,6 @@ public class CompareCardsPhaseState : MenuState
         Debug.Log("updating test state");
         GUILayout.BeginArea(new Rect(10, 10, 500, 500));
         GUILayout.Label("Here the game manager would compare all of the cards that each player played.");
-
-        //for (int i = 1; i < 7; i++)
-        //{
-        //    if (GUILayout.Button("Card #" + i))
-        //    {
-        //        changeState(new GameInitState(owner, menuSO));
-        //    }
-        //}
-        //if (GUILayout.Button("Confirm"))
-        //{
-        //    changeState(new GameInitState(owner, menuSO));
-        //}
         GUILayout.EndArea();
     }
 
