@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
 
-    Animation animation = null;
+    Animation anim = null;
     Animator animator = null;
 
     bool playingDeathAnimation = false;
@@ -13,8 +13,8 @@ public class NPCController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animation = this.GetComponent<Animation>();
-        animator = this.GetComponent<Animator>();
+        anim = GetComponent<Animation>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,8 +24,6 @@ public class NPCController : MonoBehaviour
             playingDeathAnimation = !playingDeathAnimation;
 
             animator.SetBool("npcIsDead", playingDeathAnimation);
-            
-            print("npcIsDead: " +  playingDeathAnimation);
         }
         
     }
