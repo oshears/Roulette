@@ -99,7 +99,7 @@ public class GameDrawPhaseState : MenuState
 {
     public GameDrawPhaseState(GUIController owner, MenuScriptableObject menuSO) : base(owner, menuSO) { }
 
-    int selectedCard = 0;
+    int selectedCard = -1;
 
     public override void Execute()
     {
@@ -107,12 +107,12 @@ public class GameDrawPhaseState : MenuState
         GUILayout.BeginArea(new Rect(10, 10, 500, 500));
         GUILayout.Label("Here the game manager would allow the player to pick one card from their hand and confirm.");
 
-        if (selectedCard > 0)
+        if (selectedCard >= 0)
         {
             GUILayout.Label("Selected Card: " + (selectedCard + 1));
         }
         
-        for(int i = 0; i < 7; i++)
+        for(int i = 0; i < 6; i++)
         {
             if (GUILayout.Button("Card #" + (i+1)))
             {
