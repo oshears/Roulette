@@ -84,3 +84,6 @@ crashlytics-build.properties
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Misc Visual Studio Files
+.vsconfig
