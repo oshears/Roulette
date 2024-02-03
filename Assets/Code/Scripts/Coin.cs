@@ -45,7 +45,6 @@ public class Coin : MonoBehaviour
 
     public void FlipCoin()
     {
-        GetComponent<Renderer>().enabled = true;
         Side side = (Side) Random.Range(0, 2);
         StartCoroutine(StartFlipAnimation(side));
     }
