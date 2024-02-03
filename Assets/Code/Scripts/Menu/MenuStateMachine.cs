@@ -65,6 +65,10 @@ public class DebugState : MenuState
             Debug.Log("Rotating Gun");
             menuSO.rotateGun();
         }
+        if (GUILayout.Button("Flip coin"))
+        {
+            owner.createCoin();
+        }
         if (GUILayout.Button("Start Game"))
         {
             changeState(new GameInitState(owner, menuSO));   

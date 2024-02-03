@@ -12,6 +12,8 @@ public class GUIController : MonoBehaviour
 
     public MenuStateMachine menuStateMachine;
 
+    public Coin coin;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,5 +44,14 @@ public class GUIController : MonoBehaviour
     public void rotateGun()
     {
         menuSO.rotateGun();
+    }
+
+    public void createCoin()
+    {
+        //Debug.Log("Flipping a coin!");
+        //Coin coin = new Coin();
+        //coin.transform.position = new Vector3(-7.57f, 4.88f, -1.34f);
+        //Instantiate(new Coin());
+        Instantiate(coin, new Vector3(-7.57f, 4.88f, -1.34f), Quaternion.identity);
     }
 }
