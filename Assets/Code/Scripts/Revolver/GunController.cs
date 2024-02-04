@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+
+    [SerializeField] private MenuScriptableObject menuSO;
+
     // Start is called before the first frame update
     void Start()
     {
+        menuSO.shootGunEvent.AddListener(shootGun);
     }
 
     // Update is called once per frame
@@ -17,6 +21,11 @@ public class GunController : MonoBehaviour
             GetComponent<Animator>().SetBool("makeShot", true);
         }
 
+    }
+
+    void shootGun()
+    {
+        GetComponent<Animator>().SetBool("makeShot", true);
     }
 
 }

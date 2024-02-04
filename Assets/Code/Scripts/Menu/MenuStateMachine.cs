@@ -73,6 +73,10 @@ public class DebugState : MenuState
         {
             owner.increaseBulletCount();
         }
+        if (GUILayout.Button("Shoot Gun"))
+        {
+            menuSO.shootGun();
+        }
         if (GUILayout.Button("Start Game"))
         {
             changeState(new GameInitState(owner, menuSO));   

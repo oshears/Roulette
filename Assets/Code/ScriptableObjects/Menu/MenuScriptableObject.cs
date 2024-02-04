@@ -15,6 +15,8 @@ public class MenuScriptableObject : ScriptableObject
 
     public UnityEvent increaseBulletCountEvent;
 
+    public UnityEvent shootGunEvent;
+
     public void rotateGun()
     {
         rotateGunEvent?.Invoke();
@@ -23,5 +25,10 @@ public class MenuScriptableObject : ScriptableObject
     public void increaseBulletCount()
     {
         increaseBulletCountEvent?.Invoke();
+    }
+
+    public void shootGun()
+    {
+        shootGunEvent?.Invoke();
     }
 }

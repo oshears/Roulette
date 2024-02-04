@@ -590,6 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5568ae81d64499aa182e30303004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSO: {fileID: 0}
 --- !u!95 &637846335
 Animator:
   serializedVersion: 5
@@ -639,6 +640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9f5568ae81d64499aa182e30303004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuSO: {fileID: 11400000, guid: 9521913141b8a1149987b85e9d53e5e0, type: 2}
 --- !u!1 &742303822
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +718,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
