@@ -13,8 +13,15 @@ public class MenuScriptableObject : ScriptableObject
 
     public UnityEvent rotateGunEvent;
 
+    public UnityEvent increaseBulletCountEvent;
+
     public void rotateGun()
     {
         rotateGunEvent?.Invoke();
+    }
+
+    public void increaseBulletCount()
+    {
+        increaseBulletCountEvent?.Invoke();
     }
 }

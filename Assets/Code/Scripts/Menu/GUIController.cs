@@ -52,6 +52,11 @@ public class GUIController : MonoBehaviour
         //Coin coin = new Coin();
         //coin.transform.position = new Vector3(-7.57f, 4.88f, -1.34f);
         //Instantiate(new Coin());
-        Instantiate(coin, new Vector3(-7.57f, 4.88f, -1.34f), Quaternion.identity);
+        Instantiate(coin, new Vector3(-0.28f, 1.59f, -6.42f), Quaternion.identity);
+    }
+
+    public void increaseBulletCount()
+    {
+        menuSO.increaseBulletCount();
     }
 }

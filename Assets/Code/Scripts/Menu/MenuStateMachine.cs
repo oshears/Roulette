@@ -69,6 +69,10 @@ public class DebugState : MenuState
         {
             owner.createCoin();
         }
+        if (GUILayout.Button("Increase Bullet Count"))
+        {
+            owner.increaseBulletCount();
+        }
         if (GUILayout.Button("Start Game"))
         {
             changeState(new GameInitState(owner, menuSO));   
