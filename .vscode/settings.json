@@ -9,5 +9,6 @@
         "**/Thumbs.db": true,
         "**/*.meta": true,
         "**/.vscode": true
-    }
+    },
+    "dotnet.defaultSolution": "Roulette.sln"
 }
