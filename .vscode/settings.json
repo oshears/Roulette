@@ -8,7 +8,19 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "**/*.meta": true,
-        "**/.vscode": true
+        "**/.vscode": true,
+        "**/*.asset": true,
+        "Library": true,
+        "Temp": true,
+        "Logs": true,
+        "Packages": true,
+        "ProjectSettings": true,
+        "Assembly-CSharp*": true,
+        "Assembly-obj": true,
+        "obj": true,
+        "UserSettings": true,
+        ".vsconfig": true,
+        "**/*.sln": true,
     },
     "dotnet.defaultSolution": "Roulette.sln"
 }
