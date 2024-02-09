@@ -1,25 +1,27 @@
 public class GameManagerStateMachine
 {
-    GameManagerState _currentState;
+	GameManager _owner;
+	GameManagerState _currentState;
 
-    public GameManagerStateMachine(GameManager owner)
-    {
-        _currentState = new GameManagerInitState(owner);
-    }
+	public GameManagerStateMachine(GameManager owner)
+	{
+		_owner = owner;
+		// _currentState = new GameManagerInitState(owner);
+	}
 
-    public void ChangeState(GameManagerState newState)
-    {
-        if (_currentState != null)
-            _currentState.Exit();
+	public void ChangeState(GameManagerState newState)
+	{
+		if (_currentState != null)
+			_currentState.Exit();
 
-        _currentState = newState;
-        _currentState.Enter();
-    }
+		_currentState = newState;
+		_currentState.Enter();
+	}
 
-    public void Update()
-    {
-        if (_currentState != null) _currentState.Execute();
-    }
+	public void Update()
+	{
+		if (_currentState != null) _currentState.Execute();
+	}
 }
 
 

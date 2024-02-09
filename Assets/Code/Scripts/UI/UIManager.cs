@@ -6,57 +6,64 @@ using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
-    //UnityEvent rotateGunEvent;
-    [SerializeField]
-    public UIScriptableObject uiScriptableObject;
+	//UnityEvent rotateGunEvent;
+	public UIScriptableObject uiScriptableObject;
 
-    public UIManagerStateMachine stateMachine;
+	public UIManagerStateMachine stateMachine;
 
-    public Coin coin;
+	public Coin coin;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        stateMachine = new UIManagerStateMachine(this);
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		stateMachine = new UIManagerStateMachine(this);
+		stateMachine.ChangeState(new UIManagerDebugState(this));
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Update is called once per frame
+	void Update()
+	{
 
-    void OnGUI()
-    {
-        // Starts an area to draw elements
-        /*
-        GUILayout.BeginArea(new Rect(10, 10, 100, 100));
-        if (GUILayout.Button("Rotate Gun"))
-        {
-            Debug.Log("Rotating Gun");
-            uiScriptableObject.rotateGun();
-        }
-        GUILayout.EndArea();
-        */
-        stateMachine.Update();
-    }
+	}
 
-    public void rotateGun()
-    {
-        uiScriptableObject.OnRotateGun();
-    }
+	void OnGUI()
+	{
+		// Starts an area to draw elements
+		/*
+		GUILayout.BeginArea(new Rect(10, 10, 100, 100));
+		if (GUILayout.Button("Rotate Gun"))
+		{
+			Debug.Log("Rotating Gun");
+			uiScriptableObject.rotateGun();
+		}
+		GUILayout.EndArea();
+		*/
+		stateMachine.Update();
+	}
 
-    public void createCoin()
-    {
-        //Debug.Log("Flipping a coin!");
-        //Coin coin = new Coin();
-        //coin.transform.position = new Vector3(-7.57f, 4.88f, -1.34f);
-        //Instantiate(new Coin());
-        Instantiate(coin, new Vector3(-0.28f, 1.59f, -6.42f), Quaternion.identity);
-    }
+	public void RotateGun()
+	{
+		uiScriptableObject.OnRotateGun();
+	}
 
-    public void increaseBulletCount()
-    {
-        uiScriptableObject.OnIncreaseBulletCount();
-    }
+	// public void CreateCoin()
+	// {
+	// 	//Debug.Log("Flipping a coin!");
+	// 	//Coin coin = new Coin();
+	// 	//coin.transform.position = new Vector3(-7.57f, 4.88f, -1.34f);
+	// 	//Instantiate(new Coin());
+	// 	Instantiate(coin, new Vector3(-0.28f, 1.59f, -6.42f), Quaternion.identity);
+	// }
+	
+	public void StartCoinFlip()
+	{
+		Instantiate(coin, new Vector3(-0.28f, 1.59f, -6.42f), Quaternion.identity);
+	}
+
+	public void IncreaseBulletCount()
+	{
+		uiScriptableObject.OnIncreaseBulletCount();
+	}
+	
+
 }

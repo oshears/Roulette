@@ -6,9 +6,9 @@ public abstract class GameManagerState : IManagerState
 
     public GameManagerState(GameManager owner)
     {
-        this._owner = owner;
-        this._stateMachine = owner.stateMachine;
-        this._uiScriptableObject = owner.uiScriptableObject;
+        _owner = owner;
+        _stateMachine = owner.stateMachine;
+        _uiScriptableObject = owner.uiScriptableObject;
     }
     public virtual void Enter() {}
     public virtual void Execute() {}

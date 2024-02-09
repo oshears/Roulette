@@ -1,15 +1,22 @@
 public class GameManagerInitState : GameManagerState
 {
-    public GameManagerInitState(GameManager owner) : base(owner) { }
+	public GameManagerInitState(GameManager owner) : base(owner) { 
+		_uiScriptableObject.startGameEvent.AddListener(StartGameEventHandler);
+	}
 
-    override public void Execute() 
-    { 
-        // Reset Player Scores
-        _uiScriptableObject.OnResetScores();
+	override public void Execute() 
+	{ 
+		
 
-        // Go to New Round State
-        _stateMachine.ChangeState(new GameManagerNewRoundState(_owner));
+	}
 
-    }
-    
+	void StartGameEventHandler()
+	{
+		// Reset Player Scores
+		_uiScriptableObject.OnResetScores();
+
+		// Go to New Round State
+		_stateMachine.ChangeState(new GameManagerNewRoundState(_owner));
+	}
+	
 }

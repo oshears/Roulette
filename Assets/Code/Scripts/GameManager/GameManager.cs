@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         stateMachine = new GameManagerStateMachine(this);
+        stateMachine.ChangeState(new GameManagerInitState(this));
     }
 
     // Update is called once per frame
