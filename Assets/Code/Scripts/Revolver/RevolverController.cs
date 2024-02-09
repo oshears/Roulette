@@ -19,14 +19,14 @@ public class RevolverController : MonoBehaviour
     RevolverState state = RevolverState.NPC_1;
 
     [SerializeField]
-    MenuScriptableObject menuSO;
+    UIScriptableObject uiScriptableObject;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.SetLocalPositionAndRotation(transform.position, Quaternion.Euler(0, revolverRotations[0], 0));
 
-        menuSO?.rotateGunEvent.AddListener(rotateGunRight);
+        uiScriptableObject?.rotateGunEvent.AddListener(rotateGunRight);
     }
 
     // Update is called once per frame

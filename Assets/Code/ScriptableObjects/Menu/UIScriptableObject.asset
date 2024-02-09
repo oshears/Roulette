@@ -9,10 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d86fe2c75c402c4c8b00ec5050ffb3b, type: 3}
-  m_Name: MenuScriptableObject
+  m_Script: {fileID: 11500000, guid: 7ae5ffc55116feb43a82dabd370a0844, type: 3}
+  m_Name: UIScriptableObject
   m_EditorClassIdentifier: 
-  rotation: 0
   rotateGunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  increaseBulletCountEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  shootGunEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  dealCardsEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resetScoresEvent:
     m_PersistentCalls:
       m_Calls: []

@@ -13,12 +13,12 @@ public class UIBulletCounter : MonoBehaviour
     Sprite[] sprites;
 
     [SerializeField]
-    MenuScriptableObject menuSO;
+    UIScriptableObject menuSO;
 
     // Start is called before the first frame update
     void Start()
     {
-        menuSO.increaseBulletCountEvent.AddListener(updateBulletCount);
+        menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class UIBulletCounter : MonoBehaviour
         this.GetComponent<Image>().sprite = sprites[num_rounds];
     }
 
-    void updateBulletCount()
+    void IncreaseBulletCountEventHandler()
     {
         num_rounds = (num_rounds + 1) % 6;
     }

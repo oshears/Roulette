@@ -21,6 +21,7 @@
         "UserSettings": true,
         ".vsconfig": true,
         "**/*.sln": true,
+        "**/.vs": true,
     },
-    "dotnet.defaultSolution": "Roulette.sln"
+    "dotnet.defaultSolution": "Roulette.sln",
 }

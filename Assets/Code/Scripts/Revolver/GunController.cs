@@ -5,7 +5,7 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
 
-    [SerializeField] private MenuScriptableObject menuSO;
+    [SerializeField] private UIScriptableObject menuSO;
 
     // Start is called before the first frame update
     void Start()

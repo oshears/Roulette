@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GUIController : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     //UnityEvent rotateGunEvent;
     [SerializeField]
-    public MenuScriptableObject menuSO = null;
+    public UIScriptableObject uiScriptableObject;
 
-    public MenuStateMachine menuStateMachine;
+    public UIManagerStateMachine stateMachine;
 
     public Coin coin;
 
     // Start is called before the first frame update
     void Start()
     {
-        menuStateMachine = new MenuStateMachine(this, menuSO);
+        stateMachine = new UIManagerStateMachine(this);
     }
 
     // Update is called once per frame
@@ -34,16 +34,16 @@ public class GUIController : MonoBehaviour
         if (GUILayout.Button("Rotate Gun"))
         {
             Debug.Log("Rotating Gun");
-            menuSO.rotateGun();
+            uiScriptableObject.rotateGun();
         }
         GUILayout.EndArea();
         */
-        menuStateMachine.Update();
+        stateMachine.Update();
     }
 
     public void rotateGun()
     {
-        menuSO.rotateGun();
+        uiScriptableObject.OnRotateGun();
     }
 
     public void createCoin()
@@ -57,6 +57,6 @@ public class GUIController : MonoBehaviour
 
     public void increaseBulletCount()
     {
-        menuSO.increaseBulletCount();
+        uiScriptableObject.OnIncreaseBulletCount();
     }
 }
