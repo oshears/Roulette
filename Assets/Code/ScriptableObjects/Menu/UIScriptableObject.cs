@@ -30,30 +30,15 @@ public class UIScriptableObject : ScriptableObject
 		increaseBulletCountEvent?.Invoke();
 	}
 
-	public void OnShootGun()
-	{
-		shootGunEvent?.Invoke();
-	}
-	public void OnResetScores(){
-		resetScoresEvent.Invoke();
-	}
+	public void OnShootGun() => shootGunEvent?.Invoke();
+	
+	public void OnResetScores() => resetScoresEvent.Invoke();
 
-	public void OnStartGame(){
-		startGameEvent.Invoke();
-	}
+	public void OnStartGame() => startGameEvent.Invoke();
 	
-	public void OnDrawCards()
-	{
-		drawCardsEvent.Invoke();
-	}
+	public void OnDrawCards() => drawCardsEvent.Invoke();
 	
-	public void OnPlayCard()
-	{
-		playCardEvent.Invoke();
-	}
+	public void OnPlayCard() => playCardEvent.Invoke();
 	
-	public void OnFlipCoin()
-	{
-		flipCoinEvent.Invoke();
-	}
+	public void OnFlipCoin() => flipCoinEvent.Invoke();
 }

@@ -18,9 +18,6 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		GUILayout.EndArea();
 	}
 	
-	void FlipCoinEventHandler()
-	{
-		_owner.StartCoinFlip();
-	}
+	void FlipCoinEventHandler() => _owner.StartCoinFlip();
 
 }

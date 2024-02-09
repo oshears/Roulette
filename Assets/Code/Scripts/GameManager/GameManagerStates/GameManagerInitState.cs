@@ -15,6 +15,9 @@ public class GameManagerInitState : GameManagerState
 		// Reset Player Scores
 		_uiScriptableObject.OnResetScores();
 
+		// Initialize Deck
+		_deckScriptableObject.OnShuffleDeck();
+		
 		// Go to New Round State
 		_stateMachine.ChangeState(new GameManagerNewRoundState(_owner));
 	}

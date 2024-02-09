@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public UIScriptableObject uiScriptableObject;
     // public NPCScriptableObject _npcScriptableObject;
-    // public DeckScriptableObject _deckScriptableObject;
+    public DeckScriptableObject deckScriptableObject;
 
     public GameManagerStateMachine stateMachine;
 
