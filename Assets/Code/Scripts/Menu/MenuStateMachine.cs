@@ -2,23 +2,16 @@ using static UnityEditorInternal.VersionControl.ListControl;
 using UnityEngine;
 using UnityEditor;
 
-public interface IState
-{
-    public void Enter();
-    public void Execute();
-    public void Exit();
-}
-
 public class MenuStateMachine
 {
-    IState currentState;
+    MenuState currentState;
 
     public MenuStateMachine(GUIController owner, MenuScriptableObject menuSO)
     {
         currentState = new DebugState(owner, menuSO);
     }
 
-    public void ChangeState(IState newState)
+    public void ChangeState(MenuState newState)
     {
         if (currentState != null)
             currentState.Exit();
@@ -33,7 +26,7 @@ public class MenuStateMachine
     }
 }
 
-public abstract class MenuState : IState
+public abstract class MenuState : IManagerState
 {
     protected GUIController owner;
     protected MenuScriptableObject menuSO;
