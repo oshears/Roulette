@@ -31,17 +31,13 @@ public class CardHandController : MonoBehaviour
 	{
 		int cardSpreadDistance = 100 * _numCards;
 		int distanceBetweenCards = cardSpreadDistance / _numCards;
-		float firstCardPositionX = transform.position.x - (cardSpreadDistance / 2);
 		float currentCardPositionX = distanceBetweenCards * 0.5f;
-		
+		int startingOffset = cardSpreadDistance / 2;
 		
 		
 		int maxShiftDown = 20 * _numCards;
 		int minShiftDown = -1 * (maxShiftDown / 2);
 		int shiftBetweenCards = maxShiftDown / _numCards;
-		float firstCardPositionY = (transform.position.y + 300f);
-		// float firstCardShiftDown = transform.position.y - maxShiftDown;
-		// float currentCardShiftDown = shiftBetweenCards;
 		float currentCardPositionY = minShiftDown;
 		
 
@@ -54,19 +50,11 @@ public class CardHandController : MonoBehaviour
 		for(int i = 0; i < _numCards; i++)
 		{
 			
-			// Quaternion rotation = Quaternion.Euler(0f,0f,0f);
-			
-			// Instantiate(handCard,position,rotation);
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
-			card.transform.SetParent(transform,true);
+			card.transform.SetParent(transform,false);
 			
-			// Vector3 newPosition = new Vector3(firstCardPositionX + currentCardPositionX, firstCardPositionY - Math.Abs(currentCardPositionY), card.transform.position.z);
-			// Vector3 newPosition = new Vector3(firstCardPositionX + currentCardPositionX
-			// card.transform.position = card.transform.position + Vector3.up * 300f;
-			// card.transform.position += newPosition;
-			// card.transform.rotation = rotation;
-			// card.transform.position = newPosition;
-			card.transform.position += Vector3.left * (firstCardPositionX + currentCardPositionX);
+			
+			card.transform.position += Vector3.right * (currentCardPositionX - startingOffset) ;
 			card.transform.rotation = Quaternion.Euler(0f,0f,firstCardRotation + currentCardRotation);
 			
 			currentCardPositionX += distanceBetweenCards;
@@ -78,7 +66,7 @@ public class CardHandController : MonoBehaviour
 	
 	void OnGUI()
 	{
-		GUILayout.BeginArea(new Rect(Screen.width - 500, Screen.height - 500, 500, 500));
+		GUILayout.BeginArea(new Rect(Screen.width - 150, Screen.height - 150, 150, 150));
 		if (GUILayout.Button("Add Card"))
 		{
 			for(int i = transform.childCount - 1; i >= 0; i--)

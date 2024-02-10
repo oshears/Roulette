@@ -8,6 +8,8 @@ public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
 	bool isOver = false;
 	
+	int _shiftUpAmount = 25;
+	
 	Vector3 _startPosition;
 	
 	// Start is called before the first frame update
@@ -21,11 +23,11 @@ public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerE
 	{
 		if(isOver)
 		{
-			transform.position = Vector3.Lerp(_startPosition, _startPosition + Vector3.up * 50, 1);
+			transform.position = Vector3.Lerp(_startPosition, _startPosition + Vector3.up * _shiftUpAmount, 1);
 		}
 		else
 		{
-			transform.position = Vector3.Lerp(_startPosition  + Vector3.up * 50, _startPosition, 1);
+			transform.position = Vector3.Lerp(_startPosition  + Vector3.up * _shiftUpAmount, _startPosition, 1);
 		}
 		
 		
