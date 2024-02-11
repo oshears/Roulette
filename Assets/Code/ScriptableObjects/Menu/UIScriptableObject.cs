@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "UIScriptableObject", menuName = "ScriptableObjects/UIScriptableObject")]
 public class UIScriptableObject : ScriptableObject
@@ -19,6 +21,12 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent drawCardsEvent;
 	public UnityEvent playCardEvent;
 	public UnityEvent flipCoinEvent;
+	public UnityEvent bannerButtonClick;
+	public UnityEvent showBannerEvent;
+	public UnityEvent drawButtonClick;
+	public UnityEvent dismissDrawButton;
+	
+	public String bannerText {get; private set;}
 
 	public void OnRotateGun()
 	{
@@ -41,4 +49,8 @@ public class UIScriptableObject : ScriptableObject
 	public void OnPlayCard() => playCardEvent.Invoke();
 	
 	public void OnFlipCoin() => flipCoinEvent.Invoke();
+	public void OnBannerContinue() => bannerButtonClick.Invoke();
+	public void OnShowBanner() => showBannerEvent.Invoke();
+	public void OnDrawButton() => drawButtonClick.Invoke();
+	public void SetBannerText(String text) => bannerText = text;
 }

@@ -110,6 +110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: pref_HandCard
       objectReference: {fileID: 0}
+    - target: {fileID: 6468948993282129747, guid: 4e105931fb12db84584da8370999778c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7251898829919315230, guid: 4e105931fb12db84584da8370999778c,
         type: 3}
       propertyPath: m_AnchoredPosition.y

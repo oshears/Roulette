@@ -17,7 +17,7 @@ public class CardHandController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		GenerateCards();
+		
 	}
 
 	// Update is called once per frame
@@ -69,12 +69,18 @@ public class CardHandController : MonoBehaviour
 		GUILayout.BeginArea(new Rect(Screen.width - 150, Screen.height - 150, 150, 150));
 		if (GUILayout.Button("Add Card"))
 		{
+			// Delete all old card game objects
 			for(int i = transform.childCount - 1; i >= 0; i--)
 			{
 				Destroy(transform.GetChild(i).gameObject);
 			}
-			_numCards =  (_numCards % 6) + 1;
-			GenerateCards();
+			
+			_numCards =  (_numCards % 7);
+			
+			if (_numCards > 0)
+			{
+				GenerateCards();
+			}
 		}
 		GUILayout.EndArea();
 	}

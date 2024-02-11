@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7726889635706359901}
-  - component: {fileID: 5158181635448352420}
+  - component: {fileID: 2944774471871687112}
   m_Layer: 0
   m_Name: pref_Deck
   m_TagString: Untagged
@@ -27,13 +27,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.3676548, y: -0.66, z: -1.32}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4052573665771305974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5158181635448352420
+--- !u!114 &2944774471871687112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,11 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2814228813206743676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c67c89497e6734b9b7001c2118048f, type: 3}
+  m_Script: {fileID: 11500000, guid: a902515a5987a63449985c9f8534f44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckCard: {fileID: 6289999846430688971, guid: 0671564c9ac039b4baa457aa20e696ef,
-    type: 3}
+  deckCard: {fileID: 8608038362696533032}
 --- !u!1001 &2323704301915276003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118,6 +117,12 @@ PrefabInstance:
 --- !u!4 &4052573665771305974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1730181083394455829, guid: 0671564c9ac039b4baa457aa20e696ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 2323704301915276003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8608038362696533032 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6289999846430688971, guid: 0671564c9ac039b4baa457aa20e696ef,
     type: 3}
   m_PrefabInstance: {fileID: 2323704301915276003}
   m_PrefabAsset: {fileID: 0}

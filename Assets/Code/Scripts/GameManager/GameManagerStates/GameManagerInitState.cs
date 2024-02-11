@@ -14,6 +14,10 @@ public class GameManagerInitState : GameManagerState
 	{
 		// Reset Player Scores
 		_uiScriptableObject.OnResetScores();
+		
+		// Display Game Start
+		_uiScriptableObject.SetBannerText("Game Start!");
+		_uiScriptableObject.OnShowBanner();
 
 		// Initialize Deck
 		_deckScriptableObject.OnShuffleDeck();
