@@ -1,17 +1,16 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "MainCardSO", menuName = "ScriptableObjects/MainCardSO")]
-public class MainCardSO : ScriptableObject
+public class CardSO : ScriptableObject
 {
     [SerializeField]
-    private MainCardActionType actionType;
+    private CardActionType actionType;
     [SerializeField, Range(1, 6)]
     private int value;
     [SerializeField]
     private Sprite frontOfCard;
 
-    public MainCardActionType GetActionType()
+    public CardActionType GetActionType()
     {
         return actionType;
     }
