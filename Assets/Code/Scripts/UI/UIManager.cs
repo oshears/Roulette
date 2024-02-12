@@ -18,12 +18,17 @@ public class UIManager : MonoBehaviour
 	
 	[SerializeField]
 	public GameObject textBanner;
+	
+	[SerializeField]
+	public GameObject playerCardHand;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		stateMachine = new UIManagerStateMachine(this);
 		stateMachine.ChangeState(new UIManagerDebugState(this));
+		
+		uiScriptableObject.showBannerEvent.AddListener(ShowBanner);
 	}
 
 	// Update is called once per frame
@@ -79,6 +84,11 @@ public class UIManager : MonoBehaviour
 	public void SetTextBannerActive(bool active)
 	{
 		textBanner.SetActive(active);
+	}
+	
+	public void ShowBanner()
+	{
+		textBanner.SetActive(true);
 	}
 
 }

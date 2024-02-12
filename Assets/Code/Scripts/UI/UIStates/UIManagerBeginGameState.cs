@@ -6,7 +6,9 @@ using UnityEngine.Events;
 
 public class UIManagerBeginGameState : UIManagerState
 {
-	public UIManagerBeginGameState(UIManager owner) : base(owner) { }
+	public UIManagerBeginGameState(UIManager owner) : base(owner) { 
+		_uiScriptableObject.beginPlayerDrawPhaseEvent.AddListener(BeginPlayerDrawPhaseEventHandler);
+	}
 
 
 	public override void Execute()
@@ -20,6 +22,11 @@ public class UIManagerBeginGameState : UIManagerState
 		// 	_uiScriptableObject.OnDrawCards();
 		// }
 		// EndPopUpArea();
+		
+	}
+	
+	public void BeginPlayerDrawPhaseEventHandler()
+	{
 		changeState(new UIManagerGameDrawPhaseState(_owner));
 	}
 

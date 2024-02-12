@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HandCardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIHandCardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	bool isOver = false;
 	

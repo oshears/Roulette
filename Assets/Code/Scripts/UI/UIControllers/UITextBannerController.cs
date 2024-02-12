@@ -29,11 +29,18 @@ public class UITextBannerController : MonoBehaviour
 		_image = GetComponent<Image>();
 		
 		
-		uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
-		uiScriptableObject.startGameEvent.AddListener(StartGameEventHandler);
+		// uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
+		// uiScriptableObject.startGameEvent.AddListener(StartGameEventHandler);
 		
 		// Disable banner visibility on init
-		DisableBannerAction();
+		// DisableBannerAction();
+		bannerTextTransform.gameObject.SetActive(true);
+		bannerButtonTransform.gameObject.SetActive(true);
+		_image.enabled = true;
+	}
+	
+	private void OnEnable() {
+		bannerTextTransform.GetComponent<TextMeshProUGUI>().text = uiScriptableObject.bannerText;
 	}
 
 	void Update()
@@ -41,35 +48,10 @@ public class UITextBannerController : MonoBehaviour
 		
 	}
 	
-	void StartGameEventHandler()
-	{
-		bannerTextTransform.GetComponent<TextMeshProUGUI>().text = uiScriptableObject.bannerText;
-		EnableBannerAction();
-	}
-	
 	void ContinueButtonEventHandler()
 	{
-		DisableBannerAction();
+		gameObject.SetActive(false);
 		uiScriptableObject.OnBannerContinue();
 	}
 	
-	void ShowBannerEventHandler()
-	{
-		EnableBannerAction();
-	}
-	
-	void EnableBannerAction()
-	{
-		bannerTextTransform.gameObject.SetActive(true);
-		bannerButtonTransform.gameObject.SetActive(true);
-		_image.enabled = true;
-	}
-	
-	void DisableBannerAction()
-	{
-		bannerTextTransform.gameObject.SetActive(false);
-		bannerButtonTransform.gameObject.SetActive(false);
-		_image.enabled = false;
-	}
-		
 }

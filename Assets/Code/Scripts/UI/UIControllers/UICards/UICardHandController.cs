@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CardHandController : MonoBehaviour
+public class UICardHandController : MonoBehaviour
 {
 	
 	
@@ -63,17 +63,17 @@ public class CardHandController : MonoBehaviour
 		{
 			
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
+			card.SetActive(true);
 			card.transform.SetParent(transform,false);
-			
 			
 			card.transform.position += Vector3.right * (currentCardPositionX - startingOffset) ;
 			card.transform.rotation = Quaternion.Euler(0f,0f,firstCardRotation + currentCardRotation);
 			
+			_cardsInHand.Add(card);
+			
 			currentCardPositionX += distanceBetweenCards;
 			currentCardPositionY += shiftBetweenCards;
 			currentCardRotation += rotationBetweenCards;
-			
-			_cardsInHand.Add(card);
 		}
 		
 	}

@@ -6,16 +6,17 @@ using UnityEngine.Events;
 
 public class UIManagerGameDrawPhaseState : UIManagerState
 {
-	int _numPlayerCards;
+	int _numCardsToDraw = 2;
 	int _selectedCard;
 	
 	
 	public UIManagerGameDrawPhaseState(UIManager owner) : base(owner) { 
-		_numPlayerCards = 2;
+		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
 	}
 
 	public override void Enter()
 	{	
+		_numCardsToDraw = 2;
 		_owner.SetDrawButtonActive(true);
 	}
 
@@ -46,10 +47,22 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		// GUILayout.EndArea();
 	}
 
-    public override void Exit()
-    {
-        _owner.SetDrawButtonActive(false);
-    }
+	public override void Exit()
+	{
+		_owner.SetDrawButtonActive(false);
+	}
+	
+	public void DrawButtonClickEventHandler()
+	{
+		if (_numCardsToDraw > 0)
+		{
+			_numCardsToDraw--;
+		}
+		else
+		{
+			_owner.SetDrawButtonActive(false);
+		}
+	}
 	
 
 }

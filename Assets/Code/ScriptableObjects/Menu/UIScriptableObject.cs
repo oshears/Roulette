@@ -25,6 +25,7 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent showBannerEvent;
 	public UnityEvent drawButtonClick;
 	public UnityEvent dismissDrawButton;
+	public UnityEvent beginPlayerDrawPhaseEvent;
 	
 	public String bannerText {get; private set;}
 
@@ -52,5 +53,6 @@ public class UIScriptableObject : ScriptableObject
 	public void OnBannerContinue() => bannerButtonClick.Invoke();
 	public void OnShowBanner() => showBannerEvent.Invoke();
 	public void OnDrawButton() => drawButtonClick.Invoke();
+	public void OnBeginPlayerDrawPhase() => beginPlayerDrawPhaseEvent.Invoke();
 	public void SetBannerText(String text) => bannerText = text;
 }
