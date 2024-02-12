@@ -11,15 +11,16 @@ public class UIManagerBeginGameState : UIManagerState
 
 	public override void Execute()
 	{
-		BeginPopUpArea();
-		GUILayout.Label("The Game Has Begun!");
-		GUILayout.Label("Here the game manager would shuffle the deck and each player would draw two cards.");
-		if (GUILayout.Button("Draw Cards"))
-		{
-			changeState(new UIManagerGameDrawPhaseState(_owner));
-			_uiScriptableObject.OnDrawCards();
-		}
-		EndPopUpArea();
+		// BeginPopUpArea();
+		// GUILayout.Label("The Game Has Begun!");
+		// GUILayout.Label("Here the game manager would shuffle the deck and each player would draw two cards.");
+		// if (GUILayout.Button("Draw Cards"))
+		// {
+		// 	changeState(new UIManagerGameDrawPhaseState(_owner));
+		// 	_uiScriptableObject.OnDrawCards();
+		// }
+		// EndPopUpArea();
+		changeState(new UIManagerGameDrawPhaseState(_owner));
 	}
 
 	void BeginPopUpArea()

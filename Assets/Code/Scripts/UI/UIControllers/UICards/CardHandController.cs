@@ -12,12 +12,18 @@ public class CardHandController : MonoBehaviour
 	[SerializeField]
 	GameObject handCard;
 	
-	int _numCards = 1;
+	[SerializeField]
+	UIScriptableObject uiScriptableObject;
+	
+	private List<GameObject> _cardsInHand;
+	
+	int _numCards = 0;
 	
 	// Start is called before the first frame update
 	void Start()
 	{
-		
+		_cardsInHand = new List<GameObject>();
+		uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
 	}
 
 	// Update is called once per frame
@@ -25,6 +31,12 @@ public class CardHandController : MonoBehaviour
 	{
 		
 		
+	}
+	
+	void DrawButtonClickEventHandler()
+	{
+		_numCards++;
+		GenerateCards();
 	}
 	
 	void GenerateCards()
@@ -60,6 +72,8 @@ public class CardHandController : MonoBehaviour
 			currentCardPositionX += distanceBetweenCards;
 			currentCardPositionY += shiftBetweenCards;
 			currentCardRotation += rotationBetweenCards;
+			
+			_cardsInHand.Add(card);
 		}
 		
 	}
@@ -70,12 +84,13 @@ public class CardHandController : MonoBehaviour
 		if (GUILayout.Button("Add Card"))
 		{
 			// Delete all old card game objects
-			for(int i = transform.childCount - 1; i >= 0; i--)
+			foreach(GameObject card in _cardsInHand)
 			{
-				Destroy(transform.GetChild(i).gameObject);
+				Destroy(card);
 			}
+			_cardsInHand.Clear();
 			
-			_numCards =  (_numCards % 7);
+			_numCards =  (_numCards + 1) % 7;
 			
 			if (_numCards > 0)
 			{

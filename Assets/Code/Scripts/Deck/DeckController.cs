@@ -14,9 +14,12 @@ public class DeckController : MonoBehaviour
 	
 	int _numCards = 1;
 	
+	private List<GameObject> _cardsInDeck;
+	
 	// Start is called before the first frame update
 	void Start()
 	{
+		_cardsInDeck = new List<GameObject>();
 		GenerateCards();
 	}
 
@@ -29,16 +32,12 @@ public class DeckController : MonoBehaviour
 	
 	void GenerateCards()
 	{
-		
 		for(int i = 0; i < _numCards; i++)
 		{
-			
 			GameObject card = Instantiate(deckCard, Vector3.zero, Quaternion.identity);
 			card.transform.SetParent(transform,false);
-			
-			
 			card.transform.position += Vector3.up * i * 0.01f;
-
+			_cardsInDeck.Add(card);
 		}
 		
 	}
@@ -48,11 +47,14 @@ public class DeckController : MonoBehaviour
 		GUILayout.BeginArea(new Rect(0, Screen.height - 150, 150, 150));
 		if (GUILayout.Button("Add Card to Deck"))
 		{
-			for(int i = transform.childCount - 1; i >= 0; i--)
+			foreach (GameObject card in _cardsInDeck)
 			{
-				Destroy(transform.GetChild(i).gameObject);
+				Destroy(card);
 			}
+			_cardsInDeck.Clear();
+			
 			_numCards =  (_numCards % 24) + 1;
+			
 			GenerateCards();
 		}
 		GUILayout.EndArea();

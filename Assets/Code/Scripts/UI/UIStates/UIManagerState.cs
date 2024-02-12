@@ -15,7 +15,6 @@ public abstract class UIManagerState : IManagerState
 		_owner = owner;
 		_stateMachine = owner.stateMachine;
 		_uiScriptableObject = owner.uiScriptableObject;
-		Debug.Log(_stateMachine);
 	}
 	public virtual void Enter() { }
 	public virtual void Execute() { }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handCard: {fileID: 6468948993282129747, guid: 4e105931fb12db84584da8370999778c,
     type: 3}
+  uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
 --- !u!1001 &3695374407985660026
 PrefabInstance:
   m_ObjectHideFlags: 0

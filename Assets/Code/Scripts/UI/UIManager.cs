@@ -12,6 +12,12 @@ public class UIManager : MonoBehaviour
 	public UIManagerStateMachine stateMachine;
 
 	public Coin coin;
+	
+	[SerializeField]
+	public GameObject drawCardButton;
+	
+	[SerializeField]
+	public GameObject textBanner;
 
 	// Start is called before the first frame update
 	void Start()
@@ -65,5 +71,14 @@ public class UIManager : MonoBehaviour
 		uiScriptableObject.OnIncreaseBulletCount();
 	}
 	
+	public void SetDrawButtonActive(bool active)
+	{
+		drawCardButton.SetActive(active);
+	}
+	
+	public void SetTextBannerActive(bool active)
+	{
+		textBanner.SetActive(active);
+	}
 
 }
