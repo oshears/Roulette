@@ -11,7 +11,6 @@ public class UIManagerDebugState : UIManagerState
 
     public override void Execute()
     {
-        Debug.Log("updating test state");
         GUILayout.BeginArea(new Rect(10, 10, 500, 500));
         if (GUILayout.Button("Rotate Gun"))
         {

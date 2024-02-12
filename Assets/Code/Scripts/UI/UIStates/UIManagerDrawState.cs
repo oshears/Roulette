@@ -17,7 +17,6 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 
 	public override void Execute()
 	{
-		Debug.Log("updating test state");
 		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
 		GUILayout.Label("Here the game manager would allow the player to pick one card from their hand and confirm.");
 

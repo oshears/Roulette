@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2541091164571440024}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 7323248566696850202}
   - component: {fileID: 584696295647897038}
   m_Layer: 5
-  m_Name: PointsSprite
+  m_Name: UI_PointsSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 2699210020384796810}
   - component: {fileID: 8447264825185907682}
   m_Layer: 5
-  m_Name: BulletCounter
+  m_Name: UI_BulletCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,5 +401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa5d0680a5e94641b6671cb9c2caffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: ef94a6ee35b50344b90d354efc14b0d2, type: 3}
+  - {fileID: 21300000, guid: c1636c8e607c26049960ca25f2b8e7db, type: 3}
+  - {fileID: 21300000, guid: b82a00bc849db46429101f7ab0afae4f, type: 3}
+  - {fileID: 21300000, guid: 5cd43b74f2f453547ae3d501cf68216f, type: 3}
+  - {fileID: 21300000, guid: 93d90db9f2dd98549a7e7c8df0f0d32b, type: 3}
+  - {fileID: 21300000, guid: ba79a4c8037f43c45b59961376a011cc, type: 3}
   menuSO: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}

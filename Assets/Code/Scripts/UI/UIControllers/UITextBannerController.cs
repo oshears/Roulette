@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,18 +43,22 @@ public class UITextBannerController : MonoBehaviour
 	
 	void StartGameEventHandler()
 	{
-		bannerTextTransform.GetComponent<Text>().text = uiScriptableObject.bannerText;
+		bannerTextTransform.GetComponent<TextMeshProUGUI>().text = uiScriptableObject.bannerText;
+		EnableBannerAction();
 	}
 	
 	void ContinueButtonEventHandler()
 	{
-		bannerTextTransform.gameObject.SetActive(false);
-		bannerButtonTransform.gameObject.SetActive(false);
-		_image.enabled = false;
+		DisableBannerAction();
 		uiScriptableObject.OnBannerContinue();
 	}
 	
 	void ShowBannerEventHandler()
+	{
+		EnableBannerAction();
+	}
+	
+	void EnableBannerAction()
 	{
 		bannerTextTransform.gameObject.SetActive(true);
 		bannerButtonTransform.gameObject.SetActive(true);

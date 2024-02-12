@@ -12,7 +12,6 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 
 	public override void Execute()
 	{
-		Debug.Log("updating test state");
 		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
 		GUILayout.Label("Here the game manager would compare all of the cards that each player played.");
 		GUILayout.EndArea();
