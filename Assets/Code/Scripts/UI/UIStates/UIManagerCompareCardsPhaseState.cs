@@ -10,6 +10,8 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_uiScriptableObject.playedCardsReadyEvent.AddListener(PlayedCardsReadyEventHandler);
 		_uiScriptableObject.flipCoinButtonClickEvent.AddListener(FlipCoinButtonEventHandler);
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
+		_uiScriptableObject.beginRoulettePhaseEvent.AddListener(BeginRoulettePhaseEventHandler);
+		// _uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
 	}
 
 	public override void Enter()
@@ -28,6 +30,7 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 
 	public override void Exit()
 	{
+		Debug.Log("Disabling Card Banner!");
 		_owner.SetCardBannerActive(false);
 		_owner.SetFlipCoinButtonActive(false);
 	}
@@ -55,6 +58,12 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 			_uiScriptableObject.SetBannerText("Highest number loses!");
 		}
 		_uiScriptableObject.OnShowBanner();
+	}
+	
+	void BeginRoulettePhaseEventHandler()
+	{
+		Debug.Log("UI moving into UIManagerPreGunState!");
+		changeState(new UIManagerPreGunState(_owner));
 	}
 
 }

@@ -33,6 +33,12 @@ public class UICardBannerController : MonoBehaviour
 	}
 	
 	void OnEnable() {
+		if (uiScriptableObject.cardBannerCards.Count < 1)
+		{
+			Debug.LogError("Error! Could not update card banner because there are no cards to display!");	
+			return;
+		}
+		
 		playerCard.GetComponent<Image>().sprite = uiScriptableObject.cardBannerCards[0].GetFrontOfCard();
 		
 		for(int i = 0; i < npcCards.Length; i++)

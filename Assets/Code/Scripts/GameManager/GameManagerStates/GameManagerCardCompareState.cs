@@ -8,11 +8,14 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	List<CardSO> playedCards;
 	
-	public GameManagerCardCompareState(GameManager owner) : base(owner) { 
+	GamePlayerScriptableObject _targetPlayerScriptableObject;
+	
+	public GameManagerCardCompareState(GameManager owner, int playerCardChoice) : base(owner) { 
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
-		_playerCardChoice = -1;
+		_playerCardChoice = playerCardChoice;
 		playedCards = new List<CardSO>();
+		_targetPlayerScriptableObject = null;
 	}
 
 	public override void Enter()
@@ -57,23 +60,67 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	void FlipCoinDoneEventHandler(CoinController.Side side)
 	{
-		// TODO:
-		// 1. Determine whether highest or lowest card loses
-		// 2. Get all the cards that the players placed
-		// 3. Compare the cards that were played
-		// 4. In the event of a tie, just choose a random player for now
-		// 5. Add the number of bullets to the gun based on the number of bullet cards
+		
+		Debug.Log("Done Flipping Coin! Determining Loser");
+		
+		int lowestCardIndex = 0;
+		int highestCardIndex = 0;
+		
+		int numBullets = 1;
+		
+		// 1. Get all the cards that the players placed
+		// 2. Compare the cards that were played
+		// 3. In the event of a tie, just choose a random player for now
+		// 4. Add the number of bullets to the gun based on the number of bullet cards
+		for(int i = 0; i < playedCards.Count; i++)
+		{
+			CardSO currentCard = playedCards[i];
+			if (currentCard.GetValue() < playedCards[lowestCardIndex].GetValue())
+			{
+				lowestCardIndex = i;
+			}
+			if (currentCard.GetValue() > playedCards[highestCardIndex].GetValue())
+			{
+				highestCardIndex = i;
+			}
+			
+			if (currentCard.GetActionType() == CardActionType.Bullet)
+			{
+				numBullets++;
+			}
+		}
+		
+		if (numBullets == 5)
+		{
+			// TODO: Need to implement this functionality to move on to the next round
+			Debug.LogError("ERROR! All cards played were bullet cards!!!");
+		}
+		
+		// 5. Determine whether highest or lowest card loses
+		int loserIndex = (side == CoinController.Side.Heads) ? lowestCardIndex : highestCardIndex;
+		Debug.Log($"Starting roulette with player: {loserIndex}"); 
+		Debug.Log($"Starting roulette with {numBullets} bullets"); 
+		
+		_targetPlayerScriptableObject = _playerScriptableObject;
+		if (loserIndex > 0)
+		{
+			_targetPlayerScriptableObject = _npcScriptableObjects[loserIndex - 1];
+		}
+		
 		// 6. Proceed to the gun phase!!!
+		
 	}
 	
 	
 	
-	public void BannerButtonEventHandler()
+	void BannerButtonEventHandler()
 	{
-		changeState(new GameManagerPlayerGunState(_owner));
+		Debug.Log("Sending Roulette Start Phase!");
+		_uiScriptableObject.OnBeginRoulettePhase();
+		changeState(new GameManagerPreGunState(_owner, _targetPlayerScriptableObject, 0));
 	}
 	
-	public void SetPlayerCardChoice(int cardIndex)
+	void SetPlayerCardChoice(int cardIndex)
 	{
 		_playerCardChoice = cardIndex;
 	}

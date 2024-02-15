@@ -1,6 +1,6 @@
-public class GameManagerPlayerPostGunState : GameManagerState
+public class GameManagerPostGunState : GameManagerState
 {
-    public GameManagerPlayerPostGunState(GameManager owner) : base(owner) { }
+    public GameManagerPostGunState(GameManager owner) : base(owner) { }
 
     public override void Enter()
     {

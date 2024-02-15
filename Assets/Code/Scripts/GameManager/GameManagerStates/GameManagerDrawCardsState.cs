@@ -44,8 +44,8 @@ public class GameManagerDrawCardsState : GameManagerState
 	{
 		
 		// Go to compare card state
-		GameManagerCardCompareState newState = new GameManagerCardCompareState(_owner);
-		newState.SetPlayerCardChoice(cardIndex);
+		GameManagerCardCompareState newState = new GameManagerCardCompareState(_owner, cardIndex);
+		// newState.SetPlayerCardChoice(cardIndex);
 		_stateMachine.ChangeState(newState);
 	}
 	

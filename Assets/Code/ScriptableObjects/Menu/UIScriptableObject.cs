@@ -32,7 +32,10 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent updateHandCardsEvent;
 	public UnityEvent handCardsUpdatedEvent;
 	public UnityEvent playedCardsReadyEvent;
+	public UnityEvent beginRoulettePhaseEvent;
 	// public UnityEvent displayCardBannerEvent;
+	public UnityEvent showPlayerCardBannerEvent;
+	public UnityEvent playerCardBannerButtonEvent;
 	
 	public String bannerText {get; private set;}
 	
@@ -112,5 +115,20 @@ public class UIScriptableObject : ScriptableObject
 	public void OnPlayedCardsReady()
 	{
 		playedCardsReadyEvent.Invoke();
+	}
+	
+	public void OnBeginRoulettePhase()
+	{
+		beginRoulettePhaseEvent.Invoke();
+	}
+	
+	public void OnShowPlayerCardBanner()
+	{
+		showPlayerCardBannerEvent.Invoke();
+	}
+	
+	public void OnPlayerCardBannerButton()
+	{
+		playerCardBannerButtonEvent.Invoke();
 	}
 }

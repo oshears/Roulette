@@ -7,6 +7,10 @@ public class PlayerScriptableObject : GamePlayerScriptableObject
 {
 	
 	public UnityEvent playerHandFullEvent;
-	
-	
+
+    public override bool IsNpc()
+    {
+        return false;
+    }
+
 }

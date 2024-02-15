@@ -16,12 +16,18 @@ public class GameManager : MonoBehaviour
 	public NpcScriptableObject[] npcScriptableObjects;
 
 
+	public int numPlayers {get; private set;}
 
 	// Start is called before the first frame update
 	void Awake()
 	{
 		stateMachine = new GameManagerStateMachine(this);
 		stateMachine.ChangeState(new GameManagerInitState(this));
+	}
+	
+	void Start()
+	{
+		numPlayers = npcScriptableObjects.Length + 1;
 	}
 
 	// Update is called once per frame

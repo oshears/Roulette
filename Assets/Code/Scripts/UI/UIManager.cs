@@ -26,8 +26,12 @@ public class UIManager : MonoBehaviour
 	public GameObject cardBanner;
 	
 	[SerializeField]
+	public GameObject playerCardBanner;
+	
+	[SerializeField]
 	public GameObject flipCoinButton;
 	
+	[SerializeField]
 	public GameObject coinPrefab;
 	
 	
@@ -42,6 +46,7 @@ public class UIManager : MonoBehaviour
 		SetPlayerCardHandActive(false);
 		SetCardBannerActive(false);
 		SetFlipCoinButtonActive(false);
+		SetPlayerCardBannerActive(false);
 		
 		
 		uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
@@ -85,7 +90,7 @@ public class UIManager : MonoBehaviour
 	public void StartCoinFlip()
 	{
 		Debug.Log("Creating Coin!");
-		GameObject newCoin = Instantiate(coinPrefab, new Vector3(-969.63f, -534.91f, 4.23f), Quaternion.Euler(-42.54f,0,0), transform);
+		GameObject newCoin = Instantiate(coinPrefab, new Vector3(0, 5f, 5f), Quaternion.Euler(-42.54f,0,0));
 		CoinController newCoinController = newCoin.GetComponent<CoinController>();
 		newCoinController.flipResult.AddListener( (CoinController.Side side) =>
 			{
@@ -117,6 +122,7 @@ public class UIManager : MonoBehaviour
 	
 	public void SetCardBannerActive(bool active)
 	{
+		Debug.Log("I am UIManager and I am disabling the Card Banner!");
 		cardBanner.SetActive(active);
 	}
 	
@@ -130,6 +136,9 @@ public class UIManager : MonoBehaviour
 		textBanner.SetActive(true);
 	}
 	
-	
+	public void SetPlayerCardBannerActive(bool active)
+	{
+		playerCardBanner.SetActive(active);
+	}
 
 }

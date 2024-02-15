@@ -42,23 +42,23 @@ public class DeckController : MonoBehaviour
 		
 	}
 	
-	void OnGUI()
-	{
-		GUILayout.BeginArea(new Rect(0, Screen.height - 150, 150, 150));
-		if (GUILayout.Button("Add Card to Deck"))
-		{
-			foreach (GameObject card in _cardsInDeck)
-			{
-				Destroy(card);
-			}
-			_cardsInDeck.Clear();
+	// void OnGUI()
+	// {
+	// 	GUILayout.BeginArea(new Rect(0, Screen.height - 150, 150, 150));
+	// 	if (GUILayout.Button("Add Card to Deck"))
+	// 	{
+	// 		foreach (GameObject card in _cardsInDeck)
+	// 		{
+	// 			Destroy(card);
+	// 		}
+	// 		_cardsInDeck.Clear();
 			
-			_numCards =  (_numCards % 32) + 1;
+	// 		_numCards =  (_numCards % 32) + 1;
 			
-			GenerateCards();
-		}
-		GUILayout.EndArea();
-	}
+	// 		GenerateCards();
+	// 	}
+	// 	GUILayout.EndArea();
+	// }
 	
 	
 }
