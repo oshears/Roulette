@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 	
 	[SerializeField]
 	public GameObject flipCoinButton;
-
+	
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -82,7 +82,12 @@ public class UIManager : MonoBehaviour
 	
 	public void StartCoinFlip()
 	{
-		Instantiate(coin, new Vector3(-0.28f, 1.59f, -6.42f), Quaternion.identity);
+		Coin newCoin = Instantiate(coin, new Vector3(-969.63f, -534.91f, 4.23f), Quaternion.Euler(-42.54f,0,0), this.transform);
+		newCoin.flipResult.AddListener( (Coin.Side side) =>
+			{
+				uiScriptableObject.OnCoinFlipDone(side);
+			});
+		newCoin.FlipCoin();
 	}
 
 	public void IncreaseBulletCount()

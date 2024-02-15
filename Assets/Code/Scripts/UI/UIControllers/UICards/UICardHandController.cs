@@ -81,7 +81,7 @@ public class UICardHandController : MonoBehaviour
 		{
 			CardSO cardSO = playerScriptableObject.cardsInHand[i];
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
-			card.GetComponent<UIHandCardController>().SetImage(cardSO.GetFrontOfCard());
+			card.GetComponent<UIHandCardController>().SetCardIndex(i);
 			
 			card.SetActive(true);
 			card.transform.SetParent(transform,false);

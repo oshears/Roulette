@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
     }
 
     // Subscribe to event to get the result of the flip
-    private UnityEvent<Side> flipResult;
+    public UnityEvent<Side> flipResult;
 
     [SerializeField]
     private float rotationSpeed = 1000f;

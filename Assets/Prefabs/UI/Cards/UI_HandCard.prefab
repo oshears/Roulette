@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3410936426039814455}
   - component: {fileID: 4228376059572259470}
   - component: {fileID: 1188709694343832706}
-  - component: {fileID: 802946803514023501}
   m_Layer: 0
   m_Name: UI_HandCardImage
   m_TagString: Untagged
@@ -91,19 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
---- !u!114 &802946803514023501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235647199410092949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42ec85b231609724aa63bcbc5bbb4928, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
+  playerScriptableObject: {fileID: 11400000, guid: 7c34dbf72fd682c489303994fce3a707,
+    type: 2}
 --- !u!1 &7471354212917342459
 GameObject:
   m_ObjectHideFlags: 0

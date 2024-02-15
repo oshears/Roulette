@@ -21,6 +21,7 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent drawCardsEvent;
 	public UnityEvent playCardEvent;
 	public UnityEvent flipCoinEvent;
+	public UnityEvent<Coin.Side> flipCoinDoneEvent;
 	public UnityEvent bannerButtonClick;
 	public UnityEvent showBannerEvent;
 	public UnityEvent drawButtonClick;
@@ -31,7 +32,8 @@ public class UIScriptableObject : ScriptableObject
 	
 	public String bannerText {get; private set;}
 
-	Card _playerCardSelection;
+	// Card _playerCardSelection;
+	int _playerCardSelection;
 
 	public void OnRotateGun()
 	{
@@ -51,8 +53,8 @@ public class UIScriptableObject : ScriptableObject
 	
 	public void OnDrawCards() => drawCardsEvent.Invoke();
 	
-	public void OnPlayCard(Card card){
-		_playerCardSelection = card;
+	public void OnPlayCard(int index){
+		_playerCardSelection = index;
 		playCardEvent.Invoke();
 	}
 	
@@ -69,5 +71,15 @@ public class UIScriptableObject : ScriptableObject
 	public void OnUpdateHandCards()
 	{
 		updateHandCardsEvent.Invoke();
+	}
+	
+	public int GetPlayerCardSelection()
+	{
+		return _playerCardSelection;
+	}
+	
+	public void OnCoinFlipDone(Coin.Side side)
+	{
+		flipCoinDoneEvent.Invoke(side);
 	}
 }

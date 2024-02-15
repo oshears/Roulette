@@ -41,4 +41,5 @@ public class GameManagerDrawCardsState : GameManagerState
 		// 	_stateMachine.ChangeState(new GameManagerCardCompareState(_owner));
 		// }
 	}
+	
 }

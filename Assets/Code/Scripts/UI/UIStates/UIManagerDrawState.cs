@@ -51,7 +51,9 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 
 	public override void Exit()
 	{
-		
+		_numCardsDrawn = 0;
+		_owner.SetDrawButtonActive(false);
+		_owner.SetPlayerCardHandActive(false);
 	}
 	
 	public void DrawButtonClickEventHandler()
@@ -70,7 +72,7 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 
 	public void PlayCardEventHandler()
 	{
-
+		changeState(new UIManagerCompareCardsPhaseState(_owner));
 	}
 	
 

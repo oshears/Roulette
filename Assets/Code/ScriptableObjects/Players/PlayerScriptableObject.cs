@@ -8,6 +8,10 @@ public class PlayerScriptableObject : ScriptableObject
 	
 	public List<CardSO> cardsInHand {get; private set;}
 	
+	public void InitializePlayerHand()
+	{
+		cardsInHand.Clear();
+	}
 	
 	public void AddCard(CardSO card)
 	{

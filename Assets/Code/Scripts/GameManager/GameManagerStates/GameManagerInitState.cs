@@ -18,6 +18,9 @@ public class GameManagerInitState : GameManagerState
 		// Display Game Start
 		_uiScriptableObject.SetBannerText("Game Start!");
 		_uiScriptableObject.OnShowBanner();
+		
+		// Empty all cards from player hands
+		_playerScriptableObject.InitializePlayerHand();
 
 		// Initialize Deck
 		_deckScriptableObject.OnInitializeDeck();
