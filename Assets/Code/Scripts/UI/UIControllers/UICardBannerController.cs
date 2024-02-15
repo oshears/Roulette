@@ -10,28 +10,37 @@ using UnityEngine.UI;
 public class UICardBannerController : MonoBehaviour
 {
 	
+	// [SerializeField]
+	// GameObject npcCard0;
+
+	// [SerializeField]
+	// GameObject npcCard1;
+
+	// [SerializeField]
+	// GameObject npcCard2;
 	[SerializeField]
-	Transform npcCard0;
+	GameObject[] npcCards;
 
 	[SerializeField]
-	Transform npcCard1;
-
-	[SerializeField]
-	Transform npcCard2;
-
-	[SerializeField]
-	Transform playerCard;
+	GameObject playerCard;
 	
-	void Start()
+	[SerializeField]
+	UIScriptableObject uiScriptableObject;
+	
+	void Awake()
 	{
 		
-
 	}
 	
-	private void OnEnable() {
-
+	void OnEnable() {
+		playerCard.GetComponent<Image>().sprite = uiScriptableObject.cardBannerCards[0].GetFrontOfCard();
+		
+		for(int i = 0; i < npcCards.Length; i++)
+		{
+			npcCards[i].GetComponent<Image>().sprite = uiScriptableObject.cardBannerCards[i + 1].GetFrontOfCard();
+		}
 	}
-
+	
 	void Update()
 	{
 		

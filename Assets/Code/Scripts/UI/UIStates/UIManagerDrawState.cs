@@ -13,6 +13,7 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 	public UIManagerGameDrawPhaseState(UIManager owner) : base(owner) { 
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
 		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
+		_playerScriptableObject.playerHandFullEvent.AddListener(PlayerHandFullEventHandler);
 	}
 
 	public override void Enter()
@@ -64,13 +65,16 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		}
 		else
 		{
-			Debug.Log("Disabling Draw Button!");
 			_owner.SetDrawButtonActive(false);
-			_uiScriptableObject.OnEnableCardSelection();
 		}
 	}
+	
+	public void PlayerHandFullEventHandler()
+	{
+		_owner.SetDrawButtonActive(false);
+	}
 
-	public void PlayCardEventHandler()
+	public void PlayCardEventHandler(int cardIndex)
 	{
 		changeState(new UIManagerCompareCardsPhaseState(_owner));
 	}

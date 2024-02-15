@@ -1,15 +1,32 @@
+using UnityEngine;
+
 public class GameManagerDrawCardsState : GameManagerState
 {
 	
-	int _cardsDrawn = 0;
+	int _numCardsDrawn = 0;
 	public GameManagerDrawCardsState(GameManager owner) : base(owner) { 
 		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
+		_uiScriptableObject.handCardsUpdatedEvent.AddListener(HandCardsUpdatedEventHandler);
+		_playerScriptableObject.playerHandFullEvent.AddListener(PlayerHandFullEventHandler);
 	}
 
 	public override void Enter()
 	{
+		_numCardsDrawn = 0;
 		
+		// Draw Cards for NPCs
+		foreach (NpcScriptableObject npc in _npcScriptableObjects)
+		{
+			// Draw Two Cards for each NPC
+			for (int i = 0; i < 2; i++)
+			{
+				if (!npc.HasFullHand())
+				{
+					npc.AddCard(_deckScriptableObject.OnDrawNpcCard());
+				}
+			}
+		}
 	}
 
 	override public void Execute() 
@@ -23,15 +40,18 @@ public class GameManagerDrawCardsState : GameManagerState
 		
 	}
 	
-	void PlayCardEventHandler()
+	void PlayCardEventHandler(int cardIndex)
 	{
+		
 		// Go to compare card state
-		_stateMachine.ChangeState(new GameManagerCardCompareState(_owner));
+		GameManagerCardCompareState newState = new GameManagerCardCompareState(_owner);
+		newState.SetPlayerCardChoice(cardIndex);
+		_stateMachine.ChangeState(newState);
 	}
 	
 	void DrawButtonClickEventHandler()
 	{
-		_cardsDrawn++;
+		_numCardsDrawn++;
 		
 		CardSO card = _deckScriptableObject.OnDrawCard();
 		_playerScriptableObject.AddCard(card);
@@ -40,6 +60,20 @@ public class GameManagerDrawCardsState : GameManagerState
 		// {
 		// 	_stateMachine.ChangeState(new GameManagerCardCompareState(_owner));
 		// }
+		
+	}
+	
+	public void HandCardsUpdatedEventHandler()
+	{
+		if (_numCardsDrawn == 2)
+		{
+			_uiScriptableObject.OnEnableCardSelection();
+		}
+	}
+	
+	public void PlayerHandFullEventHandler()
+	{
+		_uiScriptableObject.OnEnableCardSelection();
 	}
 	
 }

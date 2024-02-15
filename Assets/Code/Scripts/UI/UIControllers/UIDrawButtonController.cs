@@ -12,7 +12,7 @@ public class UIDrawButtonController : MonoBehaviour
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
 	
-	void Start()
+	void Awake()
 	{
 		GetComponent<Button>().onClick.AddListener(DrawButtonEventHandler);
 	}

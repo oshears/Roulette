@@ -23,7 +23,7 @@ public class UICardHandController : MonoBehaviour
 	
 	
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		
 		// _cardsInHand = new List<GameObject>();
@@ -48,6 +48,7 @@ public class UICardHandController : MonoBehaviour
 	void UpdateHandCardsEventHandler()
 	{
 		RegenerateCards();
+		uiScriptableObject.OnHandCardsUpdated();
 	}
 	
 	void RegenerateCards()
@@ -77,7 +78,7 @@ public class UICardHandController : MonoBehaviour
 		float currentCardRotation = rotationBetweenCards * 0.5f;
 
 		
-		for(int i = 0; i < numCards; i++)
+		for (int i = 0; i < numCards; i++)
 		{
 			CardSO cardSO = playerScriptableObject.cardsInHand[i];
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
@@ -98,6 +99,16 @@ public class UICardHandController : MonoBehaviour
 		
 	}
 	
+	void RemoveAllCards()
+	{
+		// Delete all old card game objects
+		foreach(GameObject card in _cardsInHand)
+		{
+			Destroy(card);
+		}
+		_cardsInHand.Clear();
+	}
+	
 	// void OnGUI()
 	// {
 	// 	GUILayout.BeginArea(new Rect(Screen.width - 150, Screen.height - 150, 150, 150));
@@ -111,14 +122,6 @@ public class UICardHandController : MonoBehaviour
 	// 	GUILayout.EndArea();
 	// }
 	
-	void RemoveAllCards()
-	{
-		// Delete all old card game objects
-		foreach(GameObject card in _cardsInHand)
-		{
-			Destroy(card);
-		}
-		_cardsInHand.Clear();
-	}
+	
 	
 }

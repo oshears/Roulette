@@ -12,11 +12,13 @@ public class GameManager : MonoBehaviour
 	public PlayerScriptableObject playerScriptableObject;
 
 	public GameManagerStateMachine stateMachine;
+	
+	public NpcScriptableObject[] npcScriptableObjects;
 
 
 
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		stateMachine = new GameManagerStateMachine(this);
 		stateMachine.ChangeState(new GameManagerInitState(this));

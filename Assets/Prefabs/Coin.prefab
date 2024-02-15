@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4943596144357553206}
   - component: {fileID: 2158949254395279033}
   - component: {fileID: 1847011986803309851}
-  - component: {fileID: 1554089018758148431}
+  - component: {fileID: 7502861260957364873}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -278,7 +278,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &1554089018758148431
+--- !u!114 &7502861260957364873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -287,9 +287,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6491625338893817941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08760af4c7b924882b5226e267720997, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f5290d82283b2043b47bcefad4d8a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipResult:
+    m_PersistentCalls:
+      m_Calls: []
   rotationSpeed: 1550
   flipTime: 1.25
-  isFlipped: 0

@@ -15,6 +15,7 @@ public class DeckScriptableObject : ScriptableObject
 	Queue<CardSO> _cardQueue;
 	
 	public UnityEvent drawCardEvent;
+	public UnityEvent drawNpcCardEvent;
 	// public UnityEvent giveCardEvent;
 	public UnityEvent discardCardEvent;
 	public UnityEvent shuffleCardsEvent;
@@ -49,6 +50,21 @@ public class DeckScriptableObject : ScriptableObject
 		return _cardQueue.Dequeue();
 		
 	}
+	
+	public CardSO OnDrawNpcCard()
+	{
+		drawNpcCardEvent.Invoke();
+		return _cardQueue.Dequeue();
+		
+	}
+	
+	public void OnDiscardCard(CardSO card)
+	{
+		_cardQueue.Enqueue(card);
+		discardCardEvent.Invoke();
+	}
+	
+	
 	
 	// public void DiscardCardEventHandler
 	

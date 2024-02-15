@@ -9,11 +9,10 @@ public class UIManager : MonoBehaviour
 {
 	//UnityEvent rotateGunEvent;
 	public UIScriptableObject uiScriptableObject;
-
+	public PlayerScriptableObject playerScriptableObject;
+	
 	public UIManagerStateMachine stateMachine;
 
-	public Coin coin;
-	
 	[SerializeField]
 	public GameObject drawCardButton;
 	
@@ -29,8 +28,11 @@ public class UIManager : MonoBehaviour
 	[SerializeField]
 	public GameObject flipCoinButton;
 	
+	public GameObject coinPrefab;
+	
+	
 	// Start is called before the first frame update
-	void Start()
+	void Awake()
 	{
 		stateMachine = new UIManagerStateMachine(this);
 		stateMachine.ChangeState(new UIManagerDebugState(this));
@@ -82,12 +84,15 @@ public class UIManager : MonoBehaviour
 	
 	public void StartCoinFlip()
 	{
-		Coin newCoin = Instantiate(coin, new Vector3(-969.63f, -534.91f, 4.23f), Quaternion.Euler(-42.54f,0,0), this.transform);
-		newCoin.flipResult.AddListener( (Coin.Side side) =>
+		Debug.Log("Creating Coin!");
+		GameObject newCoin = Instantiate(coinPrefab, new Vector3(-969.63f, -534.91f, 4.23f), Quaternion.Euler(-42.54f,0,0), transform);
+		CoinController newCoinController = newCoin.GetComponent<CoinController>();
+		newCoinController.flipResult.AddListener( (CoinController.Side side) =>
 			{
 				uiScriptableObject.OnCoinFlipDone(side);
 			});
-		newCoin.FlipCoin();
+		newCoin.SetActive(true);
+		newCoinController.FlipCoin();
 	}
 
 	public void IncreaseBulletCount()

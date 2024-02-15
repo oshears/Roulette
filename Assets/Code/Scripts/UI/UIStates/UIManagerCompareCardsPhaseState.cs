@@ -7,15 +7,13 @@ using UnityEngine.Events;
 public class UIManagerCompareCardsPhaseState : UIManagerState
 {
 	public UIManagerCompareCardsPhaseState(UIManager owner) : base(owner) { 
-		_uiScriptableObject.flipCoinEvent.AddListener(FlipCoinEventHandler);
+		_uiScriptableObject.playedCardsReadyEvent.AddListener(PlayedCardsReadyEventHandler);
+		_uiScriptableObject.flipCoinButtonClickEvent.AddListener(FlipCoinButtonEventHandler);
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 	}
 
 	public override void Enter()
 	{	
-		// TODO: update the card banner based on the cards played!
-		
-		_owner.SetCardBannerActive(true);
 		_owner.SetFlipCoinButtonActive(true);
 		
 	}
@@ -33,16 +31,22 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_owner.SetCardBannerActive(false);
 		_owner.SetFlipCoinButtonActive(false);
 	}
+	
+	void PlayedCardsReadyEventHandler()
+	{
+		_owner.SetCardBannerActive(true);
+	}
 
 	
-	void FlipCoinEventHandler(){
+	void FlipCoinButtonEventHandler(){
+		Debug.Log("Coin Flip Button Pressed!");
 		_owner.SetFlipCoinButtonActive(false);
 		_owner.StartCoinFlip();
 	}
 	
-	void FlipCoinDoneEventHandler(Coin.Side side)
+	void FlipCoinDoneEventHandler(CoinController.Side side)
 	{
-		if (side == Coin.Side.Heads)
+		if (side == CoinController.Side.Heads)
 		{
 			_uiScriptableObject.SetBannerText("Lowest number loses!");
 		}

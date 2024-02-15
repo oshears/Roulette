@@ -12,7 +12,7 @@ public class UIFlipCoinButton : MonoBehaviour
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
 	
-	void Start()
+	void Awake()
 	{
 		GetComponent<Button>().onClick.AddListener(FlipCoinButtonEventHandler);
 	}
@@ -24,7 +24,8 @@ public class UIFlipCoinButton : MonoBehaviour
 	
 	void FlipCoinButtonEventHandler()
 	{
-		uiScriptableObject.OnFlipCoin();
+		Debug.Log("Coin Flip Button Pressed!");
+		uiScriptableObject.OnFlipCoinButton();
 	}
 	
 	

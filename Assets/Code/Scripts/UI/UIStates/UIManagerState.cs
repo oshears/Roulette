@@ -9,12 +9,14 @@ public abstract class UIManagerState : IManagerState
 	protected UIManagerStateMachine _stateMachine;
 	protected UIManager _owner;
 	protected UIScriptableObject _uiScriptableObject;
+	protected PlayerScriptableObject _playerScriptableObject;
 
 	public UIManagerState(UIManager owner)
 	{
 		_owner = owner;
 		_stateMachine = owner.stateMachine;
 		_uiScriptableObject = owner.uiScriptableObject;
+		_playerScriptableObject = owner.playerScriptableObject;
 	}
 	public virtual void Enter() { }
 	public virtual void Execute() { }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -355,6 +355,10 @@ MonoBehaviour:
     type: 2}
   playerScriptableObject: {fileID: 11400000, guid: 7c34dbf72fd682c489303994fce3a707,
     type: 2}
+  npcScriptableObjects:
+  - {fileID: 11400000, guid: 58033d43916bf004dbb6b807e5e20d84, type: 2}
+  - {fileID: 11400000, guid: d9de92612f67a89469c742d830f69194, type: 2}
+  - {fileID: 11400000, guid: aead6557192f9a849b6cc778302583dd, type: 2}
 --- !u!4 &885264387
 Transform:
   m_ObjectHideFlags: 0
@@ -691,18 +695,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4616953530758859943, guid: 68fe5b6e89ba5104c881d8158a779e3c,
     type: 3}
   m_PrefabInstance: {fileID: 3929453070704512471}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1950081554 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7548170708178930490, guid: 720ede26e0271b346a67a75749e35dc2,
-    type: 3}
-  m_PrefabInstance: {fileID: 6589643225394287500}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1950081555 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2499555522564549599, guid: 720ede26e0271b346a67a75749e35dc2,
-    type: 3}
-  m_PrefabInstance: {fileID: 6589643225394287500}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068292689
 GameObject:
@@ -1466,6 +1458,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017eac0e518b8c04a915f1cefb6e6129, type: 3}
+--- !u!1 &3725427823283542198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7548170708178930490, guid: 720ede26e0271b346a67a75749e35dc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6927617880054873357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3809451506361906982
 Transform:
   m_ObjectHideFlags: 0
@@ -1942,12 +1940,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
-  coin: {fileID: 1554089018758148431, guid: d97b701b92edd40a18cf958fa1c18720, type: 3}
+  playerScriptableObject: {fileID: 11400000, guid: 7c34dbf72fd682c489303994fce3a707,
+    type: 2}
   drawCardButton: {fileID: 1246388219}
   textBanner: {fileID: 1530962220}
   playerCardHand: {fileID: 2611222193531357352}
-  cardBanner: {fileID: 1950081554}
+  cardBanner: {fileID: 3725427823283542198}
   flipCoinButton: {fileID: 4244867011533415748}
+  coinPrefab: {fileID: 6491625338893817941, guid: d97b701b92edd40a18cf958fa1c18720,
+    type: 3}
 --- !u!114 &6335311808602857034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2007,7 +2008,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7158481624480017572}
   m_CullTransparentMesh: 1
---- !u!1001 &6589643225394287500
+--- !u!1 &6662363787011204553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5421898347078553058}
+  - component: {fileID: 4151926846516444356}
+  - component: {fileID: 1954744346970978448}
+  m_Layer: 5
+  m_Name: Heart_0 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &6754642485646213617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6419132055491278502}
+  m_Layer: 5
+  m_Name: UI_PlayerHearts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &6906286830950964498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6976130511975634604}
+  - component: {fileID: 8724159980106340369}
+  - component: {fileID: 6335311808602857034}
+  m_Layer: 5
+  m_Name: UI_Objective
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1001 &6927617880054873357
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2125,58 +2178,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 720ede26e0271b346a67a75749e35dc2, type: 3}
---- !u!1 &6662363787011204553
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5421898347078553058}
-  - component: {fileID: 4151926846516444356}
-  - component: {fileID: 1954744346970978448}
-  m_Layer: 5
-  m_Name: Heart_0 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &6754642485646213617
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6419132055491278502}
-  m_Layer: 5
-  m_Name: UI_PlayerHearts
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &6906286830950964498
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6976130511975634604}
-  - component: {fileID: 8724159980106340369}
-  - component: {fileID: 6335311808602857034}
-  m_Layer: 5
-  m_Name: UI_Objective
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!224 &6976130511975634604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2302,16 +2303,16 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1950081555}
+  - {fileID: 8773901685140289619}
   - {fileID: 2297466231934619568}
   - {fileID: 1617056985}
   - {fileID: 3809451506361906982}
   - {fileID: 508983650}
   - {fileID: 6419132055491278502}
-  - {fileID: 550854839}
   - {fileID: 6976130511975634604}
   - {fileID: 4190529726681623970}
   - {fileID: 1134714648}
+  - {fileID: 550854839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2657,6 +2658,12 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!224 &8773901685140289619 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2499555522564549599, guid: 720ede26e0271b346a67a75749e35dc2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6927617880054873357}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8890053938520235787
 RectTransform:
   m_ObjectHideFlags: 0

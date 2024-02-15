@@ -22,7 +22,7 @@ public class UITextBannerController : MonoBehaviour
 	Image _image;
 	
 	
-	void Start()
+	void Awake()
 	{
 		bannerButtonTransform.gameObject.GetComponent<Button>().onClick.AddListener(ContinueButtonEventHandler);
 		

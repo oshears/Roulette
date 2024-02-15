@@ -3,26 +3,10 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "PlayerScriptableObject", menuName = "ScriptableObjects/PlayerScriptableObject")]
-public class PlayerScriptableObject : ScriptableObject
+public class PlayerScriptableObject : GamePlayerScriptableObject
 {
 	
-	public List<CardSO> cardsInHand {get; private set;}
-	
-	public void InitializePlayerHand()
-	{
-		cardsInHand.Clear();
-	}
-	
-	public void AddCard(CardSO card)
-	{
-		cardsInHand.Add(card);
-	}
-	
-	public void RemoveCard(CardSO card)
-	{
-		cardsInHand.Remove(card);
-	}
-	
+	public UnityEvent playerHandFullEvent;
 	
 	
 }

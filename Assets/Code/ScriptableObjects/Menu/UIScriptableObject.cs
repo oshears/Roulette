@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -19,9 +20,9 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent resetScoresEvent;
 	public UnityEvent startGameEvent;
 	public UnityEvent drawCardsEvent;
-	public UnityEvent playCardEvent;
-	public UnityEvent flipCoinEvent;
-	public UnityEvent<Coin.Side> flipCoinDoneEvent;
+	public UnityEvent<int> playCardEvent;
+	public UnityEvent flipCoinButtonClickEvent;
+	public UnityEvent<CoinController.Side> flipCoinDoneEvent;
 	public UnityEvent bannerButtonClick;
 	public UnityEvent showBannerEvent;
 	public UnityEvent drawButtonClick;
@@ -29,8 +30,13 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent beginPlayerDrawPhaseEvent;
 	public UnityEvent enableHandCardSelection;
 	public UnityEvent updateHandCardsEvent;
+	public UnityEvent handCardsUpdatedEvent;
+	public UnityEvent playedCardsReadyEvent;
+	// public UnityEvent displayCardBannerEvent;
 	
 	public String bannerText {get; private set;}
+	
+	public List<CardSO> cardBannerCards;
 
 	// Card _playerCardSelection;
 	int _playerCardSelection;
@@ -55,10 +61,10 @@ public class UIScriptableObject : ScriptableObject
 	
 	public void OnPlayCard(int index){
 		_playerCardSelection = index;
-		playCardEvent.Invoke();
+		playCardEvent.Invoke(index);
 	}
 	
-	public void OnFlipCoin() => flipCoinEvent.Invoke();
+	public void OnFlipCoinButton() => flipCoinButtonClickEvent.Invoke();
 	public void OnBannerContinue() => bannerButtonClick.Invoke();
 	public void OnShowBanner() => showBannerEvent.Invoke();
 	public void OnDrawButton() => drawButtonClick.Invoke();
@@ -78,8 +84,33 @@ public class UIScriptableObject : ScriptableObject
 		return _playerCardSelection;
 	}
 	
-	public void OnCoinFlipDone(Coin.Side side)
+	public void OnCoinFlipDone(CoinController.Side side)
 	{
 		flipCoinDoneEvent.Invoke(side);
+	}
+	
+	public void OnHandCardsUpdated()
+	{
+		handCardsUpdatedEvent.Invoke();
+	}
+	
+	public void ResetCardBanner()
+	{
+		cardBannerCards.Clear();
+	}
+	
+	public void AddCardBannerCard(CardSO card)
+	{
+		cardBannerCards.Add(card);
+	}
+	
+	// public void OnUpdateCardBanner()
+	// {
+	// 	updateCardBannerEvent.Invoke();
+	// }
+	
+	public void OnPlayedCardsReady()
+	{
+		playedCardsReadyEvent.Invoke();
 	}
 }

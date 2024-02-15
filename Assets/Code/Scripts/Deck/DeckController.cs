@@ -53,7 +53,7 @@ public class DeckController : MonoBehaviour
 			}
 			_cardsInDeck.Clear();
 			
-			_numCards =  (_numCards % 24) + 1;
+			_numCards =  (_numCards % 32) + 1;
 			
 			GenerateCards();
 		}
