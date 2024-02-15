@@ -20,7 +20,7 @@ public class GameManagerInitState : GameManagerState
 		_uiScriptableObject.OnShowBanner();
 
 		// Initialize Deck
-		_deckScriptableObject.OnShuffleDeck();
+		_deckScriptableObject.OnInitializeDeck();
 		
 		// Go to New Round State
 		_stateMachine.ChangeState(new GameManagerNewRoundState(_owner));

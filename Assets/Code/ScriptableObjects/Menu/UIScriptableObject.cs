@@ -26,8 +26,12 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent drawButtonClick;
 	public UnityEvent dismissDrawButton;
 	public UnityEvent beginPlayerDrawPhaseEvent;
+	public UnityEvent enableHandCardSelection;
+	public UnityEvent updateHandCardsEvent;
 	
 	public String bannerText {get; private set;}
+
+	Card _playerCardSelection;
 
 	public void OnRotateGun()
 	{
@@ -47,7 +51,10 @@ public class UIScriptableObject : ScriptableObject
 	
 	public void OnDrawCards() => drawCardsEvent.Invoke();
 	
-	public void OnPlayCard() => playCardEvent.Invoke();
+	public void OnPlayCard(Card card){
+		_playerCardSelection = card;
+		playCardEvent.Invoke();
+	}
 	
 	public void OnFlipCoin() => flipCoinEvent.Invoke();
 	public void OnBannerContinue() => bannerButtonClick.Invoke();
@@ -55,4 +62,12 @@ public class UIScriptableObject : ScriptableObject
 	public void OnDrawButton() => drawButtonClick.Invoke();
 	public void OnBeginPlayerDrawPhase() => beginPlayerDrawPhaseEvent.Invoke();
 	public void SetBannerText(String text) => bannerText = text;
+
+	public void OnEnableCardSelection() => enableHandCardSelection.Invoke();
+
+
+	public void OnUpdateHandCards()
+	{
+		updateHandCardsEvent.Invoke();
+	}
 }

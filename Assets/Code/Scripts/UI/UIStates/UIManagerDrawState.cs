@@ -6,18 +6,20 @@ using UnityEngine.Events;
 
 public class UIManagerGameDrawPhaseState : UIManagerState
 {
-	int _numCardsToDraw = 2;
+	int _numCardsDrawn = 2;
 	int _selectedCard;
 	
 	
 	public UIManagerGameDrawPhaseState(UIManager owner) : base(owner) { 
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
+		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
 	}
 
 	public override void Enter()
 	{	
-		_numCardsToDraw = 2;
+		_numCardsDrawn = 0;
 		_owner.SetDrawButtonActive(true);
+		_owner.SetPlayerCardHandActive(true);
 	}
 
 
@@ -49,19 +51,26 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 
 	public override void Exit()
 	{
-		_owner.SetDrawButtonActive(false);
+		
 	}
 	
 	public void DrawButtonClickEventHandler()
 	{
-		if (_numCardsToDraw > 0)
+		if (_numCardsDrawn < 1)
 		{
-			_numCardsToDraw--;
+			_numCardsDrawn++;
 		}
 		else
 		{
+			Debug.Log("Disabling Draw Button!");
 			_owner.SetDrawButtonActive(false);
+			_uiScriptableObject.OnEnableCardSelection();
 		}
+	}
+
+	public void PlayCardEventHandler()
+	{
+
 	}
 	
 

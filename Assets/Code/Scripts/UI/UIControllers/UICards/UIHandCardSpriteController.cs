@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class UIHandCardController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class UIHandCardSpriteController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 	bool isOver = false;
 	
@@ -19,9 +19,6 @@ public class UIHandCardController : MonoBehaviour, IPointerEnterHandler, IPointe
 
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
-	
-	[SerializeField]
-	GameObject handCardSpriteGameObject;
 	
 	// Start is called before the first frame update
 	void Start()
@@ -68,11 +65,6 @@ public class UIHandCardController : MonoBehaviour, IPointerEnterHandler, IPointe
 	public void EnableHandCardSelectionEventHandler()
 	{
 		_selectable = true;
-	}
-	
-	public void SetImage(Sprite image)
-	{
-		handCardSpriteGameObject.GetComponent<Image>().sprite = image;
 	}
 
 

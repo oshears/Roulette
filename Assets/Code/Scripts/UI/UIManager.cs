@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,12 @@ public class UIManager : MonoBehaviour
 	
 	[SerializeField]
 	public GameObject playerCardHand;
+	
+	[SerializeField]
+	public GameObject cardBanner;
+	
+	[SerializeField]
+	public GameObject flipCoinButton;
 
 	// Start is called before the first frame update
 	void Start()
@@ -28,7 +35,14 @@ public class UIManager : MonoBehaviour
 		stateMachine = new UIManagerStateMachine(this);
 		stateMachine.ChangeState(new UIManagerDebugState(this));
 		
-		uiScriptableObject.showBannerEvent.AddListener(ShowBanner);
+		SetDrawButtonActive(false);
+		SetTextBannerActive(false);
+		SetPlayerCardHandActive(false);
+		SetCardBannerActive(false);
+		SetFlipCoinButtonActive(false);
+		
+		
+		uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
 	}
 
 	// Update is called once per frame
@@ -86,9 +100,26 @@ public class UIManager : MonoBehaviour
 		textBanner.SetActive(active);
 	}
 	
-	public void ShowBanner()
+	public void SetPlayerCardHandActive(bool active)
+	{
+		playerCardHand.SetActive(active);
+	}
+	
+	public void SetCardBannerActive(bool active)
+	{
+		cardBanner.SetActive(active);
+	}
+	
+	public void SetFlipCoinButtonActive(bool active)
+	{
+		flipCoinButton.SetActive(active);
+	}
+	
+	public void ShowBannerEventHandler()
 	{
 		textBanner.SetActive(true);
 	}
+	
+	
 
 }

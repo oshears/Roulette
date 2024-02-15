@@ -15,15 +15,22 @@ public class UICardHandController : MonoBehaviour
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
 	
-	private List<GameObject> _cardsInHand;
+	private List<GameObject> _cardsInHand = new List<GameObject>();
 	
-	int _numCards = 0;
+	[SerializeField]
+	PlayerScriptableObject playerScriptableObject;
+	
+	
 	
 	// Start is called before the first frame update
 	void Start()
 	{
-		_cardsInHand = new List<GameObject>();
-		uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
+		
+		// _cardsInHand = new List<GameObject>();
+		// uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
+		uiScriptableObject.updateHandCardsEvent.AddListener(UpdateHandCardsEventHandler);
+
+		RegenerateCards();
 	}
 
 	// Update is called once per frame
@@ -33,36 +40,49 @@ public class UICardHandController : MonoBehaviour
 		
 	}
 	
-	void DrawButtonClickEventHandler()
+	void OnEnable()
 	{
-		_numCards++;
-		GenerateCards();
+		RegenerateCards();
 	}
 	
-	void GenerateCards()
+	void UpdateHandCardsEventHandler()
 	{
-		int cardSpreadDistance = 100 * _numCards;
-		int distanceBetweenCards = cardSpreadDistance / _numCards;
+		RegenerateCards();
+	}
+	
+	void RegenerateCards()
+	{
+		RemoveAllCards();
+
+		int numCards = playerScriptableObject.cardsInHand.Count;
+		if (playerScriptableObject.cardsInHand.Count == 0){
+			return;
+		}
+
+		int cardSpreadDistance = 100 * numCards;
+		int distanceBetweenCards = cardSpreadDistance / numCards;
 		float currentCardPositionX = distanceBetweenCards * 0.5f;
 		int startingOffset = cardSpreadDistance / 2;
 		
 		
-		int maxShiftDown = 20 * _numCards;
+		int maxShiftDown = 20 * numCards;
 		int minShiftDown = -1 * (maxShiftDown / 2);
-		int shiftBetweenCards = maxShiftDown / _numCards;
+		int shiftBetweenCards = maxShiftDown / numCards;
 		float currentCardPositionY = minShiftDown;
 		
 
 		int maxRotationDegrees = -60;
-		int rotationBetweenCards = maxRotationDegrees / _numCards;
+		int rotationBetweenCards = maxRotationDegrees / numCards;
 		float firstCardRotation = transform.rotation.z - (maxRotationDegrees / 2);
 		float currentCardRotation = rotationBetweenCards * 0.5f;
 
 		
-		for(int i = 0; i < _numCards; i++)
+		for(int i = 0; i < numCards; i++)
 		{
-			
+			CardSO cardSO = playerScriptableObject.cardsInHand[i];
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
+			card.GetComponent<UIHandCardController>().SetImage(cardSO.GetFrontOfCard());
+			
 			card.SetActive(true);
 			card.transform.SetParent(transform,false);
 			
@@ -78,27 +98,27 @@ public class UICardHandController : MonoBehaviour
 		
 	}
 	
-	void OnGUI()
-	{
-		GUILayout.BeginArea(new Rect(Screen.width - 150, Screen.height - 150, 150, 150));
-		if (GUILayout.Button("Add Card"))
-		{
-			// Delete all old card game objects
-			foreach(GameObject card in _cardsInHand)
-			{
-				Destroy(card);
-			}
-			_cardsInHand.Clear();
+	// void OnGUI()
+	// {
+	// 	GUILayout.BeginArea(new Rect(Screen.width - 150, Screen.height - 150, 150, 150));
+	// 	if (GUILayout.Button("Add Card"))
+	// 	{
+	// 		numCards =  (numCards + 1) % 7;
+
+	// 		RegenerateCards();
 			
-			_numCards =  (_numCards + 1) % 7;
-			
-			if (_numCards > 0)
-			{
-				GenerateCards();
-			}
-		}
-		GUILayout.EndArea();
-	}
+	// 	}
+	// 	GUILayout.EndArea();
+	// }
 	
+	void RemoveAllCards()
+	{
+		// Delete all old card game objects
+		foreach(GameObject card in _cardsInHand)
+		{
+			Destroy(card);
+		}
+		_cardsInHand.Clear();
+	}
 	
 }

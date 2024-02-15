@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c2cc454ca8714bf98fb91ab3cf1e265, type: 3}
-  m_Name: Joker5
+  m_Name: Bullet1 1
   m_EditorClassIdentifier: 
-  actionType: 4
-  value: 5
-  frontOfCard: {fileID: 21300000, guid: 36e29881def084cbd8e928127cfb04cb, type: 3}
+  actionType: 0
+  value: 0
+  frontOfCard: {fileID: 21300000, guid: d215eeef205a74bf78a5d8fc260249fa, type: 3}
+  backOfCard: {fileID: 21300000, guid: e289309dea68442cebad06c632ba15fc, type: 3}

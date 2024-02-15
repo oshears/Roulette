@@ -24,7 +24,7 @@ public class UIDrawButtonController : MonoBehaviour
 	
 	void DrawButtonEventHandler()
 	{
-		uiScriptableObject.drawButtonClick.Invoke();
+		uiScriptableObject.OnDrawButton();
 	}
 	
 	

@@ -7,6 +7,11 @@ public class GameManagerDrawCardsState : GameManagerState
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
 	}
 
+	public override void Enter()
+	{
+		
+	}
+
 	override public void Execute() 
 	{ 
 		// Deal two cards to each player and show them to each player
@@ -28,6 +33,9 @@ public class GameManagerDrawCardsState : GameManagerState
 	{
 		_cardsDrawn++;
 		
+		CardSO card = _deckScriptableObject.OnDrawCard();
+		_playerScriptableObject.AddCard(card);
+		_uiScriptableObject.OnUpdateHandCards();
 		// if (_cardsDrawn == 0)
 		// {
 		// 	_stateMachine.ChangeState(new GameManagerCardCompareState(_owner));

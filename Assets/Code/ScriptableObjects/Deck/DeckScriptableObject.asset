@@ -12,10 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e486f3009b66d34eb3a317f8c5d24ed, type: 3}
   m_Name: DeckScriptableObject
   m_EditorClassIdentifier: 
+  cardsArray:
+  - {fileID: 11400000, guid: dadeeb9de0ad44348a2afe755b1be79e, type: 2}
+  - {fileID: 11400000, guid: ff8765ca71cd13848bd9eb08a80e18ba, type: 2}
+  - {fileID: 11400000, guid: 50bb94bb04ecc48fda6c4782987ec37d, type: 2}
+  - {fileID: 11400000, guid: e9076f46fc23b3748a060167db4a248b, type: 2}
+  - {fileID: 11400000, guid: 40486f5aaad654d0d87208ab11fcdadc, type: 2}
+  - {fileID: 11400000, guid: 8e88b0fe897e37e469336fac5d3d5505, type: 2}
+  - {fileID: 11400000, guid: e1b6de15ef75f4849b83d0f802781a14, type: 2}
+  - {fileID: 11400000, guid: df96cffdcb215a14f911f97e68d24f5c, type: 2}
+  - {fileID: 11400000, guid: 3d44facb7d8f54a199c0f37885c3f654, type: 2}
+  - {fileID: 11400000, guid: e02cf87bbd888cc4aac37957ef5e022e, type: 2}
+  - {fileID: 11400000, guid: 2a7dc532068034b60bb8a184a6bfb414, type: 2}
+  - {fileID: 11400000, guid: f48f9a8221e045442b771445fba68a92, type: 2}
+  - {fileID: 11400000, guid: 136bef0ad6b094fbc868eb219318b768, type: 2}
+  - {fileID: 11400000, guid: 72fc93e67b615409abe693acc7d61573, type: 2}
+  - {fileID: 11400000, guid: f6370ed733ccf4d61a593853156db62e, type: 2}
+  - {fileID: 11400000, guid: 4b12369136b3e4a0fa37c193d574e974, type: 2}
+  - {fileID: 11400000, guid: 6c95b258c2a4849979ed0a343645ce86, type: 2}
+  - {fileID: 11400000, guid: eaf8e3c87afb64f1892f3ad75e854730, type: 2}
+  - {fileID: 11400000, guid: 509635e60864043cd8b285fc0708f654, type: 2}
+  - {fileID: 11400000, guid: 5eef3e23fc19c4b37be216cba08a93ed, type: 2}
+  - {fileID: 11400000, guid: 2c10a0a28287c49a5ac1cbcf7cfb2b44, type: 2}
+  - {fileID: 11400000, guid: d3184da14058c43b99331864963bc4fa, type: 2}
+  - {fileID: 11400000, guid: 2c974da6e3c07456da5ed6c5f217950e, type: 2}
+  - {fileID: 11400000, guid: 9bd18ab2eb0b944889a6645243a2a13d, type: 2}
+  - {fileID: 11400000, guid: 25a801e77735c41c2a679de3db3ab41a, type: 2}
+  - {fileID: 11400000, guid: 0484c798dd98f4b24a4e59ce12b3c150, type: 2}
+  - {fileID: 11400000, guid: 19152cd9a70e6433687e4b4bd5f9073a, type: 2}
+  - {fileID: 11400000, guid: 0f1284466d4ff455eb9a7b364c3f56f2, type: 2}
+  - {fileID: 11400000, guid: 3fb12b58355f643cf90df14d56ba6407, type: 2}
+  - {fileID: 11400000, guid: 36d5bf7b742484be1b881458338e5161, type: 2}
+  - {fileID: 11400000, guid: 9ebd36f0b55b74fb8ba0b90098ce09ad, type: 2}
+  - {fileID: 11400000, guid: e3c4ff8b5a164484d8a3defba1c68b71, type: 2}
   drawCardEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  giveCardEvent:
     m_PersistentCalls:
       m_Calls: []
   discardCardEvent:
