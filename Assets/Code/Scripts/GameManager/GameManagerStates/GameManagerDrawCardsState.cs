@@ -9,15 +9,15 @@ public class GameManagerDrawCardsState : GameManagerState
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
 		_uiScriptableObject.handCardsUpdatedEvent.AddListener(HandCardsUpdatedEventHandler);
 		_playerScriptableObject.playerHandFullEvent.AddListener(PlayerHandFullEventHandler);
+		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	}
 
 	public override void Enter()
 	{
-		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.DrawCardState)
-		{
-			continue;
-		}
+		_uiScriptableObject.OnShowDrawButton();
+		_uiScriptableObject.OnSetPlayerHandVisible(true);
 		
+		// _uiScriptableObject.OnBeginPlayerDrawPhase();
 		_numCardsDrawn = 0;
 		
 		// Draw Cards for NPCs
@@ -47,10 +47,31 @@ public class GameManagerDrawCardsState : GameManagerState
 
 	public override void Exit()
 	{
+		_uiScriptableObject.OnSetPlayerHandVisible(false);
+		
 		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
 		_uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
 		_uiScriptableObject.handCardsUpdatedEvent.RemoveListener(HandCardsUpdatedEventHandler);
 		_playerScriptableObject.playerHandFullEvent.RemoveListener(PlayerHandFullEventHandler);
+		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+	}
+	
+	void UiReadyEventHandler()
+	{
+		_numCardsDrawn = 0;
+		
+		// Draw Cards for NPCs
+		foreach (NpcScriptableObject npc in _npcScriptableObjects)
+		{
+			// Draw Two Cards for each NPC
+			for (int i = 0; i < 2; i++)
+			{
+				if (!npc.HasFullHand())
+				{
+					npc.AddCard(_deckScriptableObject.OnDrawNpcCard());
+				}
+			}
+		}
 	}
 
 	void PlayCardEventHandler(int cardIndex)

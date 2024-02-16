@@ -12,7 +12,7 @@ public class UIManagerEndGunState : UIManagerState
 
 	public override void Enter()
 	{	
-		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.EndGunState);
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.EndGunState);
 	}
 
 	

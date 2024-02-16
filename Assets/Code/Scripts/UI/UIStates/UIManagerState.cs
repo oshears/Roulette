@@ -23,7 +23,6 @@ public abstract class UIManagerState : IManagerState
 	public virtual void Exit() { }
 	protected void changeState(UIManagerState newState)
 	{
-		Debug.Log(_stateMachine);
 		_stateMachine.ChangeState(newState);
 	}
 }

@@ -122,7 +122,6 @@ public class UIManager : MonoBehaviour
 	
 	public void SetCardBannerActive(bool active)
 	{
-		Debug.Log("I am UIManager and I am disabling the Card Banner!");
 		cardBanner.SetActive(active);
 	}
 	
@@ -140,5 +139,7 @@ public class UIManager : MonoBehaviour
 	{
 		playerCardBanner.SetActive(active);
 	}
+	
+	
 
 }

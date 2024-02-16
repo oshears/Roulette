@@ -8,11 +8,13 @@ public class UIManagerPostGunState : UIManagerState
 {
 	public UIManagerPostGunState(UIManager owner) : base(owner) { 
 		
+		_uiScriptableObject.showPlayerCardBannerEvent.AddListener(ShowPlayerCardBannerEventHandler);
+		
 	}
 
 	public override void Enter()
 	{	
-		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.PostGunState);
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.PostGunState);
 	}
 
 	
@@ -23,8 +25,12 @@ public class UIManagerPostGunState : UIManagerState
 
 	public override void Exit()
 	{
-        _owner.SetTextBannerActive(false);
 		_owner.SetPlayerCardBannerActive(false);
+	}
+	
+	void ShowPlayerCardBannerEventHandler()
+	{
+		_owner.SetPlayerCardBannerActive(true);
 	}
 	
 }

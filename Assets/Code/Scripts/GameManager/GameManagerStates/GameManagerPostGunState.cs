@@ -11,16 +11,12 @@ public class GameManagerPostGunState : GameManagerState
 		_targetPlayerScriptableObject = targetPlayer;
 		_additionalTriggerPulls = 0;
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	}
 
 	public override void Enter()
 	{
-		_uiScriptableObject.OnBeginPostGunPhase();
-		
-		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.PostGunState)
-		{
-			continue;
-		}
+		// _uiScriptableObject.OnBeginPostGunPhase();
 		
 		// Check if player dead
 
@@ -62,6 +58,14 @@ public class GameManagerPostGunState : GameManagerState
 	public override void Exit()
 	{
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+		
+	}
+	
+	void UiReadyEventHandler()
+	{
+		
+		
 	}
 
 	void HandlePostGunCard(CardSO card)

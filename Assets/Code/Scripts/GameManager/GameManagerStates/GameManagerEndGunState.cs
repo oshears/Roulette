@@ -11,13 +11,8 @@ public class GameManagerEndGunState : GameManagerState
 
 	public override void Enter()
 	{
-		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.EndGunState)
-		{
-			continue;
-		}
-		
 		Debug.LogError($"Done with gun phase! New dealer will be: {_targetPlayerScriptableObject.GetPlayerName()}");
-		_uiScriptableObject.OnEndGunPhase();
+		// _uiScriptableObject.OnEndGunPhase();
 	}
 
 	override public void Execute() 

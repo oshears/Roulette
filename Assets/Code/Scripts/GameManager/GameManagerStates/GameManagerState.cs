@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class GameManagerState : IManagerState
 {
 	protected GameManagerStateMachine _stateMachine;
@@ -25,5 +27,10 @@ public abstract class GameManagerState : IManagerState
 	{
 		_stateMachine.ChangeState(newState);
 	}
-	public virtual void OnGUI(){}
+	public virtual void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(0, 500, 500, 500));
+		GUILayout.Label($"Current GameManagerState: {this}");
+		GUILayout.EndArea();
+	}
 }

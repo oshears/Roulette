@@ -10,24 +10,35 @@ public class UIManagerGunState : UIManagerState
 		_uiScriptableObject.beginPostGunPhaseEvent.AddListener(BeginPostGunPhaseEventHandler);
 		_uiScriptableObject.endGunPhaseEvent.AddListener(EndGunPhaseEventHandler);
 		_uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunphaseEventHandler);
+		_uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
 	}
 
 	public override void Enter()
 	{	
-		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.GunState);
+		
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.GunState);
 	}
 
 	
 	public override void Execute()
 	{
-		
+		GUILayout.BeginArea(new Rect(0, 1000, 500, 500));
+		GUILayout.Label($"UIManager State: GunState");
+		GUILayout.EndArea();
 	}
 
 	public override void Exit()
 	{ 
+		_owner.SetTextBannerActive(false);
+		
 		_uiScriptableObject.beginPostGunPhaseEvent.RemoveListener(BeginPostGunPhaseEventHandler);
 		_uiScriptableObject.endGunPhaseEvent.RemoveListener(EndGunPhaseEventHandler);
 		_uiScriptableObject.beginPreGunPhaseEvent.RemoveListener(BeginPreGunphaseEventHandler);
+	}
+	
+	void ShowBannerEventHandler()
+	{
+		_owner.SetTextBannerActive(true);
 	}
 	
 	public void BeginPostGunPhaseEventHandler()

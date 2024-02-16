@@ -21,8 +21,10 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent<int> playCardEvent;
 	public UnityEvent flipCoinButtonClickEvent;
 	public UnityEvent<bool> flipCoinDoneEvent;
+	public UnityEvent<bool> setCoinVisibleEvent;
 	public UnityEvent bannerButtonClick;
 	public UnityEvent showBannerEvent;
+	public UnityEvent showDrawButtonEvent;
 	public UnityEvent drawButtonClick;
 	public UnityEvent dismissDrawButton;
 	public UnityEvent beginPlayerDrawPhaseEvent;
@@ -30,7 +32,7 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent updateHandCardsEvent;
 	public UnityEvent handCardsUpdatedEvent;
 	public UnityEvent playedCardsReadyEvent;
-	public UnityEvent beginRoulettePhaseEvent;
+	// public UnityEvent beginRoulettePhaseEvent;
 	// public UnityEvent displayCardBannerEvent;
 	public UnityEvent showPlayerCardBannerEvent;
 	public UnityEvent playerCardBannerButtonEvent;
@@ -41,6 +43,12 @@ public class UIScriptableObject : ScriptableObject
 	
 	public UnityEvent uiReadyEvent;
 	
+	public UnityEvent<bool> playerHandVisibleEvent;
+	
+	public UnityEvent beginCompareCardPhaseEvent;
+	
+	public UnityEvent<bool> setCardBannerVisibleEvent;
+	
 	public String bannerText {get; private set;}
 	
 	public List<CardSO> cardBannerCards;
@@ -49,7 +57,8 @@ public class UIScriptableObject : ScriptableObject
 	
 	public enum UIStateEnum 
 	{
-		DebugState,
+		InitState,
+		DefaultState,
 		BeginGameState,
 		CompareCardsState,
 		PostGunState,
@@ -60,7 +69,7 @@ public class UIScriptableObject : ScriptableObject
 		
 	}
 	
-	public UIStateEnum uiState {get; private set;} = UIStateEnum.DebugState; 
+	public UIStateEnum uiState {get; private set;} = UIStateEnum.InitState; 
 
 	// Card _playerCardSelection;
 	int _playerCardSelection;
@@ -91,6 +100,7 @@ public class UIScriptableObject : ScriptableObject
 	public void OnFlipCoinButton() => flipCoinButtonClickEvent.Invoke();
 	public void OnBannerContinue() => bannerButtonClick.Invoke();
 	public void OnShowBanner() => showBannerEvent.Invoke();
+	public void OnShowDrawButton() => showDrawButtonEvent.Invoke();
 	public void OnDrawButton() => drawButtonClick.Invoke();
 	public void OnBeginPlayerDrawPhase() => beginPlayerDrawPhaseEvent.Invoke();
 	public void SetBannerText(String text) => bannerText = text;
@@ -138,10 +148,10 @@ public class UIScriptableObject : ScriptableObject
 		playedCardsReadyEvent.Invoke();
 	}
 	
-	public void OnBeginRoulettePhase()
-	{
-		beginRoulettePhaseEvent.Invoke();
-	}
+	// public void OnBeginRoulettePhase()
+	// {
+	// 	beginRoulettePhaseEvent.Invoke();
+	// }
 	
 	public void OnShowPlayerCardBanner(CardSO card, String text)
 	{
@@ -181,8 +191,29 @@ public class UIScriptableObject : ScriptableObject
 		uiReadyEvent.Invoke();
 	}
 	
-	public void SetUiState(UIStateEnum newState)
+	public void OnSetUiState(UIStateEnum newState)
 	{
 		uiState = newState;
+		uiReadyEvent.Invoke();
+	}
+	
+	public void OnBeginCompareCardPhase()
+	{
+		beginCompareCardPhaseEvent.Invoke();
+	}
+	
+	public void OnSetPlayerHandVisible(bool visible)
+	{
+		playerHandVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnSetCoinVisible(bool visible)
+	{
+		setCoinVisibleEvent.Invoke(visible);		
+	}
+	
+	public void OnSetCardBannerVisible(bool visible)
+	{
+		setCardBannerVisibleEvent.Invoke(visible);
 	}
 }

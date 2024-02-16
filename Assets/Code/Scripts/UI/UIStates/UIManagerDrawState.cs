@@ -12,8 +12,9 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 	
 	public UIManagerGameDrawPhaseState(UIManager owner) : base(owner) { 
 		_uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
-		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
+		// _uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
 		_playerScriptableObject.playerHandFullEvent.AddListener(PlayerHandFullEventHandler);
+		_uiScriptableObject.beginCompareCardPhaseEvent.AddListener(BeginComparePhaseEventHandler);
 	}
 
 	public override void Enter()
@@ -21,7 +22,7 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		_numCardsDrawn = 0;
 		_owner.SetDrawButtonActive(true);
 		_owner.SetPlayerCardHandActive(true);
-		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.DrawCardState);
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.DrawCardState);
 	}
 
 
@@ -58,8 +59,8 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		_owner.SetPlayerCardHandActive(false);
 		
 		_uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
-		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
 		_playerScriptableObject.playerHandFullEvent.RemoveListener(PlayerHandFullEventHandler);
+		_uiScriptableObject.beginCompareCardPhaseEvent.RemoveListener(BeginComparePhaseEventHandler);
 	}
 	
 	public void DrawButtonClickEventHandler()
@@ -79,7 +80,7 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		_owner.SetDrawButtonActive(false);
 	}
 
-	public void PlayCardEventHandler(int cardIndex)
+	public void BeginComparePhaseEventHandler()
 	{
 		changeState(new UIManagerCompareCardsPhaseState(_owner));
 	}

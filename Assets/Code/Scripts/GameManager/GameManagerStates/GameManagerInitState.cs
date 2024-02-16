@@ -6,10 +6,7 @@ public class GameManagerInitState : GameManagerState
 
     public override void Enter()
     {
-        while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.BeginGameState)
-		{
-			continue;
-		}
+        
     }
 
     override public void Execute() 
@@ -20,7 +17,7 @@ public class GameManagerInitState : GameManagerState
 
 	public override void Exit()
 	{
-		_uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
+		// _uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
 	}
 
 	void StartGameEventHandler()

@@ -11,7 +11,7 @@ public class UIManagerDebugState : UIManagerState
 
     public override void Enter()
     {
-		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.DebugState);
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.InitState);
     }
 
     
@@ -37,7 +37,7 @@ public class UIManagerDebugState : UIManagerState
 		}
 		if (GUILayout.Button("Start Game"))
 		{
-			changeState(new UIManagerBeginGameState(_owner));   
+			changeState(new UIManagerDefaultState(_owner));   
 			_uiScriptableObject.OnStartGame();
 		}
 		GUILayout.EndArea();

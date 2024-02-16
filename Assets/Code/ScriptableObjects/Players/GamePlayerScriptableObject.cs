@@ -72,12 +72,23 @@ public class GamePlayerScriptableObject : ScriptableObject
 		
 		Debug.LogError($"ERROR: No valid cards can be played from {GetPlayerName()}'s hand!");
 		
-		return null;
+		
+		// DEBUG: Remove this later
+		CardSO jokerCard = cardsInHand[0];
+		RemoveCard(jokerCard);
+		return jokerCard;
+		
+		
+		// return null;
 		
 	}
 	
 	public CardSO PlayCard(int i)
 	{
+		if (i > cardsInHand.Count - 1)
+		{
+			Debug.LogError($"ERROR: Trying to access card {i} in a list of {cardsInHand.Count} cards");
+		}
 		CardSO npcCard = cardsInHand[i];
 		RemoveCard(npcCard);
 		return npcCard;

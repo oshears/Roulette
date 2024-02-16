@@ -22,22 +22,18 @@ public class GameManagerPreGunState : GameManagerState
 		_additionalTriggerPulls = additionalTriggerPulls;
 		_uiScriptableObject.bannerButtonClick.AddListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	}
 
 	public override void Enter()
 	{
-		_uiScriptableObject.OnBeginPreGunPhase();
-		
-		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.GunState)
-		{
-			continue;
-		}
-		
+		// _uiScriptableObject.OnBeginPreGunPhase();
 		
 		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} is now the target!");
 		_uiScriptableObject.OnShowBanner();
 		
 		_gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.gunRotation);
+		
 	}
 
 	override public void Execute() 
@@ -57,6 +53,14 @@ public class GameManagerPreGunState : GameManagerState
 	{
 		_uiScriptableObject.bannerButtonClick.RemoveListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+
+	}
+	
+	void UiReadyEventHandler()
+	{
+		
+		
 	}
 	
 	void OnBannerContinueEventHandler()
@@ -82,12 +86,18 @@ public class GameManagerPreGunState : GameManagerState
 					_additionalTriggerPulls++;
 				}
 			}
+			else
+			{
+				Debug.Log($"Entering gun phase with this player: {_targetPlayerScriptableObject.GetPlayerName()}");
+				changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
+			}
 			
 		}
 		// else if player
 		else
 		{
 			// TODO: Need to implement the functionality for the player's pre gun actions
+			Debug.LogError("Skipping player's turn for now");
 			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 			changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
 		}

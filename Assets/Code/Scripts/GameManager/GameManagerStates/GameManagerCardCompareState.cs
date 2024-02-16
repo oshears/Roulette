@@ -10,23 +10,24 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	GamePlayerScriptableObject _targetPlayerScriptableObject;
 	
-	int _numBullets;
+	int _numBullets = 1;
 	
 	public GameManagerCardCompareState(GameManager owner, int playerCardChoice) : base(owner) { 
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
+		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
+		
 		_playerCardChoice = playerCardChoice;
 		playedCards = new List<CardSO>();
 		_targetPlayerScriptableObject = null;
-		_numBullets = 0;
+		_numBullets = 1;
+		
 	}
 
 	public override void Enter()
 	{
-		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.CompareCardsState)
-		{
-			continue;
-		}
+		// _uiScriptableObject.OnBeginCompareCardPhase();
+		_uiScriptableObject.OnSetCoinVisible(true);
 		
 		if (_playerCardChoice < 0)
 		{
@@ -38,6 +39,7 @@ public class GameManagerCardCompareState : GameManagerState
 		
 		
 		// remove card from player's hand
+		Debug.Log($"Player selected card index: {_playerCardChoice}");
 		CardSO playerCard = _playerScriptableObject.PlayCard(_playerCardChoice);
 		playedCards.Add(playerCard);
 		_uiScriptableObject.AddCardBannerCard(playerCard);
@@ -66,10 +68,45 @@ public class GameManagerCardCompareState : GameManagerState
 
 	public override void Exit()
 	{
+		Debug.Log("Exiting GameManagerCardCompareState");
 		_gunScriptableObject.SetNumBullets(_numBullets);
 		_gunScriptableObject.OnShuffleGun();
 		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
+		
+		_uiScriptableObject.OnSetCardBannerVisible(false);
+		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+	}
+	
+	void UiReadyEventHandler()
+	{
+		
+		if (_playerCardChoice < 0)
+		{
+			Debug.LogError("ERROR: Player's card choice was not registered successfully!");
+		}
+		
+		// Reset CardBanner
+		_uiScriptableObject.ResetCardBanner();
+		
+		
+		// remove card from player's hand
+		Debug.Log($"Player selected card index: {_playerCardChoice}");
+		CardSO playerCard = _playerScriptableObject.PlayCard(_playerCardChoice);
+		playedCards.Add(playerCard);
+		_uiScriptableObject.AddCardBannerCard(playerCard);
+		_deckScriptableObject.OnDiscardCard(playerCard);
+		
+		// Get a card from each NPC, add it to the card banner, then discard it into the bottom of the deck
+		foreach (NpcScriptableObject npc in _npcScriptableObjects)
+		{
+			CardSO npcCard = npc.PlayCard();
+			playedCards.Add(npcCard);
+			_uiScriptableObject.AddCardBannerCard(npcCard);
+			_deckScriptableObject.OnDiscardCard(npcCard);
+		}
+		
+		_uiScriptableObject.OnPlayedCardsReady();
 	}
 
 
@@ -77,11 +114,11 @@ public class GameManagerCardCompareState : GameManagerState
 	{
 		
 		Debug.Log("Done Flipping Coin! Determining Loser");
+		_uiScriptableObject.OnSetCoinVisible(false);
 		
 		int lowestCardIndex = 0;
 		int highestCardIndex = 0;
 		
-		int numBullets = 1;
 		
 		// 1. Get all the cards that the players placed
 		// 2. Compare the cards that were played
@@ -101,11 +138,11 @@ public class GameManagerCardCompareState : GameManagerState
 			
 			if (currentCard.GetActionType() == CardActionType.Bullet)
 			{
-				numBullets++;
+				_numBullets++;
 			}
 		}
 		
-		if (numBullets == 5)
+		if (_numBullets == 5)
 		{
 			// TODO: Need to implement this functionality to move on to the next round
 			Debug.LogError("ERROR! All cards played were bullet cards!!!");
@@ -115,7 +152,7 @@ public class GameManagerCardCompareState : GameManagerState
 		// int loserIndex = (side == CoinController.Side.Heads) ? lowestCardIndex : highestCardIndex;
 		int loserIndex = side ? lowestCardIndex : highestCardIndex;
 		Debug.Log($"Starting roulette with player: {loserIndex}"); 
-		Debug.Log($"Starting roulette with {numBullets} bullets"); 
+		Debug.Log($"Starting roulette with {_numBullets} bullets"); 
 		
 		_targetPlayerScriptableObject = _playerScriptableObject;
 		if (loserIndex > 0)
@@ -132,7 +169,6 @@ public class GameManagerCardCompareState : GameManagerState
 	void BannerButtonEventHandler()
 	{
 		Debug.Log("Sending Roulette Start Phase!");
-		_uiScriptableObject.OnBeginRoulettePhase();
 		changeState(new GameManagerPreGunState(_owner, _targetPlayerScriptableObject, 0));
 	}
 	
@@ -143,9 +179,19 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	public override void OnGUI()
 	{
-		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
-		GUILayout.Label($"In CompareCardState!");
-		GUILayout.EndArea();
+		if (_targetPlayerScriptableObject != null)
+		{
+			GUILayout.BeginArea(new Rect(0, 500, 500, 500));
+			GUILayout.Label($"GameManagerCardCompareState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
+			GUILayout.EndArea();
+		}
+		else
+		{
+			GUILayout.BeginArea(new Rect(0, 500, 500, 500));
+			GUILayout.Label($"GameManagerCardCompareState with Target: NONE");
+			GUILayout.EndArea();
+		}
+		
 	}
 	
 }

@@ -10,14 +10,15 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_uiScriptableObject.playedCardsReadyEvent.AddListener(PlayedCardsReadyEventHandler);
 		_uiScriptableObject.flipCoinButtonClickEvent.AddListener(FlipCoinButtonEventHandler);
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
-		_uiScriptableObject.beginRoulettePhaseEvent.AddListener(BeginRoulettePhaseEventHandler);
+		_uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunPhaseEventHandler);
+		// _uiScriptableObject.beginRoulettePhaseEvent.AddListener(BeginRoulettePhaseEventHandler);
 		// _uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
 	}
 
 	public override void Enter()
 	{	
 		_owner.SetFlipCoinButtonActive(true);
-        _uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.CompareCardsState);
+		_uiScriptableObject.OnSetUiState(UIScriptableObject.UIStateEnum.CompareCardsState);
 	}
 
 	
@@ -37,7 +38,8 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_uiScriptableObject.playedCardsReadyEvent.RemoveListener(PlayedCardsReadyEventHandler);
 		_uiScriptableObject.flipCoinButtonClickEvent.RemoveListener(FlipCoinButtonEventHandler);
 		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
-		_uiScriptableObject.beginRoulettePhaseEvent.RemoveListener(BeginRoulettePhaseEventHandler);
+		_uiScriptableObject.beginPreGunPhaseEvent.RemoveListener(BeginPreGunPhaseEventHandler);
+		// _uiScriptableObject.beginRoulettePhaseEvent.RemoveListener(BeginRoulettePhaseEventHandler);
 	}
 	
 	void PlayedCardsReadyEventHandler()
@@ -65,7 +67,13 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_uiScriptableObject.OnShowBanner();
 	}
 	
-	void BeginRoulettePhaseEventHandler()
+	// void BeginRoulettePhaseEventHandler()
+	// {
+	// 	Debug.Log("UI moving into UIManagerPreGunState!");
+	// 	changeState(new UIManagerPreGunState(_owner));
+	// }
+	
+	void BeginPreGunPhaseEventHandler()
 	{
 		Debug.Log("UI moving into UIManagerPreGunState!");
 		changeState(new UIManagerPreGunState(_owner));
