@@ -22,7 +22,7 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent drawCardsEvent;
 	public UnityEvent<int> playCardEvent;
 	public UnityEvent flipCoinButtonClickEvent;
-	public UnityEvent<CoinController.Side> flipCoinDoneEvent;
+	public UnityEvent<bool> flipCoinDoneEvent;
 	public UnityEvent bannerButtonClick;
 	public UnityEvent showBannerEvent;
 	public UnityEvent drawButtonClick;
@@ -87,7 +87,7 @@ public class UIScriptableObject : ScriptableObject
 		return _playerCardSelection;
 	}
 	
-	public void OnCoinFlipDone(CoinController.Side side)
+	public void OnCoinFlipDone(bool side)
 	{
 		flipCoinDoneEvent.Invoke(side);
 	}

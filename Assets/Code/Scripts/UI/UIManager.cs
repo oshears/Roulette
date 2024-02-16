@@ -94,7 +94,7 @@ public class UIManager : MonoBehaviour
 		CoinController newCoinController = newCoin.GetComponent<CoinController>();
 		newCoinController.flipResult.AddListener( (CoinController.Side side) =>
 			{
-				uiScriptableObject.OnCoinFlipDone(side);
+				uiScriptableObject.OnCoinFlipDone((side == CoinController.Side.Heads) ? true : false);
 			});
 		newCoin.SetActive(true);
 		newCoinController.FlipCoin();

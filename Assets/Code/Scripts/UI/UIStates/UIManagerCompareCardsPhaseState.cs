@@ -47,9 +47,9 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		_owner.StartCoinFlip();
 	}
 	
-	void FlipCoinDoneEventHandler(CoinController.Side side)
+	void FlipCoinDoneEventHandler(bool side)
 	{
-		if (side == CoinController.Side.Heads)
+		if (side)
 		{
 			_uiScriptableObject.SetBannerText("Lowest number loses!");
 		}

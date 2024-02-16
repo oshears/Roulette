@@ -67,7 +67,7 @@ public class GameManagerCardCompareState : GameManagerState
 	}
 
 
-	void FlipCoinDoneEventHandler(CoinController.Side side)
+	void FlipCoinDoneEventHandler(bool side)
 	{
 		
 		Debug.Log("Done Flipping Coin! Determining Loser");
@@ -106,7 +106,8 @@ public class GameManagerCardCompareState : GameManagerState
 		}
 		
 		// 5. Determine whether highest or lowest card loses
-		int loserIndex = (side == CoinController.Side.Heads) ? lowestCardIndex : highestCardIndex;
+		// int loserIndex = (side == CoinController.Side.Heads) ? lowestCardIndex : highestCardIndex;
+		int loserIndex = side ? lowestCardIndex : highestCardIndex;
 		Debug.Log($"Starting roulette with player: {loserIndex}"); 
 		Debug.Log($"Starting roulette with {numBullets} bullets"); 
 		
