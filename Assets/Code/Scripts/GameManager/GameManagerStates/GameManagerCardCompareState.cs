@@ -134,4 +134,11 @@ public class GameManagerCardCompareState : GameManagerState
 		_playerCardChoice = cardIndex;
 	}
 	
+	public override void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.Label($"In CompareCardState!");
+		GUILayout.EndArea();
+	}
+	
 }

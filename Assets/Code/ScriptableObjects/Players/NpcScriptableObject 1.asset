@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0583f4fe5bbebbc4fb35a68115af72d7, type: 3}
   m_Name: NpcScriptableObject 1
   m_EditorClassIdentifier: 
-  GunRotation: {x: 0, y: 315, z: 0}
+  _heartRemaining: 2
+  gunRotation: {x: 0, y: 315, z: 0}
+  playerId: 1
+  playerDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []

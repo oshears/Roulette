@@ -22,6 +22,11 @@ public class GameManagerStateMachine
 	{
 		if (_currentState != null) _currentState.Execute();
 	}
+	
+	public void OnGUI()
+	{
+		if (_currentState != null) _currentState.OnGUI();
+ 	}
 }
 
 

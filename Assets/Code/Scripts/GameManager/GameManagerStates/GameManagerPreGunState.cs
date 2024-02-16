@@ -1,3 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
 public class GameManagerPreGunState : GameManagerState
 {
 	
@@ -34,6 +40,8 @@ public class GameManagerPreGunState : GameManagerState
 
 
 		// Wait for player to either skip or pull trigger
+		
+		
 
 	}
 
@@ -81,8 +89,22 @@ public class GameManagerPreGunState : GameManagerState
 	{
 		changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
 	}
-	
-	
+
+	public override void OnGUI()
+	{
+		// https://stackoverflow.com/questions/52010746/how-can-i-change-guilayout-label-font-size
+		//I am using two options: this
+		// GUIStyle headStyle = new GUIStyle();
+		// headStyle.fontSize = 30; 
+		// GUI.Label(new Rect(Screen.width / 3, Screen.height / 2, 300, 50), "HELLO WORLD", headStyle);
+		// or this
+		// GUI.skin.label.fontSize = 30;
+		// GUILayout.Label("HELLO WORLD", GUILayout.Width(300), GUILayout.Height(50)))
+		
+		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.Label($"PreGunState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
+		GUILayout.EndArea();
+	}
 
 	
 }

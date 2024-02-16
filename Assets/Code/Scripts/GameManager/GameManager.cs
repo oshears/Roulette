@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
 		stateMachine.Update();
 	}
 	
+	void OnGUI()
+	{
+		stateMachine.OnGUI();
+	}
+	
 	public int GetNextPlayerIndex(int index)
 	{
 		return (index + 1) % numPlayers;

@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884c277a7779c084ea04b0d3515fa215, type: 3}
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
-  GunRotation: {x: 0, y: 180, z: 0}
+  _heartRemaining: 2
+  gunRotation: {x: 0, y: 0, z: 180}
+  playerId: 0
+  playerDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   playerHandFullEvent:
     m_PersistentCalls:
       m_Calls: []

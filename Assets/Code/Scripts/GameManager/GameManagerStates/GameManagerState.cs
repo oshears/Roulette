@@ -25,4 +25,5 @@ public abstract class GameManagerState : IManagerState
 	{
 		_stateMachine.ChangeState(newState);
 	}
+	public virtual void OnGUI(){}
 }

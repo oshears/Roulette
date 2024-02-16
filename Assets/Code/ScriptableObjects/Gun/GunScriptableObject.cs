@@ -15,7 +15,13 @@ public class GunScriptableObject : ScriptableObject
 	
 	public Vector3 gunRotation {get; private set;}
 	
-	Queue<bool> _bulletQueue;
+	Queue<bool> _bulletQueue = new Queue<bool>();
+	
+	public void InitializeGun()
+	{
+		_bulletQueue.Clear();
+		numBullets = 0;
+	}
 	
 	public void SetNumBullets(int numBullets)
 	{
@@ -25,6 +31,7 @@ public class GunScriptableObject : ScriptableObject
 		}
 		
 		this.numBullets = numBullets;
+		_bulletQueue.Clear();
 		for (int i = 0; i < numBullets; i++)
 		{
 			_bulletQueue.Enqueue(true);

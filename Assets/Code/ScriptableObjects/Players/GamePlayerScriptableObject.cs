@@ -15,10 +15,11 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public bool isDealer {get; private set;}
 	
 	[SerializeField]
-	public Vector3 gunRotation {get; private set;}
+	public Vector3 gunRotation;
 	
 	[SerializeField]
-	public int playerId {get; private set;}
+	// public int playerId {get; private set;}
+	public int playerId;
 	
 	public UnityEvent playerDiedEvent;
 	

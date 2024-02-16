@@ -21,5 +21,12 @@ public class GameManagerEndGunState : GameManagerState
 
 	}
 	
+	public override void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.Label($"EndGunState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
+		GUILayout.EndArea();
+	}
+	
 	
 }

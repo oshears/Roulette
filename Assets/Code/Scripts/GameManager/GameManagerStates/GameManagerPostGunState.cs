@@ -82,4 +82,11 @@ public class GameManagerPostGunState : GameManagerState
 		changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
 	}
 	
+	public override void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.Label($"PostGunState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
+		GUILayout.EndArea();
+	}
+	
 }

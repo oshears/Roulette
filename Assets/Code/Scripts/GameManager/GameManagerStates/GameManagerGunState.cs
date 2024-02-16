@@ -99,4 +99,11 @@ public class GameManagerGunState : GameManagerState
 		}
 	}
 	
+	public override void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.Label($"GunState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
+		GUILayout.EndArea();
+	}
+	
 }
