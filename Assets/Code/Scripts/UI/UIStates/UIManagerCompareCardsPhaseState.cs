@@ -17,7 +17,7 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 	public override void Enter()
 	{	
 		_owner.SetFlipCoinButtonActive(true);
-		
+        _uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.CompareCardsState);
 	}
 
 	
@@ -33,6 +33,11 @@ public class UIManagerCompareCardsPhaseState : UIManagerState
 		Debug.Log("Disabling Card Banner!");
 		_owner.SetCardBannerActive(false);
 		_owner.SetFlipCoinButtonActive(false);
+		
+		_uiScriptableObject.playedCardsReadyEvent.RemoveListener(PlayedCardsReadyEventHandler);
+		_uiScriptableObject.flipCoinButtonClickEvent.RemoveListener(FlipCoinButtonEventHandler);
+		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
+		_uiScriptableObject.beginRoulettePhaseEvent.RemoveListener(BeginRoulettePhaseEventHandler);
 	}
 	
 	void PlayedCardsReadyEventHandler()

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 		int nextTargetIndex = GetNextPlayerIndex(currentPlayer.playerId);
 		if(nextTargetIndex > 0)
 		{
-			nextPlayer = npcScriptableObjects[nextTargetIndex + 1];
+			nextPlayer = npcScriptableObjects[nextTargetIndex - 1];
 		}
 		
 		return nextPlayer;

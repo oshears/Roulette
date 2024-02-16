@@ -12,8 +12,6 @@ public class UIScriptableObject : ScriptableObject
 	//public int numberOfPrefabsToCreate;
 	//public Vector3[] spawnPoints;
 
-	int _rotation = 0;
-
 	public UnityEvent rotateGunEvent;
 	public UnityEvent increaseBulletCountEvent;
 	public UnityEvent shootGunEvent;
@@ -36,10 +34,33 @@ public class UIScriptableObject : ScriptableObject
 	// public UnityEvent displayCardBannerEvent;
 	public UnityEvent showPlayerCardBannerEvent;
 	public UnityEvent playerCardBannerButtonEvent;
+	public UnityEvent beginGunPhaseEvent;
+	public UnityEvent beginPreGunPhaseEvent;
+	public UnityEvent beginPostGunPhaseEvent;
+	public UnityEvent endGunPhaseEvent;
+	
+	public UnityEvent uiReadyEvent;
 	
 	public String bannerText {get; private set;}
 	
 	public List<CardSO> cardBannerCards;
+	
+	public CardSO playerCardBannerCard;
+	
+	public enum UIStateEnum 
+	{
+		DebugState,
+		BeginGameState,
+		CompareCardsState,
+		PostGunState,
+		PreGunState,
+		DrawCardState,
+		GunState,
+		EndGunState,
+		
+	}
+	
+	public UIStateEnum uiState {get; private set;} = UIStateEnum.DebugState; 
 
 	// Card _playerCardSelection;
 	int _playerCardSelection;
@@ -122,13 +143,46 @@ public class UIScriptableObject : ScriptableObject
 		beginRoulettePhaseEvent.Invoke();
 	}
 	
-	public void OnShowPlayerCardBanner()
+	public void OnShowPlayerCardBanner(CardSO card, String text)
 	{
+		playerCardBannerCard = card;
+		bannerText = text;
 		showPlayerCardBannerEvent.Invoke();
 	}
 	
 	public void OnPlayerCardBannerButton()
 	{
 		playerCardBannerButtonEvent.Invoke();
+	}
+	
+	
+	public void OnBeginPreGunPhase()
+	{
+		beginPreGunPhaseEvent.Invoke();
+	}
+	
+	public void OnBeginGunPhase()
+	{
+		beginGunPhaseEvent.Invoke();
+	}
+	
+	public void OnBeginPostGunPhase()
+	{
+		beginPostGunPhaseEvent.Invoke();
+	}
+	
+	public void OnEndGunPhase()
+	{
+		endGunPhaseEvent.Invoke();
+	}
+	
+	public void OnUiReady()
+	{
+		uiReadyEvent.Invoke();
+	}
+	
+	public void SetUiState(UIStateEnum newState)
+	{
+		uiState = newState;
 	}
 }

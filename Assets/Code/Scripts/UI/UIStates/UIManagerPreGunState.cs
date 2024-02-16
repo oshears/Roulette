@@ -11,11 +11,13 @@ public class UIManagerPreGunState : UIManagerState
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonClickEventHandler);
 		_uiScriptableObject.showPlayerCardBannerEvent.AddListener(ShowPlayerCardBannerEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.beginGunPhaseEvent.AddListener(BeginGunPhaseEventHandler);
+		
 	}
 
 	public override void Enter()
 	{	
-		
+		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.PreGunState);
 	}
 
 	
@@ -26,7 +28,15 @@ public class UIManagerPreGunState : UIManagerState
 
 	public override void Exit()
 	{
-
+		_owner.SetTextBannerActive(false);
+		_owner.SetPlayerCardBannerActive(false);
+		
+		
+		_uiScriptableObject.showBannerEvent.RemoveListener(ShowBannerEventHandler);
+		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonClickEventHandler);
+		_uiScriptableObject.showPlayerCardBannerEvent.RemoveListener(ShowPlayerCardBannerEventHandler);
+		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.beginGunPhaseEvent.RemoveListener(BeginGunPhaseEventHandler);
 	}
 	
 	void ShowBannerEventHandler()
@@ -46,6 +56,11 @@ public class UIManagerPreGunState : UIManagerState
 	void PlayerCardBannerButtonEventHandler()
 	{
 		_owner.SetPlayerCardBannerActive(false);
+	}
+	
+	void BeginGunPhaseEventHandler()
+	{
+		changeState(new UIManagerGunState(_owner));
 	}
 
 }

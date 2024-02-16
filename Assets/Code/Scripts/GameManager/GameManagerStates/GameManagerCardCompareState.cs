@@ -23,6 +23,10 @@ public class GameManagerCardCompareState : GameManagerState
 
 	public override void Enter()
 	{
+		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.CompareCardsState)
+		{
+			continue;
+		}
 		
 		if (_playerCardChoice < 0)
 		{
@@ -64,6 +68,8 @@ public class GameManagerCardCompareState : GameManagerState
 	{
 		_gunScriptableObject.SetNumBullets(_numBullets);
 		_gunScriptableObject.OnShuffleGun();
+		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
+		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
 	}
 
 

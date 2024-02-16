@@ -44,6 +44,7 @@ public class UIPlayerCardBannerController : MonoBehaviour
 	
 	private void OnEnable() {
 		bannerTextGameObject.GetComponent<TextMeshProUGUI>().text = uiScriptableObject.bannerText;
+		bannerCardImageGameObject.GetComponent<Image>().sprite = uiScriptableObject.playerCardBannerCard.GetFrontOfCard();
 	}
 
 	void Update()

@@ -4,10 +4,23 @@ public class GameManagerInitState : GameManagerState
 		_uiScriptableObject.startGameEvent.AddListener(StartGameEventHandler);
 	}
 
-	override public void Execute() 
+    public override void Enter()
+    {
+        while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.BeginGameState)
+		{
+			continue;
+		}
+    }
+
+    override public void Execute() 
 	{ 
 		
 
+	}
+
+	public override void Exit()
+	{
+		_uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
 	}
 
 	void StartGameEventHandler()

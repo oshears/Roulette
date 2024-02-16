@@ -21,6 +21,7 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		_numCardsDrawn = 0;
 		_owner.SetDrawButtonActive(true);
 		_owner.SetPlayerCardHandActive(true);
+		_uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.DrawCardState);
 	}
 
 
@@ -55,6 +56,10 @@ public class UIManagerGameDrawPhaseState : UIManagerState
 		_numCardsDrawn = 0;
 		_owner.SetDrawButtonActive(false);
 		_owner.SetPlayerCardHandActive(false);
+		
+		_uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
+		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
+		_playerScriptableObject.playerHandFullEvent.RemoveListener(PlayerHandFullEventHandler);
 	}
 	
 	public void DrawButtonClickEventHandler()

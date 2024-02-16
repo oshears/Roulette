@@ -13,6 +13,11 @@ public class GameManagerDrawCardsState : GameManagerState
 
 	public override void Enter()
 	{
+		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.DrawCardState)
+		{
+			continue;
+		}
+		
 		_numCardsDrawn = 0;
 		
 		// Draw Cards for NPCs
@@ -39,7 +44,15 @@ public class GameManagerDrawCardsState : GameManagerState
 		
 		
 	}
-	
+
+	public override void Exit()
+	{
+		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
+		_uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
+		_uiScriptableObject.handCardsUpdatedEvent.RemoveListener(HandCardsUpdatedEventHandler);
+		_playerScriptableObject.playerHandFullEvent.RemoveListener(PlayerHandFullEventHandler);
+	}
+
 	void PlayCardEventHandler(int cardIndex)
 	{
 		

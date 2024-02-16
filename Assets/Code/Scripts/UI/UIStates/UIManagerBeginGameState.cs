@@ -10,8 +10,13 @@ public class UIManagerBeginGameState : UIManagerState
 		_uiScriptableObject.beginPlayerDrawPhaseEvent.AddListener(BeginPlayerDrawPhaseEventHandler);
 	}
 
+    public override void Enter()
+    {
+        _uiScriptableObject.SetUiState(UIScriptableObject.UIStateEnum.BeginGameState);
+    }
 
-	public override void Execute()
+
+    public override void Execute()
 	{
 		// BeginPopUpArea();
 		// GUILayout.Label("The Game Has Begun!");
@@ -24,7 +29,12 @@ public class UIManagerBeginGameState : UIManagerState
 		// EndPopUpArea();
 		
 	}
-	
+
+	public override void Exit()
+	{
+		_uiScriptableObject.beginPlayerDrawPhaseEvent.RemoveListener(BeginPlayerDrawPhaseEventHandler);
+	}
+
 	public void BeginPlayerDrawPhaseEventHandler()
 	{
 		changeState(new UIManagerGameDrawPhaseState(_owner));

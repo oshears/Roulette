@@ -9,7 +9,7 @@ public class GameManagerPreGunState : GameManagerState
 	
 	GamePlayerScriptableObject _targetPlayerScriptableObject;
 	
-	bool _checkedForCard;
+	// bool _checkedForCard;
 	
 	int _additionalTriggerPulls;
 	
@@ -17,8 +17,8 @@ public class GameManagerPreGunState : GameManagerState
 	
 	public GameManagerPreGunState(GameManager owner, GamePlayerScriptableObject targetPlayer, int additionalTriggerPulls) : base(owner) { 
 		_targetPlayerScriptableObject = targetPlayer;
-		_checkedForCard = false;
-		_skipThisPlayer = true;
+		// _checkedForCard = false;
+		_skipThisPlayer = false;
 		_additionalTriggerPulls = additionalTriggerPulls;
 		_uiScriptableObject.bannerButtonClick.AddListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
@@ -26,6 +26,14 @@ public class GameManagerPreGunState : GameManagerState
 
 	public override void Enter()
 	{
+		_uiScriptableObject.OnBeginPreGunPhase();
+		
+		while(_uiScriptableObject.uiState != UIScriptableObject.UIStateEnum.GunState)
+		{
+			continue;
+		}
+		
+		
 		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} is now the target!");
 		_uiScriptableObject.OnShowBanner();
 		
@@ -47,7 +55,8 @@ public class GameManagerPreGunState : GameManagerState
 
 	public override void Exit()
 	{
-
+		_uiScriptableObject.bannerButtonClick.RemoveListener(OnBannerContinueEventHandler);
+		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
 	}
 	
 	void OnBannerContinueEventHandler()
@@ -66,8 +75,7 @@ public class GameManagerPreGunState : GameManagerState
 			if (npcPreGunCard != null)
 			{
 				_skipThisPlayer = true;
-				_uiScriptableObject.SetBannerText($"{npc.GetPlayerName()} played a {npcPreGunCard.GetActionType()} card!");
-				_uiScriptableObject.OnShowPlayerCardBanner();	
+				_uiScriptableObject.OnShowPlayerCardBanner(npcPreGunCard, $"{npc.GetPlayerName()} played a {npcPreGunCard.GetActionType()} card!");	
 				
 				if (npcPreGunCard.GetActionType() == CardActionType.Joker)
 				{
@@ -76,6 +84,7 @@ public class GameManagerPreGunState : GameManagerState
 			}
 			
 		}
+		// else if player
 		else
 		{
 			// TODO: Need to implement the functionality for the player's pre gun actions
@@ -87,7 +96,19 @@ public class GameManagerPreGunState : GameManagerState
 	
 	void PlayerCardBannerButtonEventHandler()
 	{
-		changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
+		if (_skipThisPlayer)
+		{
+			Debug.Log($"Skipping this player: {_targetPlayerScriptableObject.GetPlayerName()}");
+			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			Debug.Log($"Moving on to player: {nextTarget.GetPlayerName()}");
+			changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
+		}
+		else
+		{
+			Debug.Log($"Entering gun phase with this player: {_targetPlayerScriptableObject.GetPlayerName()}");
+			changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
+		}
+		
 	}
 
 	public override void OnGUI()
@@ -101,7 +122,7 @@ public class GameManagerPreGunState : GameManagerState
 		// GUI.skin.label.fontSize = 30;
 		// GUILayout.Label("HELLO WORLD", GUILayout.Width(300), GUILayout.Height(50)))
 		
-		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		GUILayout.BeginArea(new Rect(0, 500, 500, 500));
 		GUILayout.Label($"PreGunState with Target: {_targetPlayerScriptableObject.GetPlayerName()}");
 		GUILayout.EndArea();
 	}
