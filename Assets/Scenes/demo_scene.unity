@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -359,6 +359,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 58033d43916bf004dbb6b807e5e20d84, type: 2}
   - {fileID: 11400000, guid: d9de92612f67a89469c742d830f69194, type: 2}
   - {fileID: 11400000, guid: aead6557192f9a849b6cc778302583dd, type: 2}
+  gunScriptableObject: {fileID: 11400000, guid: bbce12ba4931df645869c488124731c2,
+    type: 2}
 --- !u!4 &885264387
 Transform:
   m_ObjectHideFlags: 0
@@ -1455,7 +1457,7 @@ GameObject:
   - component: {fileID: 3528610219045465995}
   - component: {fileID: 943244029894800666}
   m_Layer: 5
-  m_Name: Heart_0
+  m_Name: UI_PlayerHeart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2289,7 +2291,7 @@ GameObject:
   - component: {fileID: 4151926846516444356}
   - component: {fileID: 1954744346970978448}
   m_Layer: 5
-  m_Name: Heart_0 (1)
+  m_Name: UI_PlayerHeart2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2432,10 +2434,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5383289246024525651, guid: 0f156f0f457c23f4a8b58a4fbc0c1383,
+        type: 3}
+      propertyPath: m_Name
+      value: GunMeshParent
+      objectReference: {fileID: 0}
     - target: {fileID: 6224826806933367843, guid: 0f156f0f457c23f4a8b58a4fbc0c1383,
         type: 3}
       propertyPath: m_Name
-      value: Revolver
+      value: Gun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

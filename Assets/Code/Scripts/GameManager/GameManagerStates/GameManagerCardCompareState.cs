@@ -10,12 +10,15 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	GamePlayerScriptableObject _targetPlayerScriptableObject;
 	
+	int _numBullets;
+	
 	public GameManagerCardCompareState(GameManager owner, int playerCardChoice) : base(owner) { 
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
 		_playerCardChoice = playerCardChoice;
 		playedCards = new List<CardSO>();
 		_targetPlayerScriptableObject = null;
+		_numBullets = 0;
 	}
 
 	public override void Enter()
@@ -57,7 +60,13 @@ public class GameManagerCardCompareState : GameManagerState
 
 	}
 
-	
+	public override void Exit()
+	{
+		_gunScriptableObject.SetNumBullets(_numBullets);
+		_gunScriptableObject.OnShuffleGun();
+	}
+
+
 	void FlipCoinDoneEventHandler(CoinController.Side side)
 	{
 		

@@ -7,9 +7,12 @@ public class GameManagerPreGunState : GameManagerState
 	
 	int _additionalTriggerPulls;
 	
+	bool _skipThisPlayer;
+	
 	public GameManagerPreGunState(GameManager owner, GamePlayerScriptableObject targetPlayer, int additionalTriggerPulls) : base(owner) { 
 		_targetPlayerScriptableObject = targetPlayer;
 		_checkedForCard = false;
+		_skipThisPlayer = true;
 		_additionalTriggerPulls = additionalTriggerPulls;
 		_uiScriptableObject.bannerButtonClick.AddListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
@@ -17,8 +20,10 @@ public class GameManagerPreGunState : GameManagerState
 
 	public override void Enter()
 	{
-		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} has been chosen as the first target!");
+		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} is now the target!");
 		_uiScriptableObject.OnShowBanner();
+		
+		_gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.gunRotation);
 	}
 
 	override public void Execute() 
@@ -52,9 +57,22 @@ public class GameManagerPreGunState : GameManagerState
 			
 			if (npcPreGunCard != null)
 			{
+				_skipThisPlayer = true;
 				_uiScriptableObject.SetBannerText($"{npc.GetPlayerName()} played a {npcPreGunCard.GetActionType()} card!");
 				_uiScriptableObject.OnShowPlayerCardBanner();	
+				
+				if (npcPreGunCard.GetActionType() == CardActionType.Joker)
+				{
+					_additionalTriggerPulls++;
+				}
 			}
+			
+		}
+		else
+		{
+			// TODO: Need to implement the functionality for the player's pre gun actions
+			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
 		}
 		
 	}
@@ -63,6 +81,8 @@ public class GameManagerPreGunState : GameManagerState
 	{
 		changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
 	}
+	
+	
 
 	
 }

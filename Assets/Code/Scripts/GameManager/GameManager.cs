@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 	public GameManagerStateMachine stateMachine;
 	
 	public NpcScriptableObject[] npcScriptableObjects;
+	
+	public GunScriptableObject gunScriptableObject;
 
 
 	public int numPlayers {get; private set;}
@@ -34,5 +36,22 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		stateMachine.Update();
+	}
+	
+	public int GetNextPlayerIndex(int index)
+	{
+		return (index + 1) % numPlayers;
+	}
+	
+	public GamePlayerScriptableObject GetNextPlayer(GamePlayerScriptableObject currentPlayer)
+	{
+		GamePlayerScriptableObject nextPlayer = playerScriptableObject;
+		int nextTargetIndex = GetNextPlayerIndex(currentPlayer.playerId);
+		if(nextTargetIndex > 0)
+		{
+			nextPlayer = npcScriptableObjects[nextTargetIndex + 1];
+		}
+		
+		return nextPlayer;
 	}
 }

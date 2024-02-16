@@ -6,6 +6,7 @@ public abstract class GameManagerState : IManagerState
 	protected DeckScriptableObject _deckScriptableObject;
 	protected PlayerScriptableObject _playerScriptableObject;
 	protected NpcScriptableObject[] _npcScriptableObjects;
+	protected GunScriptableObject _gunScriptableObject;
 
 	public GameManagerState(GameManager owner)
 	{
@@ -15,6 +16,7 @@ public abstract class GameManagerState : IManagerState
 		_deckScriptableObject = owner.deckScriptableObject;
 		_playerScriptableObject = owner.playerScriptableObject;
 		_npcScriptableObjects = owner.npcScriptableObjects;
+		_gunScriptableObject = owner.gunScriptableObject;
 	}
 	public virtual void Enter() {}
 	public virtual void Execute() {}

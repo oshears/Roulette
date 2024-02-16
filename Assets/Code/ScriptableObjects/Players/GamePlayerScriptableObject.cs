@@ -9,13 +9,18 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public List<CardSO> cardsInHand {get; private set;}
 	
+	[SerializeField]
 	int _heartRemaining = 2;
 	
 	public bool isDealer {get; private set;}
 	
-	public Vector3 GunRotation;
+	[SerializeField]
+	public Vector3 gunRotation {get; private set;}
 	
+	[SerializeField]
 	public int playerId {get; private set;}
+	
+	public UnityEvent playerDiedEvent;
 	
 	public void InitializePlayer()
 	{
@@ -97,6 +102,11 @@ public class GamePlayerScriptableObject : ScriptableObject
 		{
 			return $"Player {playerId}";
 		}
+	}
+	
+	public void OnPlayerDied()
+	{
+		playerDiedEvent.Invoke();
 	}
 	
 	

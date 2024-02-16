@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class RevolverController : MonoBehaviour
+public class GunController : MonoBehaviour
 {
 
-	enum RevolverState
+	enum GunState
 	{
 		NPC_1,
 		NPC_2,
@@ -16,10 +16,13 @@ public class RevolverController : MonoBehaviour
 
 	int[] revolverRotations = {315, 0, 45, 180};
 
-	RevolverState state = RevolverState.NPC_1;
+	GunState state = GunState.NPC_1;
 
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
+	
+	[SerializeField]
+	GunScriptableObject gunScriptableObject;
 	
 	[SerializeField]
 	GameObject revolverModel;
@@ -29,8 +32,10 @@ public class RevolverController : MonoBehaviour
 	{
 		transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, revolverRotations[0], 0));
 
-		uiScriptableObject?.rotateGunEvent.AddListener(rotateGunRight);
-		uiScriptableObject?.shootGunEvent.AddListener(shootGun);
+		// uiScriptableObject?.rotateGunEvent.AddListener(rotateGunRight);
+		// uiScriptableObject?.shootGunEvent.AddListener(shootGun);
+		
+		
 	}
 
 	// Update is called once per frame
@@ -42,21 +47,21 @@ public class RevolverController : MonoBehaviour
 
    void rotateGunRight()
 	{
-		if (state == RevolverState.NPC_1)
+		if (state == GunState.NPC_1)
 		{
-			state = RevolverState.NPC_2;
+			state = GunState.NPC_2;
 		}
-		else if (state == RevolverState.NPC_2)
+		else if (state == GunState.NPC_2)
 		{
-			state = RevolverState.NPC_3;
+			state = GunState.NPC_3;
 		}
-		else if (state == RevolverState.NPC_3)
+		else if (state == GunState.NPC_3)
 		{
-			state = RevolverState.Player;
+			state = GunState.Player;
 		}
-		else if (state == RevolverState.Player)
+		else if (state == GunState.Player)
 		{
-			state = RevolverState.NPC_1;
+			state = GunState.NPC_1;
 		}
 		
 		transform.rotation = Quaternion.Euler(0, revolverRotations[(int) state], 0);

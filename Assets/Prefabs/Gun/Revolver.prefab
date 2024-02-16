@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 647234646909541448}
   - component: {fileID: 7376109543751433660}
   m_Layer: 0
-  m_Name: RevolverMeshParent
+  m_Name: GunMeshParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733003117561595913}
-  - component: {fileID: 2193849032016547659}
+  - component: {fileID: 5368428210120346001}
   m_Layer: 0
   m_Name: Revolver
   m_TagString: Untagged
@@ -356,7 +356,7 @@ Transform:
   - {fileID: 3383592829734791490}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
---- !u!114 &2193849032016547659
+--- !u!114 &5368428210120346001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,10 +365,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6224826806933367843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1305b6b90ce7b2148a433299baf19720, type: 3}
+  m_Script: {fileID: 11500000, guid: 758f5d22eb5df3848ab620a09375cfb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
+  gunScriptableObject: {fileID: 11400000, guid: bbce12ba4931df645869c488124731c2,
+    type: 2}
   revolverModel: {fileID: 5383289246024525651}
 --- !u!1 &7532263893350369118
 GameObject:

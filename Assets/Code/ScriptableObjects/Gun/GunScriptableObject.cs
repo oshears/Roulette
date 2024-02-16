@@ -11,10 +11,13 @@ public class GunScriptableObject : ScriptableObject
 	public UnityEvent<bool> fireGunEvent;
 	public UnityEvent addBulletEvent;
 	public UnityEvent shuffleGunEvent;
+	public UnityEvent updateGunPositionEvent;
+	
+	public Vector3 gunRotation {get; private set;}
 	
 	Queue<bool> _bulletQueue;
 	
-	void SetNumBullets(int numBullets)
+	public void SetNumBullets(int numBullets)
 	{
 		if (numBullets > 5)
 		{
@@ -32,14 +35,18 @@ public class GunScriptableObject : ScriptableObject
 		}
 	}
 	
-	void OnFireGunEvent()
+	public bool OnFireGunEvent()
 	{
-		fireGunEvent.Invoke(_bulletQueue.Dequeue());
+		bool bulletFired = _bulletQueue.Dequeue();
+		fireGunEvent.Invoke(bulletFired);
+		return bulletFired;
 	}
 	
-	void OnAddBulletEvent()
+	public void OnAddBulletEvent()
 	{
 		addBulletEvent.Invoke();
+		
+		_bulletQueue.Enqueue(true);
 	}
 	
 	public void OnShuffleGun()
@@ -58,6 +65,17 @@ public class GunScriptableObject : ScriptableObject
 		}
 		
 		_bulletQueue = new Queue<bool>(tmpBulletArray);  
+	}
+	
+	public void OnUpdateGunRotation(Vector3 gunRotation)
+	{
+		this.gunRotation = gunRotation;
+		updateGunPositionEvent.Invoke();
+	}
+	
+	public bool HasOnlyBulletsLeft()
+	{
+		return !_bulletQueue.Contains(false);
 	}
 	
 }

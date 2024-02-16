@@ -46,6 +46,11 @@ public class DeckScriptableObject : ScriptableObject
 	
 	public CardSO OnDrawCard()
 	{
+		if (_cardQueue.Count < 1)
+		{
+			Debug.Log("ERROR: Deck is empty!!!");
+		}
+		
 		drawCardEvent.Invoke();
 		return _cardQueue.Dequeue();
 		
@@ -53,6 +58,11 @@ public class DeckScriptableObject : ScriptableObject
 	
 	public CardSO OnDrawNpcCard()
 	{
+		if (_cardQueue.Count < 1)
+		{
+			Debug.Log("ERROR: Deck is empty!!!");
+		}
+		
 		drawNpcCardEvent.Invoke();
 		return _cardQueue.Dequeue();
 		
