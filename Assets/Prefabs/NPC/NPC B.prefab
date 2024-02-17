@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2e544129c9ea11449d5559abb65b509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcHeartContainer:
+  - {fileID: 2064214408917966854}
+  - {fileID: 4703068980909131886}
 --- !u!1 &2064214408917966854
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +153,7 @@ GameObject:
   - component: {fileID: 2771312114702928700}
   - component: {fileID: 6813941727743143009}
   m_Layer: 0
-  m_Name: Heart
+  m_Name: NPC Heart0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +237,7 @@ GameObject:
   - component: {fileID: 6363248054086895464}
   - component: {fileID: 5614198903518194115}
   m_Layer: 0
-  m_Name: Heart (1)
+  m_Name: NPC Heart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

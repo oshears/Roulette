@@ -7,33 +7,36 @@ using UnityEngine.UI;
 public class UIBulletCounter : MonoBehaviour
 {
 
-    int num_rounds = 0;
+	int num_rounds = 0;
 
-    [SerializeField]
-    Sprite[] sprites;
+	[SerializeField]
+	Sprite[] sprites;
 
-    [SerializeField]
-    UIScriptableObject menuSO;
+	[SerializeField]
+	UIScriptableObject menuSO;
+	
+	[SerializeField]
+	GunScriptableObject gunScriptableObject;
 
-    // Start is called before the first frame update
-    void Awake()
-    {
-        menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
-    }
+	// Start is called before the first frame update
+	void Awake()
+	{
+		menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if(Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    num_rounds = (num_rounds + 1) % 5;
-        //}
+	// Update is called once per frame
+	void Update()
+	{
+		//if(Input.GetKeyDown(KeyCode.Q))
+		//{
+		//    num_rounds = (num_rounds + 1) % 5;
+		//}
 
-        this.GetComponent<Image>().sprite = sprites[num_rounds];
-    }
+		this.GetComponent<Image>().sprite = sprites[num_rounds];
+	}
 
-    void IncreaseBulletCountEventHandler()
-    {
-        num_rounds = (num_rounds + 1) % 6;
-    }
+	void IncreaseBulletCountEventHandler()
+	{
+		num_rounds = (num_rounds + 1) % 6;
+	}
 }

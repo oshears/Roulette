@@ -48,6 +48,26 @@ public class GameManager : MonoBehaviour
 		return (index + 1) % numPlayers;
 	}
 	
+	public int GetNumPlayersAlive()
+	{
+		int numPlayersAlive = 0;
+		
+		if (playerScriptableObject.IsPlayerAlive())
+		{
+			numPlayersAlive++;
+		}
+		
+		foreach (NpcScriptableObject npc in npcScriptableObjects)
+		{
+			if (npc.IsPlayerAlive())
+			{
+				numPlayersAlive++;
+			}
+		}
+		
+		return numPlayersAlive;
+	}
+	
 	public GamePlayerScriptableObject GetNextPlayer(GamePlayerScriptableObject currentPlayer)
 	{
 		GamePlayerScriptableObject nextPlayer = playerScriptableObject;

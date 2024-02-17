@@ -28,6 +28,14 @@ public class GameManagerPreGunState : GameManagerState
 	public override void Enter()
 	{
 		// _uiScriptableObject.OnBeginPreGunPhase();
+		if (!_targetPlayerScriptableObject.IsPlayerAlive())
+		{
+			Debug.Log($"Skipping this player: {_targetPlayerScriptableObject.GetPlayerName()}");
+			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			Debug.Log($"Moving on to player: {nextTarget.GetPlayerName()}");
+			changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
+			return;
+		}
 		
 		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} is now the target!");
 		_uiScriptableObject.OnShowBanner();

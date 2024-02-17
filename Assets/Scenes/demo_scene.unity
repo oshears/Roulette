@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 26592578192418320, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
       propertyPath: m_Name
-      value: NPC B
+      value: NPC2
       objectReference: {fileID: 0}
     - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
@@ -316,6 +316,86 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563368616513798739, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: npcScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: d9de92612f67a89469c742d830f69194,
+        type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b53a3dd1c52f734387314d2f9a72e73, type: 3}
+--- !u!1001 &683293918
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 26592578192418320, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.72170717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6563368616513798739, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: npcScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: aead6557192f9a849b6cc778302583dd,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -971,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 26592578192418320, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
       propertyPath: m_Name
-      value: NPC B
+      value: NPC1
       objectReference: {fileID: 0}
     - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
@@ -1023,6 +1103,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6563368616513798739, guid: 4b53a3dd1c52f734387314d2f9a72e73,
+        type: 3}
+      propertyPath: npcScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 58033d43916bf004dbb6b807e5e20d84,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1729,6 +1815,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8447264825185907682, guid: 68fe5b6e89ba5104c881d8158a779e3c,
+        type: 3}
+      propertyPath: gunScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: bbce12ba4931df645869c488124731c2,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1946,74 +2038,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 4109979110230367209}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4968461979259282305
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7865184429320682367, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_Name
-      value: NPC Knight
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8796136661862471640, guid: fd63689bfd4fda748a0fd1f93d35ec74,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fd63689bfd4fda748a0fd1f93d35ec74, type: 3}
 --- !u!222 &5249870794604351325
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2854,7 +2878,7 @@ SceneRoots:
   - {fileID: 124987612}
   - {fileID: 766660907466571558}
   - {fileID: 609808691}
-  - {fileID: 4968461979259282305}
+  - {fileID: 683293918}
   - {fileID: 1181696625}
   - {fileID: 7848770369800103194}
   - {fileID: 7878056091715418487}

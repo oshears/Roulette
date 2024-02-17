@@ -65,7 +65,7 @@ public class GunScriptableObject : ScriptableObject
 		int n = tmpBulletArray.Length;  
 		while (n > 1) {  
 			n--;  
-			int k = Random.Range(0,n + 1);  
+			int k = Random.Range(0, n + 1);  
 			bool card = tmpBulletArray[k];  
 			tmpBulletArray[k] = tmpBulletArray[n];  
 			tmpBulletArray[n] = card;  

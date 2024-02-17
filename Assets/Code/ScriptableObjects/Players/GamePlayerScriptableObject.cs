@@ -22,6 +22,7 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public int playerId;
 	
 	public UnityEvent playerDiedEvent;
+	public UnityEvent playerShotEvent;
 	
 	public void InitializePlayer()
 	{
@@ -47,6 +48,7 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public void RemoveHeart()
 	{
 		_heartRemaining--;
+		playerShotEvent.Invoke();
 	}
 	
 	public bool IsPlayerAlive()
