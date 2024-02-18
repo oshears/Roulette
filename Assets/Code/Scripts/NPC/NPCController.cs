@@ -22,6 +22,8 @@ public class NPCController : MonoBehaviour
 	{
 		npcScriptableObject.playerDiedEvent.AddListener(NpcDiedEventHandler);
 		npcScriptableObject.playerShotEvent.AddListener(NpcShotEventHandler);
+		npcScriptableObject.playerInitEvent.AddListener(PlayerInitEventHandler);
+		
 		_npcHeartsRemaining = 2;
 		
 		foreach (GameObject npcHeart in npcHeartContainer)
@@ -48,6 +50,18 @@ public class NPCController : MonoBehaviour
 		// 	animator.SetBool("npcIsDead", playingDeathAnimation);
 		// }
 		
+	}
+	
+	void PlayerInitEventHandler()
+	{
+		_npcHeartsRemaining = 2;
+		
+		foreach (GameObject npcHeart in npcHeartContainer)
+		{
+			npcHeart.SetActive(true);
+		}
+		
+		GetComponent<SpriteRenderer>().enabled = true;
 	}
 	
 	void NpcShotEventHandler()

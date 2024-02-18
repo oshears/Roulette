@@ -12,6 +12,7 @@ public class GunScriptableObject : ScriptableObject
 	public UnityEvent<bool> fireGunEvent;
 	public UnityEvent addBulletEvent;
 	public UnityEvent shuffleGunEvent;
+	public UnityEvent initGunEvent;
 	public UnityEvent<Vector3> updateGunRotationEvent;
 	
 	public UnityEvent<int> numBulletsUpdatedEvent;
@@ -20,10 +21,11 @@ public class GunScriptableObject : ScriptableObject
 	
 	Queue<bool> _bulletQueue = new Queue<bool>();
 	
-	public void InitializeGun()
+	public void OnInitializeGun()
 	{
 		_bulletQueue.Clear();
 		numBullets = 0;
+		initGunEvent.Invoke();
 	}
 	
 	public void SetNumBullets(int numBullets)

@@ -23,11 +23,13 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public UnityEvent playerDiedEvent;
 	public UnityEvent playerShotEvent;
+	public UnityEvent playerInitEvent;
 	
-	public void InitializePlayer()
+	public void OnInitializePlayer()
 	{
 		_heartRemaining = 2;
 		InitializePlayerHand();
+		playerInitEvent.Invoke();
 	}
 	
 	public void InitializePlayerHand()

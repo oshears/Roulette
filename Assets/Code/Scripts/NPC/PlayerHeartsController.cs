@@ -20,6 +20,8 @@ public class PlayerHeartsController : MonoBehaviour
 	{
 		_playerScriptableObject.playerDiedEvent.AddListener(PlayerDiedEventHandler);
 		_playerScriptableObject.playerShotEvent.AddListener(PlayerShotEventHandler);
+		_playerScriptableObject.playerInitEvent.AddListener(PlayerInitEventHandler);
+		
 		_playerHeartsRemaining = 2;
 		
 		foreach (GameObject playerHeart in _playerHeartContainer)
@@ -44,6 +46,16 @@ public class PlayerHeartsController : MonoBehaviour
 		// 	animator.SetBool("npcIsDead", playingDeathAnimation);
 		// }
 		
+	}
+	
+	void PlayerInitEventHandler()
+	{
+		_playerHeartsRemaining = 2;
+		
+		foreach (GameObject playerHeart in _playerHeartContainer)
+		{
+			playerHeart.SetActive(true);
+		}
 	}
 	
 	void PlayerShotEventHandler()

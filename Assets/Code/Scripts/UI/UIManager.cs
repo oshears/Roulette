@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour
 	
 	[SerializeField] private GameObject shootButton;
 	
+	[SerializeField] private GameObject gameOverBanner;
+	
 	
 	// Start is called before the first frame update
 	void Awake()
@@ -59,6 +61,8 @@ public class UIManager : MonoBehaviour
 		
 		SetPassButtonActive(false);
 		SetShootButtonActive(false);
+		
+		SetGameOverBannerActive(false);
 		
 	}
 
@@ -153,6 +157,11 @@ public class UIManager : MonoBehaviour
 	public void SetShootButtonActive(bool active)
 	{
 		shootButton.SetActive(active);
+	}
+	
+	public void SetGameOverBannerActive(bool active)
+	{
+		gameOverBanner.SetActive(active);
 	}
 	
 }

@@ -33,15 +33,17 @@ public class GameManagerInitState : GameManagerState
 		_uiScriptableObject.OnShowBanner();
 		
 		// Empty all cards from player hands
-		_playerScriptableObject.InitializePlayer();
+		_playerScriptableObject.OnInitializePlayer();
 		foreach (NpcScriptableObject npc in _npcScriptableObjects)
 		{
-			npc.InitializePlayer();
+			npc.OnInitializePlayer();
 		}
 
 		// Initialize Deck
 		_deckScriptableObject.OnInitializeDeck();
 		
+		// Initialize Gun
+		_gunScriptableObject.OnInitializeGun();
 		
 	}
 	

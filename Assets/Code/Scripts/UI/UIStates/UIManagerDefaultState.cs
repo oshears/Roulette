@@ -36,6 +36,9 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.drawButtonVisibleEvent.AddListener(SetDrawButtonVisibleEventHandler);
 		
+		_uiScriptableObject.gameOverBannerVisibleEvent.AddListener(SetGameOverBannerVisible);
+		
+		
 		// _uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunPhaseEventHandler);
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.AddListener(BeginPlayerDrawPhaseEventHandler);
 		// _uiScriptableObject.beginCompareCardPhaseEvent.AddListener(BeginComparePhaseEventHandler);
@@ -88,6 +91,8 @@ public class UIManagerDefaultState : UIManagerState
 		_uiScriptableObject.passButtonVisibleEvent.RemoveListener(SetPassButtonVisibleEventHandler);
 		
 		_uiScriptableObject.shootButtonVisibleEvent.RemoveListener(SetShootButtonVisibleEventHandler);
+		
+		_uiScriptableObject.gameOverBannerVisibleEvent.RemoveListener(SetGameOverBannerVisible);
 		
 		
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.RemoveListener(BeginPlayerDrawPhaseEventHandler);
@@ -210,6 +215,11 @@ public class UIManagerDefaultState : UIManagerState
 	void SetDrawButtonVisibleEventHandler(bool visible)
 	{
 		_owner.SetDrawButtonActive(visible);
+	}
+	
+	void SetGameOverBannerVisible(bool visible)
+	{
+		_owner.SetGameOverBannerActive(visible);
 	}
 	
 		

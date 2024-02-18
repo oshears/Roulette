@@ -57,12 +57,20 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent shootButtonClickEvent;
 	
 	public UnityEvent<bool> drawButtonVisibleEvent;
+	public UnityEvent<bool> gameOverEvent;
+	public UnityEvent<bool> gameOverBannerVisibleEvent;
+	
+	public UnityEvent playAgainButtonClickEvent;
+	public UnityEvent quitButtonClickEvent;
+	
 	
 	public String bannerText {get; private set;}
 	
 	public List<CardSO> cardBannerCards;
 	
 	public CardSO playerCardBannerCard;
+	
+	public bool playerWon {get; private set;} = false;
 	
 	public enum UIStateEnum 
 	{
@@ -249,5 +257,26 @@ public class UIScriptableObject : ScriptableObject
 	public void OnDrawButtonVisible(bool visible)
 	{
 		drawButtonVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnGameOver(bool playerWon)
+	{
+		this.playerWon = playerWon;
+		gameOverEvent.Invoke(playerWon);
+	}
+	
+	public void OnGameOverBannerVisible(bool visible)
+	{
+		gameOverBannerVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnPlayAgainButtonClick()
+	{
+		playAgainButtonClickEvent.Invoke();
+	}
+	
+	public void OnQuitButtonClick()
+	{
+		quitButtonClickEvent.Invoke();
 	}
 }

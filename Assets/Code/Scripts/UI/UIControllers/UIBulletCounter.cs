@@ -17,7 +17,7 @@ public class UIBulletCounter : MonoBehaviour
 	UIScriptableObject menuSO;
 	
 	[SerializeField]
-	GunScriptableObject gunScriptableObject;
+	GunScriptableObject _gunScriptableObject;
 	
 	[SerializeField] private Sprite[] _bulletCounterSprites;
 	
@@ -30,9 +30,10 @@ public class UIBulletCounter : MonoBehaviour
 		NumBulletsUpdatedEventHandler(_numBullets);
 		
 		// menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
-		gunScriptableObject.fireGunEvent.AddListener(FireGunEventHandler);
-		gunScriptableObject.addBulletEvent.AddListener(AddBulletEventHandler);
-		gunScriptableObject.numBulletsUpdatedEvent.AddListener(NumBulletsUpdatedEventHandler);
+		_gunScriptableObject.fireGunEvent.AddListener(FireGunEventHandler);
+		_gunScriptableObject.addBulletEvent.AddListener(AddBulletEventHandler);
+		_gunScriptableObject.numBulletsUpdatedEvent.AddListener(NumBulletsUpdatedEventHandler);
+		_gunScriptableObject.initGunEvent.AddListener(InitGunEventHandler);
 	}
 
 	// Update is called once per frame
@@ -50,6 +51,13 @@ public class UIBulletCounter : MonoBehaviour
 	// {
 	// 	num_rounds = (num_rounds + 1) % 6;
 	// }
+	
+	void InitGunEventHandler()
+	{
+		_numBullets = 0;
+		NumBulletsUpdatedEventHandler(_numBullets);
+		shotsRemainingTextGameObject.GetComponent<TextMeshProUGUI>().text = $"Gun is unloaded.";
+	}
 	
 	void AddBulletEventHandler()
 	{
@@ -75,6 +83,6 @@ public class UIBulletCounter : MonoBehaviour
 	
 	void UpdateShotsRemainingText()
 	{
-		shotsRemainingTextGameObject.GetComponent<TextMeshProUGUI>().text = $"Empty Shells Remaining: {gunScriptableObject.GetNumEmptyShells()}";
+		shotsRemainingTextGameObject.GetComponent<TextMeshProUGUI>().text = $"Empty Shells Remaining: {_gunScriptableObject.GetNumEmptyShells()}";
 	}
 }

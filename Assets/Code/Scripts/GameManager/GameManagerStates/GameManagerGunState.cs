@@ -86,23 +86,37 @@ public class GameManagerGunState : GameManagerState
 	
 	void BannerButtonEventHandler()
 	{
-		if(_shotsRemaining == 0)
+		if (!_targetPlayerScriptableObject.IsNpc() && !_targetPlayerScriptableObject.IsPlayerAlive())
 		{
-			if (_gunScriptableObject.HasOnlyBulletsLeft())
-			{
-				changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
-			}
-			else
-			{
-				changeState(new GameManagerPostGunState(_owner, _targetPlayerScriptableObject));
-			}
-			
+			changeState(new GameManagerGameOverState(_owner, false));
+		}
+		else if (_playerScriptableObject.IsPlayerAlive() && _owner.GetNumPlayersAlive() == 1)
+		{
+			changeState(new GameManagerGameOverState(_owner, true));
 		}
 		else
 		{
-			if (_targetPlayerScriptableObject.IsNpc())
+			if(_shotsRemaining == 0)
 			{
-				ExecuteGunShotLogic();
+				if (_gunScriptableObject.HasOnlyBulletsLeft())
+				{
+					changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
+				}
+				else
+				{
+					changeState(new GameManagerPostGunState(_owner, _targetPlayerScriptableObject));
+				}
+			}
+			else
+			{
+				if (_targetPlayerScriptableObject.IsNpc())
+				{
+					ExecuteGunShotLogic();
+				}
+				else
+				{
+					_uiScriptableObject.OnSetShootButtonVisible(true);
+				}
 			}
 		}
 	}
@@ -113,10 +127,7 @@ public class GameManagerGunState : GameManagerState
 		bool bulletFired = _gunScriptableObject.OnFireGunEvent();
 		_shotsRemaining--;
 		
-		if(_shotsRemaining < 1)
-		{
-			_uiScriptableObject.OnSetShootButtonVisible(false);
-		}
+		_uiScriptableObject.OnSetShootButtonVisible(false);
 	
 		if (bulletFired)
 		{
@@ -132,15 +143,15 @@ public class GameManagerGunState : GameManagerState
 			
 				// move on to next player
 				_targetPlayerScriptableObject.OnPlayerDied();
-				GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
-				if (_gunScriptableObject.HasOnlyBulletsLeft())
-				{
-					changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
-				}
-				else
-				{
-					changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
-				}
+				// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+				// if (_gunScriptableObject.HasOnlyBulletsLeft())
+				// {
+				// 	changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
+				// }
+				// else
+				// {
+				// 	changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
+				// }
 				
 			}
 			else
@@ -156,6 +167,7 @@ public class GameManagerGunState : GameManagerState
 			_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} dodged a bullet!");
 			_uiScriptableObject.OnShowBanner();
 		}
+		
 		
 		
 	}
