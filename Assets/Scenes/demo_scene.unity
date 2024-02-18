@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 26592578192418320, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
       propertyPath: m_Name
-      value: NPC2
+      value: NPC3
       objectReference: {fileID: 0}
     - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
@@ -320,7 +320,7 @@ PrefabInstance:
         type: 3}
       propertyPath: npcScriptableObject
       value: 
-      objectReference: {fileID: 11400000, guid: d9de92612f67a89469c742d830f69194,
+      objectReference: {fileID: 11400000, guid: aead6557192f9a849b6cc778302583dd,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -338,7 +338,7 @@ PrefabInstance:
     - target: {fileID: 26592578192418320, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
       propertyPath: m_Name
-      value: NPC3
+      value: NPC2
       objectReference: {fileID: 0}
     - target: {fileID: 1132282538735428135, guid: 4b53a3dd1c52f734387314d2f9a72e73,
         type: 3}
@@ -394,7 +394,7 @@ PrefabInstance:
         type: 3}
       propertyPath: npcScriptableObject
       value: 
-      objectReference: {fileID: 11400000, guid: aead6557192f9a849b6cc778302583dd,
+      objectReference: {fileID: 11400000, guid: d9de92612f67a89469c742d830f69194,
         type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -485,12 +485,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: UIScriptableObject, ScriptableObjects
+        m_MethodName: OnShootButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -989,12 +989,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66, type: 2}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+        m_TargetAssemblyTypeName: UIScriptableObject, ScriptableObjects
+        m_MethodName: OnPassButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1809,12 +1809,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6563368616513798739, guid: 4b53a3dd1c52f734387314d2f9a72e73,
-        type: 3}
-      propertyPath: npcScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 58033d43916bf004dbb6b807e5e20d84,
-        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3125,7 +3119,7 @@ MonoBehaviour:
   flipCoinButton: {fileID: 4244867011533415748}
   coinPrefab: {fileID: 6491625338893817941, guid: d97b701b92edd40a18cf958fa1c18720,
     type: 3}
-  bulletCounter: {fileID: 1695820548}
+  bulletCounter: {fileID: 5802709731731784448}
   passButton: {fileID: 1695820548}
   shootButton: {fileID: 857430619}
 --- !u!224 &6244337812969331160
@@ -3234,6 +3228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6419132055491278502}
+  - component: {fileID: 6754642485646213618}
   m_Layer: 5
   m_Name: UI_PlayerHearts
   m_TagString: Untagged
@@ -3241,6 +3236,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6754642485646213618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754642485646213617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2894acbe10950d841887088ce1192896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHeartContainer:
+  - {fileID: 3254507681107770184}
+  - {fileID: 6662363787011204553}
+  _playerScriptableObject: {fileID: 11400000, guid: 7c34dbf72fd682c489303994fce3a707,
+    type: 2}
 --- !u!114 &6761898531666956446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3840,8 +3852,8 @@ SceneRoots:
   - {fileID: 1265987309}
   - {fileID: 124987612}
   - {fileID: 766660907466571558}
-  - {fileID: 609808691}
   - {fileID: 683293918}
+  - {fileID: 609808691}
   - {fileID: 1181696625}
   - {fileID: 7848770369800103194}
   - {fileID: 7878056091715418487}

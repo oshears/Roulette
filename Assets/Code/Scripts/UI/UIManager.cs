@@ -48,14 +48,18 @@ public class UIManager : MonoBehaviour
 		stateMachine.ChangeState(new UIManagerDebugState(this));
 		
 		SetDrawButtonActive(false);
-		SetTextBannerActive(false);
+		
 		SetPlayerCardHandActive(false);
+		
+		SetTextBannerActive(false);
 		SetCardBannerActive(false);
-		SetFlipCoinButtonActive(false);
 		SetPlayerCardBannerActive(false);
 		
+		SetFlipCoinButtonActive(false);
 		
-		uiScriptableObject.showBannerEvent.AddListener(ShowBannerEventHandler);
+		SetPassButtonActive(false);
+		SetShootButtonActive(false);
+		
 	}
 
 	// Update is called once per frame
@@ -134,11 +138,6 @@ public class UIManager : MonoBehaviour
 	public void SetFlipCoinButtonActive(bool active)
 	{
 		flipCoinButton.SetActive(active);
-	}
-	
-	public void ShowBannerEventHandler()
-	{
-		textBanner.SetActive(true);
 	}
 	
 	public void SetPlayerCardBannerActive(bool active)

@@ -91,9 +91,43 @@ public class GamePlayerScriptableObject : ScriptableObject
 		{
 			Debug.LogError($"ERROR: Trying to access card {i} in a list of {_cardsInHand.Count} cards");
 		}
-		CardSO npcCard = _cardsInHand[i];
-		RemoveCard(npcCard);
-		return npcCard;
+		CardSO card = _cardsInHand[i];
+		RemoveCard(card);
+		return card;
+	}
+	
+	public CardSO PlayPreGunPhaseCard(int i)
+	{
+		if (i > _cardsInHand.Count - 1)
+		{
+			Debug.LogError($"ERROR: Trying to access card {i} in a list of {_cardsInHand.Count} cards");
+		}
+		CardSO card = _cardsInHand[i];
+		
+		if (CardIsValidPreGunPhaseCard(card.GetActionType()))
+		{
+			RemoveCard(card);
+			return card;
+		}
+		
+		return null;
+	}
+	
+	public CardSO PlayPostGunPhaseCard(int i)
+	{
+		if (i > _cardsInHand.Count - 1)
+		{
+			Debug.LogError($"ERROR: Trying to access card {i} in a list of {_cardsInHand.Count} cards");
+		}
+		CardSO card = _cardsInHand[i];
+		
+		if (CardIsValidPostGunPhaseCard(card.GetActionType()))
+		{
+			RemoveCard(card);
+			return card;
+		}
+		
+		return null;
 	}
 	
 	public void SetIsDealer(bool isDealer)
@@ -133,5 +167,13 @@ public class GamePlayerScriptableObject : ScriptableObject
 		return _cardsInHand.Count;
 	}
 	
+	public bool CardIsValidPreGunPhaseCard(CardActionType cardAction)
+	{
+		return cardAction == CardActionType.Joker || cardAction == CardActionType.EmptyShell;
+	}
 	
+	public bool CardIsValidPostGunPhaseCard(CardActionType cardAction)
+	{
+		return cardAction != CardActionType.EmptyShell;
+	}
 }

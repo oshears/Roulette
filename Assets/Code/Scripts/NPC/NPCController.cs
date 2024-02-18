@@ -28,6 +28,8 @@ public class NPCController : MonoBehaviour
 		{
 			npcHeart.SetActive(true);
 		}
+		
+		GetComponent<SpriteRenderer>().enabled = true;
 	}
 
 	// Start is called before the first frame update
@@ -51,10 +53,12 @@ public class NPCController : MonoBehaviour
 	void NpcShotEventHandler()
 	{
 		npcHeartContainer[2 - _npcHeartsRemaining].SetActive(false);
+		_npcHeartsRemaining--;
 	}
 	
 	void NpcDiedEventHandler()
 	{
 		animator.SetBool("npcIsDead", true);
+		GetComponent<SpriteRenderer>().enabled = false;
 	}
 }

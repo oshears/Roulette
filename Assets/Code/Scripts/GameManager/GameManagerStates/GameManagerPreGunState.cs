@@ -112,10 +112,11 @@ public class GameManagerPreGunState : GameManagerState
 		else
 		{
 			// TODO: Need to implement the functionality for the player's pre gun actions
-			Debug.LogError("Skipping player's turn for now");
+			// Debug.LogError("Skipping player's turn for now");
 			// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 			// changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
 			_uiScriptableObject.OnSetPlayerHandVisible(true);
+			_uiScriptableObject.OnEnableCardSelection();
 			_uiScriptableObject.OnSetPassButtonVisible(true);
 		}
 		
@@ -123,17 +124,23 @@ public class GameManagerPreGunState : GameManagerState
 	
 	
 	void PlayCardEventHandler(int cardChoice) {
-		CardSO playedCard = _playerScriptableObject.PlayCard(cardChoice);
-		if (playedCard.GetActionType() == CardActionType.Joker)
+		Debug.Log("Handling player card selection!");
+		
+		CardSO playedCard = _playerScriptableObject.PlayPreGunPhaseCard(cardChoice);
+		if (playedCard != null)
 		{
-			_additionalTriggerPulls++;
-			_skipThisPlayer = true;
+			if (playedCard.GetActionType() == CardActionType.Joker)
+			{
+				_additionalTriggerPulls++;
+				_skipThisPlayer = true;
+			}
+			else if (playedCard.GetActionType() == CardActionType.EmptyShell)
+			{
+				_skipThisPlayer = true;
+			}
 			_uiScriptableObject.OnShowPlayerCardBanner(playedCard, $"{_targetPlayerScriptableObject.GetPlayerName()} played a {playedCard.GetActionType()} card!");	
-		}
-		else if (playedCard.GetActionType() == CardActionType.EmptyShell)
-		{
-			_skipThisPlayer = true;
-			_uiScriptableObject.OnShowPlayerCardBanner(playedCard, $"{_targetPlayerScriptableObject.GetPlayerName()} played a {playedCard.GetActionType()} card!");	
+			_uiScriptableObject.OnSetPlayerHandVisible(false);
+			_uiScriptableObject.OnSetPassButtonVisible(false);
 		}
 	}
 	

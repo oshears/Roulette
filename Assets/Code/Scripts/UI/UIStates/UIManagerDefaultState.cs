@@ -26,12 +26,15 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.showPlayerCardBannerEvent.AddListener(ShowPlayerCardBannerEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.setCardBannerVisibleEvent.AddListener(SetCardBannerVisibleEventHandler);
 		
 		_uiScriptableObject.enableHandCardSelection.AddListener(EnableCardHandSelectionHandler);
 		
 		_uiScriptableObject.passButtonVisibleEvent.AddListener(SetPassButtonVisibleEventHandler);
 		
-		_uiScriptableObject.shootButtonVisibleEvent.AddListener(SetPassButtonVisibleEventHandler);
+		_uiScriptableObject.shootButtonVisibleEvent.AddListener(SetShootButtonVisibleEventHandler);
+		
+		_uiScriptableObject.drawButtonVisibleEvent.AddListener(SetDrawButtonVisibleEventHandler);
 		
 		// _uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunPhaseEventHandler);
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.AddListener(BeginPlayerDrawPhaseEventHandler);
@@ -78,12 +81,13 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.showPlayerCardBannerEvent.RemoveListener(ShowPlayerCardBannerEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.setCardBannerVisibleEvent.AddListener(SetCardBannerVisibleEventHandler);
 		
 		_uiScriptableObject.enableHandCardSelection.RemoveListener(EnableCardHandSelectionHandler);
 		
 		_uiScriptableObject.passButtonVisibleEvent.RemoveListener(SetPassButtonVisibleEventHandler);
 		
-		_uiScriptableObject.shootButtonVisibleEvent.RemoveListener(SetPassButtonVisibleEventHandler);
+		_uiScriptableObject.shootButtonVisibleEvent.RemoveListener(SetShootButtonVisibleEventHandler);
 		
 		
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.RemoveListener(BeginPlayerDrawPhaseEventHandler);
@@ -195,7 +199,17 @@ public class UIManagerDefaultState : UIManagerState
 	
 	void SetShootButtonVisibleEventHandler(bool visible)
 	{
-		_owner.SetPassButtonActive(visible);
+		_owner.SetShootButtonActive(visible);
+	}
+	
+	void SetCardBannerVisibleEventHandler(bool visible)
+	{
+		_owner.SetCardBannerActive(visible);
+	}
+	
+	void SetDrawButtonVisibleEventHandler(bool visible)
+	{
+		_owner.SetDrawButtonActive(visible);
 	}
 	
 		

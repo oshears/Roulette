@@ -11,6 +11,8 @@ public class GameManagerPostGunState : GameManagerState
 		_targetPlayerScriptableObject = targetPlayer;
 		_additionalTriggerPulls = 0;
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
+		_uiScriptableObject.passButtonEvent.AddListener(PassButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	}
 
@@ -41,10 +43,13 @@ public class GameManagerPostGunState : GameManagerState
 		else
 		{
 			// TODO: Implement player post gun state logic
-			Debug.LogError("Not yet implemented!!!");
+			// Debug.LogError("Not yet implemented!!!");
 			
-			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
-			changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
+			// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			// changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
+			_uiScriptableObject.OnSetPlayerHandVisible(true);
+			_uiScriptableObject.OnEnableCardSelection();
+			_uiScriptableObject.OnSetPassButtonVisible(true);
 		}
 	}
 
@@ -61,21 +66,57 @@ public class GameManagerPostGunState : GameManagerState
 	public override void Exit()
 	{
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
+		_uiScriptableObject.passButtonEvent.RemoveListener(PassButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+		
+		
+		_uiScriptableObject.OnSetPlayerHandVisible(false);
+		_uiScriptableObject.OnSetPassButtonVisible(false);
 		
 	}
 	
-	void UiReadyEventHandler()
+	void PlayCardEventHandler(int cardChoice)
 	{
-		
+		CardSO playedCard = _playerScriptableObject.PlayPostGunPhaseCard(cardChoice);
+		if (playedCard != null)
+		{
+			if (playedCard.GetActionType() == CardActionType.Joker)
+			{
+				_additionalTriggerPulls++;
+			}
+			else if (playedCard.GetActionType() == CardActionType.DrawTwo)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					CardSO drawnCard = _deckScriptableObject.OnDrawCard();
+					_playerScriptableObject.AddCard(drawnCard);
+					_uiScriptableObject.OnUpdateHandCards();
+				}
+				
+			}
+			else if (playedCard.GetActionType() == CardActionType.TargetNextPlayer)
+			{
+				_additionalTriggerPulls++;
+			}
+			else if (playedCard.GetActionType() == CardActionType.Bullet)
+			{
+				_gunScriptableObject.OnAddBullet();
+				_gunScriptableObject.OnShuffleGun();
+			}
+
+			_uiScriptableObject.OnShowPlayerCardBanner(playedCard, $"{_targetPlayerScriptableObject.GetPlayerName()} played a {playedCard.GetActionType()} card!");	
+			_uiScriptableObject.OnSetPlayerHandVisible(false);
+		}
 		
 	}
-
+	
 	void HandlePostGunCard(CardSO card)
 	{
 		if (card.GetActionType() == CardActionType.Bullet)
 		{
-			_gunScriptableObject.OnAddBulletEvent();
+			_gunScriptableObject.OnAddBullet();
+			_gunScriptableObject.OnShuffleGun();
 		}
 		else if (card.GetActionType() == CardActionType.TargetNextPlayer)
 		{
@@ -99,6 +140,12 @@ public class GameManagerPostGunState : GameManagerState
 	{
 		GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 		changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
+	}
+	
+	void PassButtonClickEventHandler()
+	{
+		GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+		changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
 	}
 	
 	public override void OnGUI()

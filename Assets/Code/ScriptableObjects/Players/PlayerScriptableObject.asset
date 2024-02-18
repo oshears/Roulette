@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
   _heartRemaining: 2
-  gunRotation: {x: 0, y: 0, z: 180}
+  gunRotation: {x: 0, y: 180, z: 0}
   playerId: 0
   playerDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerShotEvent:
     m_PersistentCalls:
       m_Calls: []
   playerHandFullEvent:

@@ -54,7 +54,7 @@ public class GunScriptableObject : ScriptableObject
 		return bulletFired;
 	}
 	
-	public void OnAddBulletEvent()
+	public void OnAddBullet()
 	{
 		addBulletEvent.Invoke();
 		

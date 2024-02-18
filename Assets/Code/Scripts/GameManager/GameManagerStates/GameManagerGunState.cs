@@ -71,6 +71,7 @@ public class GameManagerGunState : GameManagerState
 	public override void Exit()
 	{
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
+		_uiScriptableObject.shootButtonClickEvent.RemoveListener(ShootButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
 		
 		_uiScriptableObject.OnSetShootButtonVisible(false);
@@ -81,28 +82,6 @@ public class GameManagerGunState : GameManagerState
 		// _shotsRemaining--;
 		ExecuteGunShotLogic();
 		
-	}
-	
-	void UiReadyEventHandler()
-	{
-		
-		// Fire the number of required times
-		
-		if (_targetPlayerScriptableObject.IsNpc())
-		{
-			// timer = 0;
-			ExecuteGunShotLogic();
-		}
-		// else
-		// {
-		// 	// TODO: Implement player pulling the trigger phase!
-		// 	// Debug.LogError("Hey! You shouldn't be here yet!!");
-		// 	ContinuousEvent;
-		// }
-		
-		// Check if player dead
-
-		// If plalyer dead
 	}
 	
 	void BannerButtonEventHandler()

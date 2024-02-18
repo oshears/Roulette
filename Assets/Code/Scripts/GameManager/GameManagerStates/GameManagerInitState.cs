@@ -2,14 +2,15 @@ public class GameManagerInitState : GameManagerState
 {
 	public GameManagerInitState(GameManager owner) : base(owner) { 
 		_uiScriptableObject.startGameEvent.AddListener(StartGameEventHandler);
+		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonClickEventHandler);
 	}
 
-    public override void Enter()
-    {
-        
-    }
+	public override void Enter()
+	{
+		
+	}
 
-    override public void Execute() 
+	override public void Execute() 
 	{ 
 		
 
@@ -18,6 +19,8 @@ public class GameManagerInitState : GameManagerState
 	public override void Exit()
 	{
 		// _uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
+		_uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
+		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonClickEventHandler);
 	}
 
 	void StartGameEventHandler()
@@ -39,6 +42,11 @@ public class GameManagerInitState : GameManagerState
 		// Initialize Deck
 		_deckScriptableObject.OnInitializeDeck();
 		
+		
+	}
+	
+	void BannerButtonClickEventHandler()
+	{
 		// Go to New Round State
 		_stateMachine.ChangeState(new GameManagerNewRoundState(_owner));
 	}

@@ -55,6 +55,7 @@ public class GameManagerCardCompareState : GameManagerState
 		}
 		
 		_uiScriptableObject.OnPlayedCardsReady();
+		_uiScriptableObject.OnSetCardBannerVisible(true);
 	}
 	override public void Execute() 
 	{ 
@@ -71,6 +72,7 @@ public class GameManagerCardCompareState : GameManagerState
 		Debug.Log("Exiting GameManagerCardCompareState");
 		_gunScriptableObject.SetNumBullets(_numBullets);
 		_gunScriptableObject.OnShuffleGun();
+		
 		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
 		

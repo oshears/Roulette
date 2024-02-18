@@ -2,12 +2,12 @@ public class GameManagerNewRoundState : GameManagerState
 {
 	public GameManagerNewRoundState(GameManager owner) : base(owner) { 
 		// _uiScriptableObject.drawCardsEvent.AddListener(DrawCardsEventHandler);
-		_uiScriptableObject.bannerButtonClick.AddListener(BannerContinueEventHandler);
+		// _uiScriptableObject.bannerButtonClick.AddListener(BannerContinueEventHandler);
 	}
 
     public override void Enter()
     {
-        
+        _stateMachine.ChangeState(new GameManagerDrawCardsState(_owner));
     }
 
     override public void Execute() 
@@ -23,12 +23,12 @@ public class GameManagerNewRoundState : GameManagerState
 
 	public override void Exit()
 	{
-		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerContinueEventHandler);
+		// _uiScriptableObject.bannerButtonClick.RemoveListener(BannerContinueEventHandler);
 	}
 
 	void BannerContinueEventHandler()
 	{
-		_stateMachine.ChangeState(new GameManagerDrawCardsState(_owner));
+		
 	}
 	
 	

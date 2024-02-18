@@ -48,6 +48,7 @@ public class GameManagerDrawCardsState : GameManagerState
 	public override void Exit()
 	{
 		_uiScriptableObject.OnSetPlayerHandVisible(false);
+		_uiScriptableObject.OnDrawButtonVisible(false);
 		
 		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
 		_uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
