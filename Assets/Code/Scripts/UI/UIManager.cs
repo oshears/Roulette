@@ -47,7 +47,8 @@ public class UIManager : MonoBehaviour
 	void Awake()
 	{
 		stateMachine = new UIManagerStateMachine(this);
-		stateMachine.ChangeState(new UIManagerDebugState(this));
+		// stateMachine.ChangeState(new UIManagerDebugState(this));
+		stateMachine.ChangeState(new UIManagerDefaultState(this));
 		
 		SetDrawButtonActive(false);
 		
@@ -69,11 +70,12 @@ public class UIManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		stateMachine.Update();
 	}
 
 	void OnGUI()
 	{
+		// stateMachine.OnGUI();
 		// Starts an area to draw elements
 		/*
 		GUILayout.BeginArea(new Rect(10, 10, 100, 100));
@@ -84,7 +86,7 @@ public class UIManager : MonoBehaviour
 		}
 		GUILayout.EndArea();
 		*/
-		stateMachine.Update();
+		
 	}
 
 	public void RotateGun()

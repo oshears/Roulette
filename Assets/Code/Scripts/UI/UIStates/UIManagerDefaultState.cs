@@ -59,9 +59,9 @@ public class UIManagerDefaultState : UIManagerState
 
 	public override void Execute()
 	{
-		GUILayout.BeginArea(new Rect(0, 1000, 500, 500));
-		GUILayout.Label($"Current GameManagerState: {this}");
-		GUILayout.EndArea();
+		// GUILayout.BeginArea(new Rect(0, 1000, 500, 500));
+		// GUILayout.Label($"Current GameManagerState: {this}");
+		// GUILayout.EndArea();
 	}
 
 	public override void Exit()

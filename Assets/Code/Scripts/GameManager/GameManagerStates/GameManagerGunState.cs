@@ -79,40 +79,53 @@ public class GameManagerGunState : GameManagerState
 	
 	void ShootButtonClickEventHandler()
 	{
-		// _shotsRemaining--;
 		ExecuteGunShotLogic();
 		
 	}
 	
 	void BannerButtonEventHandler()
 	{
+		// End the game if the human player (who is the current target) has died.
 		if (!_targetPlayerScriptableObject.IsNpc() && !_targetPlayerScriptableObject.IsPlayerAlive())
 		{
 			changeState(new GameManagerGameOverState(_owner, false));
 		}
+		// End the game if only player is alive.
 		else if (_playerScriptableObject.IsPlayerAlive() && _owner.GetNumPlayersAlive() == 1)
 		{
 			changeState(new GameManagerGameOverState(_owner, true));
 		}
+		// If current player was shot and killed, move on to next player
+		else if (!_targetPlayerScriptableObject.IsPlayerAlive())
+		{
+			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
+		}
 		else
 		{
+			// if there are no shots left to take
 			if(_shotsRemaining == 0)
 			{
+				// if the gun has only bullets, the current target becomes the dealer
 				if (_gunScriptableObject.HasOnlyBulletsLeft())
 				{
 					changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
 				}
+				// else move on to their post gun state
 				else
 				{
 					changeState(new GameManagerPostGunState(_owner, _targetPlayerScriptableObject));
 				}
 			}
+			// if there are still shots left to take
 			else
 			{
+				// if the target is an npc, then execute the gun logic automatically
 				if (_targetPlayerScriptableObject.IsNpc())
 				{
 					ExecuteGunShotLogic();
 				}
+				// else let the player click the button
 				else
 				{
 					_uiScriptableObject.OnSetShootButtonVisible(true);

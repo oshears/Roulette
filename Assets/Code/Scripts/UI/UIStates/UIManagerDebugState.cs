@@ -17,30 +17,30 @@ public class UIManagerDebugState : UIManagerState
     
 	public override void Execute()
 	{
-		GUILayout.BeginArea(new Rect(10, 10, 500, 500));
-		if (GUILayout.Button("Rotate Gun"))
-		{
-			Debug.Log("Rotating Gun");
-			_uiScriptableObject.OnRotateGun();
-		}
-		if (GUILayout.Button("Flip coin"))
-		{
-			_owner.StartCoinFlip();
-		}
-		if (GUILayout.Button("Increase Bullet Count"))
-		{
-			_owner.IncreaseBulletCount();
-		}
-		if (GUILayout.Button("Shoot Gun"))
-		{
-			_uiScriptableObject.OnShootGun();
-		}
-		if (GUILayout.Button("Start Game"))
-		{
-			changeState(new UIManagerDefaultState(_owner));   
-			_uiScriptableObject.OnStartGame();
-		}
-		GUILayout.EndArea();
+		// GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+		// if (GUILayout.Button("Rotate Gun"))
+		// {
+		// 	Debug.Log("Rotating Gun");
+		// 	_uiScriptableObject.OnRotateGun();
+		// }
+		// if (GUILayout.Button("Flip coin"))
+		// {
+		// 	_owner.StartCoinFlip();
+		// }
+		// if (GUILayout.Button("Increase Bullet Count"))
+		// {
+		// 	_owner.IncreaseBulletCount();
+		// }
+		// if (GUILayout.Button("Shoot Gun"))
+		// {
+		// 	_uiScriptableObject.OnShootGun();
+		// }
+		// if (GUILayout.Button("Start Game"))
+		// {
+		// 	changeState(new UIManagerDefaultState(_owner));   
+		// 	_uiScriptableObject.OnStartGame();
+		// }
+		// GUILayout.EndArea();
 	}
 
 }

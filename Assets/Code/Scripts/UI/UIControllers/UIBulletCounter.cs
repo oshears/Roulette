@@ -68,7 +68,7 @@ public class UIBulletCounter : MonoBehaviour
 	{
 		_numBullets = numBullets;
 		GetComponent<Image>().sprite = _bulletCounterSprites[numBullets];
-		
+		UpdateShotsRemainingText();
 	}
 	
 	void FireGunEventHandler(bool wasBullet)

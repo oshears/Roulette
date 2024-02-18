@@ -20,6 +20,9 @@ public class NPCController : MonoBehaviour
 	
 	void Awake()
 	{
+		anim = GetComponent<Animation>();
+		animator = GetComponent<Animator>();
+		
 		npcScriptableObject.playerDiedEvent.AddListener(NpcDiedEventHandler);
 		npcScriptableObject.playerShotEvent.AddListener(NpcShotEventHandler);
 		npcScriptableObject.playerInitEvent.AddListener(PlayerInitEventHandler);
@@ -37,8 +40,7 @@ public class NPCController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		anim = GetComponent<Animation>();
-		animator = GetComponent<Animator>();
+		
 	}
 
 	// Update is called once per frame
@@ -54,6 +56,8 @@ public class NPCController : MonoBehaviour
 	
 	void PlayerInitEventHandler()
 	{
+		animator.SetBool("npcIsDead", false);
+		
 		_npcHeartsRemaining = 2;
 		
 		foreach (GameObject npcHeart in npcHeartContainer)

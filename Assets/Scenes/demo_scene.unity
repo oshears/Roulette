@@ -241,6 +241,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &228580807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1023231725523546336, guid: f54bcf6f01b4af34fbf2c9eb9272e83d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1597145105964536445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &508983650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2064650052910578560, guid: 72de81dcf4ed54c409c12ea2f2de9ea0,
@@ -917,6 +923,21 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1597145105964536445}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1596354442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596354438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ecbb27d625c62b438c02df41829a752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiScriptableObject: {fileID: 11400000, guid: d92f417325b98824eb56029e953bae66,
+    type: 2}
+  _gameOverTextGameObject: {fileID: 228580807}
 --- !u!1 &1695820548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2020,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7878056091715418487}
     m_Modifications:
+    - target: {fileID: 1023231725523546336, guid: f54bcf6f01b4af34fbf2c9eb9272e83d,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_GameResultText
+      objectReference: {fileID: 0}
     - target: {fileID: 1500772338466871409, guid: f54bcf6f01b4af34fbf2c9eb9272e83d,
         type: 3}
       propertyPath: m_Name
@@ -2109,10 +2135,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6567444905981952216, guid: f54bcf6f01b4af34fbf2c9eb9272e83d,
+        type: 3}
+      propertyPath: m_Name
+      value: UI_GameOverText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1500772338466871409, guid: f54bcf6f01b4af34fbf2c9eb9272e83d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1596354442}
   m_SourcePrefab: {fileID: 100100000, guid: f54bcf6f01b4af34fbf2c9eb9272e83d, type: 3}
 --- !u!114 &1650343587677788420
 MonoBehaviour:
