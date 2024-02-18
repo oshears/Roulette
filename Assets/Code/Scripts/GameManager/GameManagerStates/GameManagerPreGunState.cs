@@ -22,6 +22,8 @@ public class GameManagerPreGunState : GameManagerState
 		_additionalTriggerPulls = additionalTriggerPulls;
 		_uiScriptableObject.bannerButtonClick.AddListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.AddListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
+		_uiScriptableObject.passButtonEvent.AddListener(PassButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	}
 
@@ -61,7 +63,12 @@ public class GameManagerPreGunState : GameManagerState
 	{
 		_uiScriptableObject.bannerButtonClick.RemoveListener(OnBannerContinueEventHandler);
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
+		_uiScriptableObject.playCardEvent.RemoveListener(PlayCardEventHandler);
+		_uiScriptableObject.passButtonEvent.RemoveListener(PassButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+		
+		_uiScriptableObject.OnSetPlayerHandVisible(false);
+		_uiScriptableObject.OnSetPassButtonVisible(false);
 
 	}
 	
@@ -106,10 +113,35 @@ public class GameManagerPreGunState : GameManagerState
 		{
 			// TODO: Need to implement the functionality for the player's pre gun actions
 			Debug.LogError("Skipping player's turn for now");
-			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
-			changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
+			// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			// changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
+			_uiScriptableObject.OnSetPlayerHandVisible(true);
+			_uiScriptableObject.OnSetPassButtonVisible(true);
 		}
 		
+	}
+	
+	
+	void PlayCardEventHandler(int cardChoice) {
+		CardSO playedCard = _playerScriptableObject.PlayCard(cardChoice);
+		if (playedCard.GetActionType() == CardActionType.Joker)
+		{
+			_additionalTriggerPulls++;
+			_skipThisPlayer = true;
+			_uiScriptableObject.OnShowPlayerCardBanner(playedCard, $"{_targetPlayerScriptableObject.GetPlayerName()} played a {playedCard.GetActionType()} card!");	
+		}
+		else if (playedCard.GetActionType() == CardActionType.EmptyShell)
+		{
+			_skipThisPlayer = true;
+			_uiScriptableObject.OnShowPlayerCardBanner(playedCard, $"{_targetPlayerScriptableObject.GetPlayerName()} played a {playedCard.GetActionType()} card!");	
+		}
+	}
+	
+	void PassButtonClickEventHandler()
+	{
+		//TODO: Need to debug why this isn't running?
+		Debug.Log($"Entering gun phase with this player: {_targetPlayerScriptableObject.GetPlayerName()}");
+		changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
 	}
 	
 	void PlayerCardBannerButtonEventHandler()

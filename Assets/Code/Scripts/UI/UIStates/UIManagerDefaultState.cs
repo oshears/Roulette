@@ -29,6 +29,10 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.enableHandCardSelection.AddListener(EnableCardHandSelectionHandler);
 		
+		_uiScriptableObject.passButtonVisibleEvent.AddListener(SetPassButtonVisibleEventHandler);
+		
+		_uiScriptableObject.shootButtonVisibleEvent.AddListener(SetPassButtonVisibleEventHandler);
+		
 		// _uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunPhaseEventHandler);
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.AddListener(BeginPlayerDrawPhaseEventHandler);
 		// _uiScriptableObject.beginCompareCardPhaseEvent.AddListener(BeginComparePhaseEventHandler);
@@ -76,6 +80,11 @@ public class UIManagerDefaultState : UIManagerState
 		_uiScriptableObject.playerCardBannerButtonEvent.RemoveListener(PlayerCardBannerButtonEventHandler);
 		
 		_uiScriptableObject.enableHandCardSelection.RemoveListener(EnableCardHandSelectionHandler);
+		
+		_uiScriptableObject.passButtonVisibleEvent.RemoveListener(SetPassButtonVisibleEventHandler);
+		
+		_uiScriptableObject.shootButtonVisibleEvent.RemoveListener(SetPassButtonVisibleEventHandler);
+		
 		
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.RemoveListener(BeginPlayerDrawPhaseEventHandler);
 		// _uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
@@ -177,6 +186,16 @@ public class UIManagerDefaultState : UIManagerState
 	void SetCoinVisibleEventHandler(bool visible)
 	{
 		_owner.SetFlipCoinButtonActive(visible);
+	}
+	
+	void SetPassButtonVisibleEventHandler(bool visible)
+	{
+		_owner.SetPassButtonActive(visible);
+	}
+	
+	void SetShootButtonVisibleEventHandler(bool visible)
+	{
+		_owner.SetPassButtonActive(visible);
 	}
 	
 		

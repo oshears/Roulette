@@ -8,7 +8,7 @@ public class NpcScriptableObject : GamePlayerScriptableObject
 
 	public CardSO PlayPreGunPhaseCard()
 	{
-		foreach(CardSO card in cardsInHand)
+		foreach(CardSO card in _cardsInHand)
 		{
 			if (card.GetActionType() == CardActionType.Joker || card.GetActionType() == CardActionType.EmptyShell)
 			{
@@ -22,7 +22,7 @@ public class NpcScriptableObject : GamePlayerScriptableObject
 	
 	public CardSO PlayPostGunPhaseCard()
 	{
-		foreach(CardSO card in cardsInHand)
+		foreach(CardSO card in _cardsInHand)
 		{
 			if (card.GetActionType() == CardActionType.DrawTwo || card.GetActionType() == CardActionType.Bullet || card.GetActionType() == CardActionType.TargetNextPlayer)
 			{

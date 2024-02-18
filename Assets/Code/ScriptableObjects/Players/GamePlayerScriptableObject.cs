@@ -7,7 +7,7 @@ using UnityEditor.Rendering;
 public class GamePlayerScriptableObject : ScriptableObject
 {
 	
-	public List<CardSO> cardsInHand {get; private set;}
+	protected List<CardSO> _cardsInHand = new List<CardSO>();
 	
 	[SerializeField]
 	int _heartRemaining = 2;
@@ -32,17 +32,17 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public void InitializePlayerHand()
 	{
-		cardsInHand.Clear();
+		_cardsInHand.Clear();
 	}
 	
 	public void AddCard(CardSO card)
 	{
-		cardsInHand.Add(card);
+		_cardsInHand.Add(card);
 	}
 	
 	public void RemoveCard(CardSO card)
 	{
-		cardsInHand.Remove(card);
+		_cardsInHand.Remove(card);
 	}
 	
 	public void RemoveHeart()
@@ -58,12 +58,12 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public bool HasFullHand()
 	{
-		return cardsInHand.Count > 5;
+		return _cardsInHand.Count > 5;
 	}
 	
 	public CardSO PlayCard()
 	{
-		foreach (CardSO card in cardsInHand)
+		foreach (CardSO card in _cardsInHand)
 		{
 			if (card.GetActionType() != CardActionType.Joker)
 			{
@@ -76,7 +76,7 @@ public class GamePlayerScriptableObject : ScriptableObject
 		
 		
 		// DEBUG: Remove this later
-		CardSO jokerCard = cardsInHand[0];
+		CardSO jokerCard = _cardsInHand[0];
 		RemoveCard(jokerCard);
 		return jokerCard;
 		
@@ -87,11 +87,11 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public CardSO PlayCard(int i)
 	{
-		if (i > cardsInHand.Count - 1)
+		if (i > _cardsInHand.Count - 1)
 		{
-			Debug.LogError($"ERROR: Trying to access card {i} in a list of {cardsInHand.Count} cards");
+			Debug.LogError($"ERROR: Trying to access card {i} in a list of {_cardsInHand.Count} cards");
 		}
-		CardSO npcCard = cardsInHand[i];
+		CardSO npcCard = _cardsInHand[i];
 		RemoveCard(npcCard);
 		return npcCard;
 	}
@@ -121,6 +121,16 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public void OnPlayerDied()
 	{
 		playerDiedEvent.Invoke();
+	}
+	
+	public CardSO GetCard(int i)
+	{
+		return _cardsInHand[i];
+	}
+	
+	public int GetNumCardsInHand()
+	{
+		return _cardsInHand.Count;
 	}
 	
 	

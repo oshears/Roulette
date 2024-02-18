@@ -49,6 +49,13 @@ public class UIScriptableObject : ScriptableObject
 	
 	public UnityEvent<bool> setCardBannerVisibleEvent;
 	
+	public UnityEvent passButtonEvent;
+	public UnityEvent<bool> passButtonVisibleEvent;
+	
+	public UnityEvent<bool> shootButtonVisibleEvent;
+	
+	public UnityEvent shootButtonClickEvent;
+	
 	public String bannerText {get; private set;}
 	
 	public List<CardSO> cardBannerCards;
@@ -215,5 +222,25 @@ public class UIScriptableObject : ScriptableObject
 	public void OnSetCardBannerVisible(bool visible)
 	{
 		setCardBannerVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnPassButtonClick()
+	{
+		passButtonEvent.Invoke();
+	}
+	
+	public void OnSetPassButtonVisible(bool visible)
+	{
+		passButtonVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnSetShootButtonVisible(bool visible)
+	{
+		passButtonVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnShootButtonClicked()
+	{
+		shootButtonClickEvent.Invoke();
 	}
 }

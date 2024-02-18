@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using UnityEditor;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "GunScriptableObject", menuName = "ScriptableObjects/GunScriptableObject")]
 public class GunScriptableObject : ScriptableObject
@@ -11,7 +12,9 @@ public class GunScriptableObject : ScriptableObject
 	public UnityEvent<bool> fireGunEvent;
 	public UnityEvent addBulletEvent;
 	public UnityEvent shuffleGunEvent;
-	public UnityEvent updateGunPositionEvent;
+	public UnityEvent<Vector3> updateGunRotationEvent;
+	
+	public UnityEvent<int> numBulletsUpdatedEvent;
 	
 	public Vector3 gunRotation {get; private set;}
 	
@@ -40,6 +43,8 @@ public class GunScriptableObject : ScriptableObject
 		{
 			_bulletQueue.Enqueue(false);
 		}
+		
+		numBulletsUpdatedEvent.Invoke(numBullets);
 	}
 	
 	public bool OnFireGunEvent()
@@ -77,12 +82,17 @@ public class GunScriptableObject : ScriptableObject
 	public void OnUpdateGunRotation(Vector3 gunRotation)
 	{
 		this.gunRotation = gunRotation;
-		updateGunPositionEvent.Invoke();
+		updateGunRotationEvent.Invoke(gunRotation);
 	}
 	
 	public bool HasOnlyBulletsLeft()
 	{
 		return !_bulletQueue.Contains(false);
+	}
+	
+	public int GetNumEmptyShells()
+	{
+		return _bulletQueue.Where(x => x == false).Count();
 	}
 	
 }

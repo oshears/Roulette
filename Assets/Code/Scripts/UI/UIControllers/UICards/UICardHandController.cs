@@ -55,8 +55,8 @@ public class UICardHandController : MonoBehaviour
 	{
 		RemoveAllCards();
 
-		int numCards = playerScriptableObject.cardsInHand.Count;
-		if (playerScriptableObject.cardsInHand.Count == 0){
+		int numCards = playerScriptableObject.GetNumCardsInHand();
+		if (playerScriptableObject.GetNumCardsInHand() == 0){
 			return;
 		}
 
@@ -80,7 +80,7 @@ public class UICardHandController : MonoBehaviour
 		
 		for (int i = 0; i < numCards; i++)
 		{
-			CardSO cardSO = playerScriptableObject.cardsInHand[i];
+			CardSO cardSO = playerScriptableObject.GetCard(i);
 			GameObject card = Instantiate(handCard, Vector3.zero, Quaternion.identity);
 			card.GetComponent<UIHandCardController>().SetCardIndex(i);
 			

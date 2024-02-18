@@ -26,11 +26,20 @@ public class GunController : MonoBehaviour
 	
 	[SerializeField]
 	GameObject revolverModel;
+	
+	void Awake()
+	{
+		gunScriptableObject.fireGunEvent.AddListener(FireGunEventHandler);
+		gunScriptableObject.updateGunRotationEvent.AddListener(UpdateGunRotationEventHandler);
+		
+	}
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, revolverRotations[0], 0));
+		
+		
 
 		// uiScriptableObject?.rotateGunEvent.AddListener(rotateGunRight);
 		// uiScriptableObject?.shootGunEvent.AddListener(shootGun);
@@ -65,6 +74,18 @@ public class GunController : MonoBehaviour
 		}
 		
 		transform.rotation = Quaternion.Euler(0, revolverRotations[(int) state], 0);
+	}
+	
+	void UpdateGunRotationEventHandler(Vector3 gunRotation)
+	{
+		transform.rotation = Quaternion.Euler(gunRotation);
+	}
+	
+	
+	
+	void FireGunEventHandler(bool wasBullet)
+	{
+		shootGun();
 	}
 	
 	void shootGun()

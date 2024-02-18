@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class GameManagerGunState : GameManagerState
 {
@@ -12,6 +13,8 @@ public class GameManagerGunState : GameManagerState
 		_shotsRemaining = additionalTriggerPulls + 1;
 		
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
+		
+		_uiScriptableObject.shootButtonClickEvent.AddListener(ShootButtonClickEventHandler);
 		// _uiScriptableObject.uiReadyEvent.AddListener(UiReadyEventHandler);
 	 }
 
@@ -25,12 +28,13 @@ public class GameManagerGunState : GameManagerState
 		if (_targetPlayerScriptableObject.IsNpc())
 		{
 			// timer = 0;
-			ExecuteNpcGunLogic();
+			ExecuteGunShotLogic();
 		}
 		else
 		{
 			// TODO: Implement player pulling the trigger phase!
-			Debug.LogError("Hey! You shouldn't be here yet!!");
+			// Debug.LogError("Hey! You shouldn't be here yet!!");
+			_uiScriptableObject.OnSetShootButtonVisible(true);
 		}
 		
 		// Check if player dead
@@ -68,6 +72,15 @@ public class GameManagerGunState : GameManagerState
 	{
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
+		
+		_uiScriptableObject.OnSetShootButtonVisible(false);
+	}
+	
+	void ShootButtonClickEventHandler()
+	{
+		// _shotsRemaining--;
+		ExecuteGunShotLogic();
+		
 	}
 	
 	void UiReadyEventHandler()
@@ -78,13 +91,14 @@ public class GameManagerGunState : GameManagerState
 		if (_targetPlayerScriptableObject.IsNpc())
 		{
 			// timer = 0;
-			ExecuteNpcGunLogic();
+			ExecuteGunShotLogic();
 		}
-		else
-		{
-			// TODO: Implement player pulling the trigger phase!
-			Debug.LogError("Hey! You shouldn't be here yet!!");
-		}
+		// else
+		// {
+		// 	// TODO: Implement player pulling the trigger phase!
+		// 	// Debug.LogError("Hey! You shouldn't be here yet!!");
+		// 	ContinuousEvent;
+		// }
 		
 		// Check if player dead
 
@@ -107,15 +121,23 @@ public class GameManagerGunState : GameManagerState
 		}
 		else
 		{
-			ExecuteNpcGunLogic();
+			if (_targetPlayerScriptableObject.IsNpc())
+			{
+				ExecuteGunShotLogic();
+			}
 		}
 	}
 	
 	
-	void ExecuteNpcGunLogic()
+	void ExecuteGunShotLogic()
 	{
 		bool bulletFired = _gunScriptableObject.OnFireGunEvent();
 		_shotsRemaining--;
+		
+		if(_shotsRemaining < 1)
+		{
+			_uiScriptableObject.OnSetShootButtonVisible(false);
+		}
 	
 		if (bulletFired)
 		{

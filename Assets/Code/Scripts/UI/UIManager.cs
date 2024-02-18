@@ -34,6 +34,12 @@ public class UIManager : MonoBehaviour
 	[SerializeField]
 	public GameObject coinPrefab;
 	
+	[SerializeField] private GameObject bulletCounter;
+	
+	[SerializeField] private GameObject passButton;
+	
+	[SerializeField] private GameObject shootButton;
+	
 	
 	// Start is called before the first frame update
 	void Awake()
@@ -140,6 +146,14 @@ public class UIManager : MonoBehaviour
 		playerCardBanner.SetActive(active);
 	}
 	
+	public void SetPassButtonActive(bool active)
+	{
+		passButton.SetActive(active);
+	}
 	
-
+	public void SetShootButtonActive(bool active)
+	{
+		shootButton.SetActive(active);
+	}
+	
 }

@@ -42,6 +42,9 @@ public class GameManagerPostGunState : GameManagerState
 		{
 			// TODO: Implement player post gun state logic
 			Debug.LogError("Not yet implemented!!!");
+			
+			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+			changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
 		}
 	}
 

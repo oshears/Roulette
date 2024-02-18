@@ -80,7 +80,7 @@ public class UIHandCardSpriteController : MonoBehaviour, IPointerEnterHandler, I
 	public void SetCardIndex(int index)
 	{
 		_cardIndex = index;
-		GetComponent<Image>().sprite = playerScriptableObject.cardsInHand[index].GetFrontOfCard();
+		GetComponent<Image>().sprite = playerScriptableObject.GetCard(index).GetFrontOfCard();
 	}
 
 

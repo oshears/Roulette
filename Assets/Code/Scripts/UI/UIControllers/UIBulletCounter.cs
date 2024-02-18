@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class UIBulletCounter : MonoBehaviour
 {
 
-	int num_rounds = 0;
+	int _numBullets;
 
 	[SerializeField]
 	Sprite[] sprites;
@@ -17,11 +18,21 @@ public class UIBulletCounter : MonoBehaviour
 	
 	[SerializeField]
 	GunScriptableObject gunScriptableObject;
+	
+	[SerializeField] private Sprite[] _bulletCounterSprites;
+	
+	[SerializeField] private GameObject shotsRemainingTextGameObject;
 
 	// Start is called before the first frame update
 	void Awake()
 	{
-		menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
+		_numBullets = 0;
+		NumBulletsUpdatedEventHandler(_numBullets);
+		
+		// menuSO.increaseBulletCountEvent.AddListener(IncreaseBulletCountEventHandler);
+		gunScriptableObject.fireGunEvent.AddListener(FireGunEventHandler);
+		gunScriptableObject.addBulletEvent.AddListener(AddBulletEventHandler);
+		gunScriptableObject.numBulletsUpdatedEvent.AddListener(NumBulletsUpdatedEventHandler);
 	}
 
 	// Update is called once per frame
@@ -32,11 +43,38 @@ public class UIBulletCounter : MonoBehaviour
 		//    num_rounds = (num_rounds + 1) % 5;
 		//}
 
-		this.GetComponent<Image>().sprite = sprites[num_rounds];
+		// this.GetComponent<Image>().sprite = sprites[_numRounds];
 	}
 
-	void IncreaseBulletCountEventHandler()
+	// void IncreaseBulletCountEventHandler()
+	// {
+	// 	num_rounds = (num_rounds + 1) % 6;
+	// }
+	
+	void AddBulletEventHandler()
 	{
-		num_rounds = (num_rounds + 1) % 6;
+		NumBulletsUpdatedEventHandler(_numBullets + 1);
+	}
+	
+	void NumBulletsUpdatedEventHandler(int numBullets)
+	{
+		_numBullets = numBullets;
+		GetComponent<Image>().sprite = _bulletCounterSprites[numBullets];
+		
+	}
+	
+	void FireGunEventHandler(bool wasBullet)
+	{
+		if (wasBullet)
+		{
+			NumBulletsUpdatedEventHandler(_numBullets - 1);
+		}
+		
+		UpdateShotsRemainingText();
+	}
+	
+	void UpdateShotsRemainingText()
+	{
+		shotsRemainingTextGameObject.GetComponent<TextMeshProUGUI>().text = $"Empty Shells Remaining: {gunScriptableObject.GetNumEmptyShells()}";
 	}
 }
