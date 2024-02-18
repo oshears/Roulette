@@ -14,12 +14,25 @@ public class DeckController : MonoBehaviour
 	
 	int _numCards = 1;
 	
-	private List<GameObject> _cardsInDeck;
+	private List<GameObject> _cardsInDeck = new List<GameObject>();
+	
+	[SerializeField] DeckScriptableObject _deckScriptableObject;
+	
+	void Awake()
+	{
+		_deckScriptableObject.discardCardEvent.AddListener(UpdateDeckViewEventHandler);
+		_deckScriptableObject.drawCardEvent.AddListener(UpdateDeckViewEventHandler);
+		_deckScriptableObject.drawNpcCardEvent.AddListener(UpdateDeckViewEventHandler);
+		_deckScriptableObject.shuffleCardsEvent.AddListener(UpdateDeckViewEventHandler);
+		
+		_numCards = _deckScriptableObject.GetNumCardsInDeck();
+		
+		// _cardsInDeck = new List<GameObject>();
+	}
 	
 	// Start is called before the first frame update
 	void Start()
 	{
-		_cardsInDeck = new List<GameObject>();
 		GenerateCards();
 	}
 
@@ -32,6 +45,8 @@ public class DeckController : MonoBehaviour
 	
 	void GenerateCards()
 	{
+		RemoveAllCards();
+		
 		for(int i = 0; i < _numCards; i++)
 		{
 			GameObject card = Instantiate(deckCard, Vector3.zero, Quaternion.identity);
@@ -40,6 +55,22 @@ public class DeckController : MonoBehaviour
 			_cardsInDeck.Add(card);
 		}
 		
+	}
+	
+	void RemoveAllCards()
+	{
+		// Delete all old card game objects
+		foreach(GameObject card in _cardsInDeck)
+		{
+			Destroy(card);
+		}
+		_cardsInDeck.Clear();
+	}
+	
+	void UpdateDeckViewEventHandler()
+	{
+		_numCards = _deckScriptableObject.GetNumCardsInDeck();
+		GenerateCards();
 	}
 	
 	// void OnGUI()

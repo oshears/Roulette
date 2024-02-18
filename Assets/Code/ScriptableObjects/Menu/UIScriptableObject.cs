@@ -63,6 +63,10 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent playAgainButtonClickEvent;
 	public UnityEvent quitButtonClickEvent;
 	
+	public UnityEvent<bool> damageColorizerVisibleEvent;
+	
+	public UnityEvent initializeGuiEvent;
+	
 	
 	public String bannerText {get; private set;}
 	
@@ -278,5 +282,15 @@ public class UIScriptableObject : ScriptableObject
 	public void OnQuitButtonClick()
 	{
 		quitButtonClickEvent.Invoke();
+	}
+	
+	public void OnSetDamageColorizerVisible(bool visible)
+	{
+		damageColorizerVisibleEvent.Invoke(visible);
+	}
+	
+	public void OnInitializeGui()
+	{
+		initializeGuiEvent.Invoke();
 	}
 }

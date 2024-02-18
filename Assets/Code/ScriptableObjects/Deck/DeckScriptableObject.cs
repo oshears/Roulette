@@ -12,7 +12,7 @@ public class DeckScriptableObject : ScriptableObject
 	// List<CardSO> _cardScriptableObjects;
 	[SerializeField]
 	CardSO[] cardsArray;
-	Queue<CardSO> _cardQueue;
+	Queue<CardSO> _cardQueue = new Queue<CardSO>();
 	
 	public UnityEvent drawCardEvent;
 	public UnityEvent drawNpcCardEvent;
@@ -72,6 +72,11 @@ public class DeckScriptableObject : ScriptableObject
 	{
 		_cardQueue.Enqueue(card);
 		discardCardEvent.Invoke();
+	}
+	
+	public int GetNumCardsInDeck()
+	{
+		return _cardQueue.Count;
 	}
 	
 	

@@ -53,6 +53,11 @@ public class GamePlayerScriptableObject : ScriptableObject
 		playerShotEvent.Invoke();
 	}
 	
+	public int GetHeartsRemaining()
+	{
+		return _heartRemaining;
+	}
+	
 	public bool IsPlayerAlive()
 	{
 		return _heartRemaining > 0;

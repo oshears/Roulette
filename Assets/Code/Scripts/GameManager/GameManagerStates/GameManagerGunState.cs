@@ -144,9 +144,12 @@ public class GameManagerGunState : GameManagerState
 	
 		if (bulletFired)
 		{
-			
-			
 			_targetPlayerScriptableObject.RemoveHeart();
+			
+			if (_playerScriptableObject.GetHeartsRemaining() < 2)
+			{
+				_uiScriptableObject.OnSetDamageColorizerVisible(true);
+			}
 			
 			
 			if(!_targetPlayerScriptableObject.IsPlayerAlive())

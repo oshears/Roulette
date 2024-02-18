@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private GameObject shootButton;
 	
 	[SerializeField] private GameObject gameOverBanner;
+	[SerializeField] GameObject _damageColorizer;
 	
 	
 	// Start is called before the first frame update
@@ -50,6 +51,12 @@ public class UIManager : MonoBehaviour
 		// stateMachine.ChangeState(new UIManagerDebugState(this));
 		stateMachine.ChangeState(new UIManagerDefaultState(this));
 		
+		InitializeGui();
+		
+	}
+	
+	public void InitializeGui()
+	{
 		SetDrawButtonActive(false);
 		
 		SetPlayerCardHandActive(false);
@@ -65,6 +72,7 @@ public class UIManager : MonoBehaviour
 		
 		SetGameOverBannerActive(false);
 		
+		SetDamageColorizerActive(false);
 	}
 
 	// Update is called once per frame
@@ -106,7 +114,7 @@ public class UIManager : MonoBehaviour
 	public void StartCoinFlip()
 	{
 		Debug.Log("Creating Coin!");
-		GameObject newCoin = Instantiate(coinPrefab, new Vector3(0, 5f, 5f), Quaternion.Euler(-42.54f,0,0));
+		GameObject newCoin = Instantiate(coinPrefab, new Vector3(1.5f, -1.8f, -1.7f), Quaternion.Euler(-10.96f,0,0));
 		CoinController newCoinController = newCoin.GetComponent<CoinController>();
 		newCoinController.flipResult.AddListener( (CoinController.Side side) =>
 			{
@@ -138,7 +146,7 @@ public class UIManager : MonoBehaviour
 	
 	public void SetCardBannerActive(bool active)
 	{
-		cardBanner.SetActive(active);
+		// cardBanner.SetActive(active);
 	}
 	
 	public void SetFlipCoinButtonActive(bool active)
@@ -164,6 +172,11 @@ public class UIManager : MonoBehaviour
 	public void SetGameOverBannerActive(bool active)
 	{
 		gameOverBanner.SetActive(active);
+	}
+	
+	public void SetDamageColorizerActive(bool active)
+	{
+		_damageColorizer.SetActive(active);
 	}
 	
 }

@@ -36,7 +36,11 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.drawButtonVisibleEvent.AddListener(SetDrawButtonVisibleEventHandler);
 		
-		_uiScriptableObject.gameOverBannerVisibleEvent.AddListener(SetGameOverBannerVisible);
+		_uiScriptableObject.gameOverBannerVisibleEvent.AddListener(SetGameOverBannerVisibleEventHandler);
+		
+		_uiScriptableObject.damageColorizerVisibleEvent.AddListener(SetDamageColorizerVisibleEventHandler);
+		
+		_uiScriptableObject.initializeGuiEvent.AddListener(InitializeGuiEventHandler);
 		
 		
 		// _uiScriptableObject.beginPreGunPhaseEvent.AddListener(BeginPreGunPhaseEventHandler);
@@ -92,7 +96,12 @@ public class UIManagerDefaultState : UIManagerState
 		
 		_uiScriptableObject.shootButtonVisibleEvent.RemoveListener(SetShootButtonVisibleEventHandler);
 		
-		_uiScriptableObject.gameOverBannerVisibleEvent.RemoveListener(SetGameOverBannerVisible);
+		_uiScriptableObject.gameOverBannerVisibleEvent.RemoveListener(SetGameOverBannerVisibleEventHandler);
+		
+		_uiScriptableObject.damageColorizerVisibleEvent.RemoveListener(SetDamageColorizerVisibleEventHandler);
+		
+		_uiScriptableObject.initializeGuiEvent.RemoveListener(InitializeGuiEventHandler);
+		
 		
 		
 		// _uiScriptableObject.beginPlayerDrawPhaseEvent.RemoveListener(BeginPlayerDrawPhaseEventHandler);
@@ -217,9 +226,19 @@ public class UIManagerDefaultState : UIManagerState
 		_owner.SetDrawButtonActive(visible);
 	}
 	
-	void SetGameOverBannerVisible(bool visible)
+	void SetGameOverBannerVisibleEventHandler(bool visible)
 	{
 		_owner.SetGameOverBannerActive(visible);
+	}
+	
+	void SetDamageColorizerVisibleEventHandler(bool visible)
+	{
+		_owner.SetDamageColorizerActive(visible);
+	}
+	
+	void InitializeGuiEventHandler()
+	{
+		_owner.InitializeGui();
 	}
 	
 		

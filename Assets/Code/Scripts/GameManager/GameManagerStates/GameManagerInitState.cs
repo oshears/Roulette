@@ -17,8 +17,8 @@ public class GameManagerInitState : GameManagerState
 	{
 		Debug.Log("Preparing to initialize New Game!");
 		
-		
 		InitializeGame();
+		_uiScriptableObject.OnInitializeGui();
 		
 		
 	}
