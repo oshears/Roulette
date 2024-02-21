@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,9 +11,15 @@ public class CameraController : MonoBehaviour
 
 	float _speed = 6f;
 	
+	[SerializeField]
+	float _cameraPanSpeed = 1.5f;
+	
 	bool lookingUp = false;
 	
 	[SerializeField] PlayerScriptableObject _playerScriptableObject;
+	
+	// [SerializeField] CameraFollow cameraFollow;
+	Vector3 cameraFollowPosition = new Vector3();
 
 	void Awake()
 	{
@@ -20,44 +27,69 @@ public class CameraController : MonoBehaviour
 		
 	}
 	
+	void Start()
+	{
+		// cameraFollowPosition.Setup(() => cameraFollowPosition, () => 80f);
+	}
+	
 	// Update is called once per frame
 	void Update()
 	{
-		if(_playerScriptableObject.GetHeartsRemaining() < 2)
+		// if(_playerScriptableObject.GetHeartsRemaining() < 2)
+		// {
+		// 	if (lookingUp)
+		// 	{
+		// 		if (lookingUp && transform.rotation.eulerAngles.x > 7)
+		// 		{
+		// 			Debug.Log("Rotating Camera Up");
+		// 			transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - _speed * Time.deltaTime, 0, 0);
+						
+		// 		}
+		// 		else
+		// 		{
+		// 			lookingUp = false;
+		// 		}
+		// 	}
+		// 	else
+		// 	{
+		// 		if (!lookingUp && transform.rotation.eulerAngles.x < 13)
+		// 		{
+		// 			Debug.Log("Rotating Camera Down");
+		// 			transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + _speed * Time.deltaTime, 0, 0);
+						
+		// 		}
+		// 		else
+		// 		{
+		// 			lookingUp = true;
+		// 		}
+		// 	}
+			
+		// }
+		// else
+		// {
+		// 	transform.rotation = Quaternion.Euler(10,0,0);
+		// }
+		
+		float edgeSize = 30f;
+		if (Input.mousePosition.x > Screen.width - edgeSize)
 		{
-			if (lookingUp)
-			{
-				if (lookingUp && transform.rotation.eulerAngles.x > 7)
-				{
-					Debug.Log("Rotating Camera Up");
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - _speed * Time.deltaTime, 0, 0);
-						
-				}
-				else
-				{
-					lookingUp = false;
-				}
-			}
-			else
-			{
-				if (!lookingUp && transform.rotation.eulerAngles.x < 13)
-				{
-					Debug.Log("Rotating Camera Down");
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + _speed * Time.deltaTime, 0, 0);
-						
-				}
-				else
-				{
-					lookingUp = true;
-				}
-			}
+			float newX = Math.Min(transform.position.x + _cameraPanSpeed * Time.deltaTime, 2.53f);
+			transform.position = new Vector3(newX, transform.position.y, transform.position.z);
 			
 		}
-		else
+		if (Input.mousePosition.x < edgeSize)
 		{
-			transform.rotation = Quaternion.Euler(10,0,0);
+			float newX = Math.Max(transform.position.x - _cameraPanSpeed * Time.deltaTime, -1.72f);
+			transform.position = new Vector3(newX, transform.position.y, transform.position.z);
 		}
+		
+		
 	}
+	
+	// bool validCameraPosition(Vector3 position)
+	// {
+	// 	return position.x < 2.53 && position.x > -1.72;
+	// }
 	
 	
 
