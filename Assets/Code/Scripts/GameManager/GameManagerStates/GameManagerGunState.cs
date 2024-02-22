@@ -101,21 +101,18 @@ public class GameManagerGunState : GameManagerState
 			GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 			changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
 		}
+		// if no empty shells left in the gun, move to the end gun state
+		// if the gun has only bullets, the current target becomes the dealer
+		else if (_gunScriptableObject.HasOnlyBulletsLeft())
+		{
+			changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
+		}
 		else
 		{
 			// if there are no shots left to take
 			if(_shotsRemaining == 0)
 			{
-				// if the gun has only bullets, the current target becomes the dealer
-				if (_gunScriptableObject.HasOnlyBulletsLeft())
-				{
-					changeState(new GameManagerEndGunState(_owner, _targetPlayerScriptableObject));
-				}
-				// else move on to their post gun state
-				else
-				{
-					changeState(new GameManagerPostGunState(_owner, _targetPlayerScriptableObject));
-				}
+				changeState(new GameManagerPostGunState(_owner, _targetPlayerScriptableObject));
 			}
 			// if there are still shots left to take
 			else

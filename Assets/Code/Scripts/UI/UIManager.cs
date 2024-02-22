@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
 	public void StartCoinFlip()
 	{
 		Debug.Log("Creating Coin!");
-		GameObject newCoin = Instantiate(coinPrefab, new Vector3(1.5f, -1.8f, -1.7f), Quaternion.Euler(-10.96f,0,0));
+		GameObject newCoin = Instantiate(coinPrefab, new Vector3(1.3f, 0, -1.7f), Quaternion.Euler(90,0,0));
 		CoinController newCoinController = newCoin.GetComponent<CoinController>();
 		newCoinController.flipResult.AddListener( (CoinController.Side side) =>
 			{
@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
 	
 	public void SetCardBannerActive(bool active)
 	{
-		// cardBanner.SetActive(active);
+		cardBanner.SetActive(active);
 	}
 	
 	public void SetFlipCoinButtonActive(bool active)

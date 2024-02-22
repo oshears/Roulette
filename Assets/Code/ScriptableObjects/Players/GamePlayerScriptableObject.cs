@@ -24,6 +24,9 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public UnityEvent playerDiedEvent;
 	public UnityEvent playerShotEvent;
 	public UnityEvent playerInitEvent;
+	public UnityEvent playerAddCardEvent;
+	public UnityEvent playerPlayedCardEvent;
+	public UnityEvent playerRemoveCardEvent;
 	
 	public void OnInitializePlayer()
 	{
@@ -40,11 +43,13 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public void AddCard(CardSO card)
 	{
 		_cardsInHand.Add(card);
+		playerAddCardEvent.Invoke();
 	}
 	
 	public void RemoveCard(CardSO card)
 	{
 		_cardsInHand.Remove(card);
+		playerRemoveCardEvent.Invoke();
 	}
 	
 	public void RemoveHeart()

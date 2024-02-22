@@ -12,7 +12,7 @@ public class UIManagerDefaultState : UIManagerState
 
 		_uiScriptableObject.setCoinVisibleEvent.AddListener(SetCoinVisibleEventHandler);
 		_uiScriptableObject.flipCoinButtonClickEvent.AddListener(FlipCoinButtonEventHandler);
-		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
+		// _uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 
 		_uiScriptableObject.showDrawButtonEvent.AddListener(ShowDrawButtonEventHandler);
 		// _uiScriptableObject.drawButtonClick.AddListener(DrawButtonClickEventHandler);
@@ -74,7 +74,7 @@ public class UIManagerDefaultState : UIManagerState
 
 		_uiScriptableObject.setCoinVisibleEvent.RemoveListener(SetCoinVisibleEventHandler);
 		_uiScriptableObject.flipCoinButtonClickEvent.RemoveListener(FlipCoinButtonEventHandler);
-		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
+		// _uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
 
 		_uiScriptableObject.showDrawButtonEvent.RemoveListener(ShowDrawButtonEventHandler);
 		// _uiScriptableObject.drawButtonClick.RemoveListener(DrawButtonClickEventHandler);
@@ -153,18 +153,18 @@ public class UIManagerDefaultState : UIManagerState
 		_owner.StartCoinFlip();
 	}
 	
-	void FlipCoinDoneEventHandler(bool side)
-	{
-		if (side)
-		{
-			_uiScriptableObject.SetBannerText("Lowest number loses!");
-		}
-		else
-		{
-			_uiScriptableObject.SetBannerText("Highest number loses!");
-		}
-		_uiScriptableObject.OnShowBanner();
-	}
+	// void FlipCoinDoneEventHandler(bool side)
+	// {
+	// 	if (side)
+	// 	{
+	// 		_uiScriptableObject.SetBannerText("Lowest number loses!");
+	// 	}
+	// 	else
+	// 	{
+	// 		_uiScriptableObject.SetBannerText("Highest number loses!");
+	// 	}
+	// 	_uiScriptableObject.OnShowBanner();
+	// }
 
 	
 	void ShowBannerEventHandler()

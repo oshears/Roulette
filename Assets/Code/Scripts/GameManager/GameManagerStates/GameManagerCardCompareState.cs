@@ -12,6 +12,8 @@ public class GameManagerCardCompareState : GameManagerState
 	
 	int _numBullets = 1;
 	
+	bool _tooManyBullets = false;
+	
 	public GameManagerCardCompareState(GameManager owner, int playerCardChoice) : base(owner) { 
 		_uiScriptableObject.flipCoinDoneEvent.AddListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.AddListener(BannerButtonEventHandler);
@@ -22,12 +24,13 @@ public class GameManagerCardCompareState : GameManagerState
 		_targetPlayerScriptableObject = null;
 		_numBullets = 1;
 		
+		_tooManyBullets = false;
+		
 	}
 
 	public override void Enter()
 	{
 		// _uiScriptableObject.OnBeginCompareCardPhase();
-		_uiScriptableObject.OnSetCoinVisible(true);
 		
 		if (_playerCardChoice < 0)
 		{
@@ -56,6 +59,30 @@ public class GameManagerCardCompareState : GameManagerState
 		
 		_uiScriptableObject.OnPlayedCardsReady();
 		_uiScriptableObject.OnSetCardBannerVisible(true);
+		
+		foreach (CardSO playedCard in playedCards){
+			if (playedCard.GetActionType() == CardActionType.Bullet)
+			{
+				_numBullets++;
+			}
+		}
+		
+		if (_numBullets > 5)
+		{
+			// TODO: Need to implement this functionality to move on to the next round
+			Debug.LogError("ERROR! All cards played were bullet cards!!!");
+			_tooManyBullets = true;
+		}
+		
+		if (!_tooManyBullets)
+		{
+			_uiScriptableObject.OnSetCoinVisible(true);
+		}
+		else
+		{
+			_uiScriptableObject.SetBannerText("Too many bullet cards were played! Starting new round.");
+			_uiScriptableObject.OnShowBanner();
+		}
 	}
 	override public void Execute() 
 	{ 
@@ -70,8 +97,11 @@ public class GameManagerCardCompareState : GameManagerState
 	public override void Exit()
 	{
 		Debug.Log("Exiting GameManagerCardCompareState");
-		_gunScriptableObject.SetNumBullets(_numBullets);
-		_gunScriptableObject.OnShuffleGun();
+		if (_numBullets < 6)
+		{
+			_gunScriptableObject.SetNumBullets(_numBullets);
+			_gunScriptableObject.OnShuffleGun();
+		}
 		
 		_uiScriptableObject.flipCoinDoneEvent.RemoveListener(FlipCoinDoneEventHandler);
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonEventHandler);
@@ -80,40 +110,10 @@ public class GameManagerCardCompareState : GameManagerState
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
 	}
 	
-	void UiReadyEventHandler()
-	{
-		
-		if (_playerCardChoice < 0)
-		{
-			Debug.LogError("ERROR: Player's card choice was not registered successfully!");
-		}
-		
-		// Reset CardBanner
-		_uiScriptableObject.ResetCardBanner();
-		
-		
-		// remove card from player's hand
-		Debug.Log($"Player selected card index: {_playerCardChoice}");
-		CardSO playerCard = _playerScriptableObject.PlayCard(_playerCardChoice);
-		playedCards.Add(playerCard);
-		_uiScriptableObject.AddCardBannerCard(playerCard);
-		_deckScriptableObject.OnDiscardCard(playerCard);
-		
-		// Get a card from each NPC, add it to the card banner, then discard it into the bottom of the deck
-		foreach (NpcScriptableObject npc in _npcScriptableObjects)
-		{
-			CardSO npcCard = npc.PlayCard();
-			playedCards.Add(npcCard);
-			_uiScriptableObject.AddCardBannerCard(npcCard);
-			_deckScriptableObject.OnDiscardCard(npcCard);
-		}
-		
-		_uiScriptableObject.OnPlayedCardsReady();
-	}
-
-
 	void FlipCoinDoneEventHandler(bool side)
 	{
+		_uiScriptableObject.SetBannerText(side ? "Lowest number loses!" : "Highest number loses!");
+		_uiScriptableObject.OnShowBanner();
 		
 		Debug.Log("Done Flipping Coin! Determining Loser");
 		_uiScriptableObject.OnSetCoinVisible(false);
@@ -138,16 +138,6 @@ public class GameManagerCardCompareState : GameManagerState
 				highestCardIndex = i;
 			}
 			
-			if (currentCard.GetActionType() == CardActionType.Bullet)
-			{
-				_numBullets++;
-			}
-		}
-		
-		if (_numBullets == 5)
-		{
-			// TODO: Need to implement this functionality to move on to the next round
-			Debug.LogError("ERROR! All cards played were bullet cards!!!");
 		}
 		
 		// 5. Determine whether highest or lowest card loses
@@ -166,17 +156,17 @@ public class GameManagerCardCompareState : GameManagerState
 		
 	}
 	
-	
-	
 	void BannerButtonEventHandler()
 	{
-		Debug.Log("Sending Roulette Start Phase!");
-		changeState(new GameManagerPreGunState(_owner, _targetPlayerScriptableObject, 0));
-	}
-	
-	void SetPlayerCardChoice(int cardIndex)
-	{
-		_playerCardChoice = cardIndex;
+		if (_tooManyBullets)
+		{
+			changeState(new GameManagerDrawCardsState(_owner));
+		}
+		else
+		{
+			Debug.Log("Sending Roulette Start Phase!");
+			changeState(new GameManagerPreGunState(_owner, _targetPlayerScriptableObject, 0));
+		}
 	}
 	
 	public override void OnGUI()
