@@ -37,14 +37,39 @@ public class GunController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, revolverRotations[0], 0));
+		// transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, revolverRotations[0], 0));
 		
 		
 
 		// uiScriptableObject?.rotateGunEvent.AddListener(rotateGunRight);
 		// uiScriptableObject?.shootGunEvent.AddListener(shootGun);
 		
+		// Gun Positions
+		// -1.604 0.557 -3.31
+		// 0 320.18 0
 		
+		
+		// -0.977 0.557 -3.31
+		// 702.059
+		
+		// 0.45 0.557 -3.31
+		// 0
+		
+		// 1.697
+		// 31.601
+		
+		// xPos = 2.904
+		// yRot = 42.286
+		
+		// player
+		// 0.45 0.557 -3.31
+		// 180
+		
+		// idle
+		// pos: 1.43 -0.256 -3.31
+		// rot: -17 0 90
+		
+		// TODO: Add animation to gun between these locations
 	}
 
 	// Update is called once per frame
@@ -73,12 +98,12 @@ public class GunController : MonoBehaviour
 			state = GunState.NPC_1;
 		}
 		
-		transform.rotation = Quaternion.Euler(0, revolverRotations[(int) state], 0);
+		// transform.rotation = Quaternion.Euler(0, revolverRotations[(int) state], 0);
 	}
 	
 	void UpdateGunRotationEventHandler(Vector3 gunRotation)
 	{
-		transform.rotation = Quaternion.Euler(gunRotation);
+		// transform.rotation = Quaternion.Euler(gunRotation);
 	}
 	
 	
