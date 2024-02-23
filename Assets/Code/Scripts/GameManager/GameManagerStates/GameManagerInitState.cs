@@ -87,7 +87,7 @@ public class GameManagerInitState : GameManagerState
 	{
 		if (!_gameStarting)
 		{
-			GUILayout.BeginArea(new Rect(10, 10, 500, 500));
+			GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, (Screen.height / 2)  - 50, 100, 20));
 			if (GUILayout.Button("Start Game"))
 			{
 				
