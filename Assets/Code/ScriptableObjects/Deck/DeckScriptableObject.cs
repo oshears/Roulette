@@ -74,6 +74,14 @@ public class DeckScriptableObject : ScriptableObject
 		discardCardEvent.Invoke();
 	}
 	
+	public void OnDiscardCards(List<CardSO> discardedCards)
+	{
+		foreach (CardSO card in discardedCards)
+		{
+			OnDiscardCard(card);
+		}
+	}
+	
 	public int GetNumCardsInDeck()
 	{
 		return _cardQueue.Count;

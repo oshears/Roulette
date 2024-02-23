@@ -66,9 +66,12 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent<bool> damageColorizerVisibleEvent;
 	
 	public UnityEvent initializeGuiEvent;
+	public UnityEvent<string> updateObjectiveEvent;
 	
 	
 	public String bannerText {get; private set;}
+	
+	public String objectiveText{get; private set;}
 	
 	public List<CardSO> cardBannerCards;
 	
@@ -292,5 +295,11 @@ public class UIScriptableObject : ScriptableObject
 	public void OnInitializeGui()
 	{
 		initializeGuiEvent.Invoke();
+	}
+	
+	public void OnUpdateObjectiveText(String text)
+	{
+		objectiveText = text;
+		updateObjectiveEvent.Invoke(text);
 	}
 }

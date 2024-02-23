@@ -52,7 +52,19 @@ public class GamePlayerScriptableObject : ScriptableObject
 		playerRemoveCardEvent.Invoke();
 	}
 	
-	public void RemoveHeart()
+	public List<CardSO> RemoveAllCards()
+	{
+		List<CardSO> removedCards = new List<CardSO>();
+		foreach(CardSO card in _cardsInHand)
+		{
+			removedCards.Add(card);
+		}
+		_cardsInHand.Clear();
+		playerRemoveCardEvent.Invoke();
+		return removedCards;
+	}
+	
+	public virtual void RemoveHeart()
 	{
 		_heartRemaining--;
 		playerShotEvent.Invoke();
@@ -186,6 +198,27 @@ public class GamePlayerScriptableObject : ScriptableObject
 	
 	public bool CardIsValidPostGunPhaseCard(CardActionType cardAction)
 	{
-		return cardAction != CardActionType.EmptyShell;
+		// return cardAction != CardActionType.EmptyShell;
+		return cardAction == CardActionType.DrawTwo || cardAction == CardActionType.Bullet || cardAction == CardActionType.TargetNextPlayer;
+	}
+	
+	public bool HasValidPreGunPhaseCard()
+	{
+		foreach (CardSO card in _cardsInHand)
+		{
+			if (card.GetActionType() == CardActionType.Joker || card.GetActionType() == CardActionType.EmptyShell) return true;
+		}
+		
+		return false;
+	}
+	
+	public bool HasValidPostGunPhaseCard()
+	{
+		foreach (CardSO card in _cardsInHand)
+		{
+			if (card.GetActionType() == CardActionType.DrawTwo || card.GetActionType() == CardActionType.Bullet || card.GetActionType() == CardActionType.TargetNextPlayer) return true;
+		}
+		
+		return false;
 	}
 }

@@ -29,6 +29,15 @@ public class GameManagerPreGunState : GameManagerState
 
 	public override void Enter()
 	{
+		if (_targetPlayerScriptableObject.IsNpc())
+		{
+			_uiScriptableObject.OnUpdateObjectiveText("Survive the roulette!");
+		}
+		else
+		{
+			_uiScriptableObject.OnUpdateObjectiveText("Select a pre-roulette card to play!");
+		}
+		
 		// _uiScriptableObject.OnBeginPreGunPhase();
 		if (!_targetPlayerScriptableObject.IsPlayerAlive())
 		{
@@ -39,10 +48,13 @@ public class GameManagerPreGunState : GameManagerState
 			return;
 		}
 		
+		
 		_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} is now the target!");
 		_uiScriptableObject.OnShowBanner();
 		
-		_gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.gunRotation);
+		// _gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.gunRotation);
+		_gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.playerId);
+		
 		
 	}
 
@@ -115,9 +127,18 @@ public class GameManagerPreGunState : GameManagerState
 			// Debug.LogError("Skipping player's turn for now");
 			// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 			// changeState(new GameManagerPreGunState(_owner, nextTarget, _additionalTriggerPulls));
-			_uiScriptableObject.OnSetPlayerHandVisible(true);
-			_uiScriptableObject.OnEnableCardSelection();
-			_uiScriptableObject.OnSetPassButtonVisible(true);
+			
+			// skip this phase if the player doesn't have a valid pregunphase card
+			if(!_targetPlayerScriptableObject.IsNpc() && !_targetPlayerScriptableObject.HasValidPreGunPhaseCard())
+			{
+				changeState(new GameManagerGunState(_owner, _targetPlayerScriptableObject, _additionalTriggerPulls));
+			}
+			else
+			{
+				_uiScriptableObject.OnSetPlayerHandVisible(true);
+				_uiScriptableObject.OnEnableCardSelection();
+				_uiScriptableObject.OnSetPassButtonVisible(true);
+			}
 		}
 		
 	}

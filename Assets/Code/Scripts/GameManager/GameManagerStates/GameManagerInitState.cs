@@ -15,6 +15,8 @@ public class GameManagerInitState : GameManagerState
 
 	public override void Enter()
 	{
+		_uiScriptableObject.OnUpdateObjectiveText("Click start when you are ready to play!");
+		
 		Debug.Log("Preparing to initialize New Game!");
 		
 		InitializeGame();
@@ -33,6 +35,11 @@ public class GameManagerInitState : GameManagerState
 	{
 		_uiScriptableObject.startGameEvent.RemoveListener(StartGameEventHandler);
 		_uiScriptableObject.bannerButtonClick.RemoveListener(BannerButtonClickEventHandler);
+		
+		foreach (NpcScriptableObject npc in _npcScriptableObjects)
+		{
+			npc.OnUpdateNpcSpeech("Let the game, begin.");
+		}
 	}
 
 	void StartGameEventHandler()

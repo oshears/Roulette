@@ -31,6 +31,7 @@ public class GunController : MonoBehaviour
 	{
 		gunScriptableObject.fireGunEvent.AddListener(FireGunEventHandler);
 		gunScriptableObject.updateGunRotationEvent.AddListener(UpdateGunRotationEventHandler);
+		gunScriptableObject.setGunActiveEvent.AddListener(SetGunActiveEventHandler);
 		
 	}
 
@@ -101,9 +102,10 @@ public class GunController : MonoBehaviour
 		// transform.rotation = Quaternion.Euler(0, revolverRotations[(int) state], 0);
 	}
 	
-	void UpdateGunRotationEventHandler(Vector3 gunRotation)
+	void UpdateGunRotationEventHandler(int targetId)
 	{
 		// transform.rotation = Quaternion.Euler(gunRotation);
+		revolverModel.GetComponent<Animator>().SetInteger("playerTurn", targetId);
 	}
 	
 	
@@ -115,6 +117,20 @@ public class GunController : MonoBehaviour
 	
 	void shootGun()
 	{
-		revolverModel.GetComponent<Animator>()?.SetBool("makeShot", true);
+		// revolverModel.GetComponent<Animator>()?.SetBool("makeShot", true);
+	}
+	
+	void SetGunActiveEventHandler(bool active)
+	{
+		if (active)
+		{
+			revolverModel.GetComponent<Animator>()?.SetInteger("playerTurn", 0);
+			revolverModel.GetComponent<Animator>()?.SetBool("gunActive", true);
+		}
+		else
+		{
+			revolverModel.GetComponent<Animator>()?.SetInteger("playerTurn", 0);
+			revolverModel.GetComponent<Animator>()?.SetBool("gunActive", false);
+		}
 	}
 }

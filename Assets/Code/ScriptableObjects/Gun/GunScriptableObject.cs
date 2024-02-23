@@ -13,19 +13,23 @@ public class GunScriptableObject : ScriptableObject
 	public UnityEvent addBulletEvent;
 	public UnityEvent shuffleGunEvent;
 	public UnityEvent initGunEvent;
-	public UnityEvent<Vector3> updateGunRotationEvent;
+	public UnityEvent<int> updateGunRotationEvent;
 	
 	public UnityEvent<int> numBulletsUpdatedEvent;
+	public UnityEvent<bool> setGunActiveEvent;
 	
-	public Vector3 gunRotation {get; private set;}
+	// public Vector3 gunRotation {get; private set;}
 	
 	Queue<bool> _bulletQueue = new Queue<bool>();
+	
+	int _currentTarget;
 	
 	public void OnInitializeGun()
 	{
 		_bulletQueue.Clear();
 		numBullets = 0;
 		initGunEvent.Invoke();
+		OnSetGunActive(false);
 	}
 	
 	public void SetNumBullets(int numBullets)
@@ -81,10 +85,11 @@ public class GunScriptableObject : ScriptableObject
 		_bulletQueue = new Queue<bool>(tmpBulletArray);  
 	}
 	
-	public void OnUpdateGunRotation(Vector3 gunRotation)
+	public void OnUpdateGunRotation(int targetId)
 	{
-		this.gunRotation = gunRotation;
-		updateGunRotationEvent.Invoke(gunRotation);
+		// this.gunRotation = gunRotation;
+		_currentTarget = targetId;
+		updateGunRotationEvent.Invoke(targetId);
 	}
 	
 	public bool HasOnlyBulletsLeft()
@@ -95,6 +100,11 @@ public class GunScriptableObject : ScriptableObject
 	public int GetNumEmptyShells()
 	{
 		return _bulletQueue.Where(x => x == false).Count();
+	}
+	
+	public void OnSetGunActive(bool active)
+	{
+		setGunActiveEvent.Invoke(active);
 	}
 	
 }

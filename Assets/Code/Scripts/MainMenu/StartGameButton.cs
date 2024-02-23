@@ -23,7 +23,7 @@ public class StartGameButton : Selectable
 
     public override void OnSelect(BaseEventData eventData)
     {
-        SceneManager.LoadScene("demo_scene", LoadSceneMode.Single);
+        SceneManager.LoadScene("game_scene", LoadSceneMode.Single);
     }
 
 }

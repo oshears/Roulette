@@ -27,6 +27,9 @@ public class UICardBannerController : MonoBehaviour
 	[SerializeField]
 	UIScriptableObject uiScriptableObject;
 	
+	[SerializeField]
+	Sprite _cardBackSprite;
+	
 	void Awake()
 	{
 		
@@ -43,7 +46,14 @@ public class UICardBannerController : MonoBehaviour
 		
 		for(int i = 0; i < npcCards.Length; i++)
 		{
-			npcCards[i].GetComponent<Image>().sprite = uiScriptableObject.cardBannerCards[i + 1].GetFrontOfCard();
+			if (uiScriptableObject.cardBannerCards[i + 1] != null)
+			{
+				npcCards[i].GetComponent<Image>().sprite = uiScriptableObject.cardBannerCards[i + 1].GetFrontOfCard();
+			}
+			else
+			{
+				npcCards[i].GetComponent<Image>().sprite = _cardBackSprite;
+			}
 		}
 	}
 	

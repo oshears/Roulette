@@ -14,6 +14,8 @@ public class GameManagerDrawCardsState : GameManagerState
 
 	public override void Enter()
 	{
+		_owner.RandomNpcSpeech("Time to draw new cards.");
+		_uiScriptableObject.OnUpdateObjectiveText("Draw two cards from the deck!");
 		_uiScriptableObject.OnShowDrawButton();
 		_uiScriptableObject.OnSetPlayerHandVisible(true);
 		
@@ -26,7 +28,7 @@ public class GameManagerDrawCardsState : GameManagerState
 			// Draw Two Cards for each NPC
 			for (int i = 0; i < 2; i++)
 			{
-				if (!npc.HasFullHand())
+				if (!npc.HasFullHand() && npc.IsPlayerAlive())
 				{
 					npc.AddCard(_deckScriptableObject.OnDrawNpcCard());
 				}
@@ -57,24 +59,6 @@ public class GameManagerDrawCardsState : GameManagerState
 		// _uiScriptableObject.uiReadyEvent.RemoveListener(UiReadyEventHandler);
 	}
 	
-	void UiReadyEventHandler()
-	{
-		_numCardsDrawn = 0;
-		
-		// Draw Cards for NPCs
-		foreach (NpcScriptableObject npc in _npcScriptableObjects)
-		{
-			// Draw Two Cards for each NPC
-			for (int i = 0; i < 2; i++)
-			{
-				if (!npc.HasFullHand())
-				{
-					npc.AddCard(_deckScriptableObject.OnDrawNpcCard());
-				}
-			}
-		}
-	}
-
 	void PlayCardEventHandler(int cardIndex)
 	{
 		
@@ -102,13 +86,17 @@ public class GameManagerDrawCardsState : GameManagerState
 	{
 		if (_numCardsDrawn == 2)
 		{
+			_uiScriptableObject.OnUpdateObjectiveText("Now select a card to play from your hand!");
 			_uiScriptableObject.OnEnableCardSelection();
+			_uiScriptableObject.OnDrawButtonVisible(false);
 		}
 	}
 	
 	public void PlayerHandFullEventHandler()
 	{
+		_uiScriptableObject.OnUpdateObjectiveText("Now select a card to play from your hand!");
 		_uiScriptableObject.OnEnableCardSelection();
+		_uiScriptableObject.OnDrawButtonVisible(false);
 	}
 	
 }

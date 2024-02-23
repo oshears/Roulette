@@ -26,6 +26,8 @@ public class GameManagerPostGunState : GameManagerState
 		
 		if (_targetPlayerScriptableObject.IsNpc())
 		{
+			_uiScriptableObject.OnUpdateObjectiveText("Survive the roulette!");
+			
 			CardSO playedCard = ((NpcScriptableObject) _targetPlayerScriptableObject).PlayPostGunPhaseCard();
 			if (playedCard != null)
 			{
@@ -42,14 +44,21 @@ public class GameManagerPostGunState : GameManagerState
 		}
 		else
 		{
-			// TODO: Implement player post gun state logic
-			// Debug.LogError("Not yet implemented!!!");
+			if (_targetPlayerScriptableObject.HasValidPostGunPhaseCard())
+			{
+				_uiScriptableObject.OnUpdateObjectiveText("Choose a post-roulette card to play!");
 			
-			// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
-			// changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
-			_uiScriptableObject.OnSetPlayerHandVisible(true);
-			_uiScriptableObject.OnEnableCardSelection();
-			_uiScriptableObject.OnSetPassButtonVisible(true);
+				// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
+				// changeState(new GameManagerPreGunState(_owner, nextTarget, 0));
+				_uiScriptableObject.OnSetPlayerHandVisible(true);
+				_uiScriptableObject.OnEnableCardSelection();
+				_uiScriptableObject.OnSetPassButtonVisible(true);
+			}
+			else
+			{
+				PassButtonClickEventHandler();
+			}
+			
 		}
 	}
 

@@ -51,19 +51,31 @@ public class GameManagerCardCompareState : GameManagerState
 		// Get a card from each NPC, add it to the card banner, then discard it into the bottom of the deck
 		foreach (NpcScriptableObject npc in _npcScriptableObjects)
 		{
-			CardSO npcCard = npc.PlayCard();
-			playedCards.Add(npcCard);
-			_uiScriptableObject.AddCardBannerCard(npcCard);
-			_deckScriptableObject.OnDiscardCard(npcCard);
+			if (npc.IsPlayerAlive())
+			{
+				CardSO npcCard = npc.PlayCard();
+				playedCards.Add(npcCard);
+				_uiScriptableObject.AddCardBannerCard(npcCard);
+				_deckScriptableObject.OnDiscardCard(npcCard);
+			}
+			else
+			{
+				playedCards.Add(null);
+				_uiScriptableObject.AddCardBannerCard(null);
+			}
+			
 		}
 		
 		_uiScriptableObject.OnPlayedCardsReady();
 		_uiScriptableObject.OnSetCardBannerVisible(true);
 		
 		foreach (CardSO playedCard in playedCards){
-			if (playedCard.GetActionType() == CardActionType.Bullet)
+			if (playedCard != null)
 			{
-				_numBullets++;
+				if (playedCard.GetActionType() == CardActionType.Bullet)
+				{
+					_numBullets++;
+				}
 			}
 		}
 		
@@ -72,14 +84,18 @@ public class GameManagerCardCompareState : GameManagerState
 			// TODO: Need to implement this functionality to move on to the next round
 			Debug.LogError("ERROR! All cards played were bullet cards!!!");
 			_tooManyBullets = true;
+			
 		}
 		
 		if (!_tooManyBullets)
 		{
+			_owner.RandomNpcSpeech("Time to flip the coin human.");
+			_uiScriptableObject.OnUpdateObjectiveText("Flip the coin to decide the loser!");
 			_uiScriptableObject.OnSetCoinVisible(true);
 		}
 		else
 		{
+			_owner.RandomNpcSpeech("All bullets? This round is a wash.");
 			_uiScriptableObject.SetBannerText("Too many bullet cards were played! Starting new round.");
 			_uiScriptableObject.OnShowBanner();
 		}
@@ -129,13 +145,16 @@ public class GameManagerCardCompareState : GameManagerState
 		for(int i = 0; i < playedCards.Count; i++)
 		{
 			CardSO currentCard = playedCards[i];
-			if (currentCard.GetValue() < playedCards[lowestCardIndex].GetValue())
+			if (currentCard != null)
 			{
-				lowestCardIndex = i;
-			}
-			if (currentCard.GetValue() > playedCards[highestCardIndex].GetValue())
-			{
-				highestCardIndex = i;
+				if (currentCard.GetValue() < playedCards[lowestCardIndex].GetValue())
+				{
+					lowestCardIndex = i;
+				}
+				if (currentCard.GetValue() > playedCards[highestCardIndex].GetValue())
+				{
+					highestCardIndex = i;
+				}
 			}
 			
 		}
@@ -153,6 +172,14 @@ public class GameManagerCardCompareState : GameManagerState
 		}
 		
 		// 6. Proceed to the gun phase!!!
+		if (_targetPlayerScriptableObject.IsNpc())
+		{
+			((NpcScriptableObject) _targetPlayerScriptableObject).OnUpdateNpcSpeech("Damn it. Of course I'd have to go first.");
+		}
+		else
+		{
+			_owner.RandomNpcSpeech("Sorry human. You'll have to go first.");
+		}
 		
 	}
 	
@@ -166,6 +193,9 @@ public class GameManagerCardCompareState : GameManagerState
 		{
 			Debug.Log("Sending Roulette Start Phase!");
 			changeState(new GameManagerPreGunState(_owner, _targetPlayerScriptableObject, 0));
+			
+			_gunScriptableObject.OnSetGunActive(true);
+			_gunScriptableObject.OnUpdateGunRotation(_targetPlayerScriptableObject.playerId);
 		}
 	}
 	

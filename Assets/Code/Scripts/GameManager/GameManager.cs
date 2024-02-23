@@ -79,4 +79,9 @@ public class GameManager : MonoBehaviour
 		
 		return nextPlayer;
 	}
+	
+	public void RandomNpcSpeech(string text)
+	{
+		npcScriptableObjects[Random.Range(0, npcScriptableObjects.Length)].OnUpdateNpcSpeech(text);
+	}
 }

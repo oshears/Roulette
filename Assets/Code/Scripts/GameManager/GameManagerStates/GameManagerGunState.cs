@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -28,12 +29,14 @@ public class GameManagerGunState : GameManagerState
 		if (_targetPlayerScriptableObject.IsNpc())
 		{
 			// timer = 0;
+			_uiScriptableObject.OnUpdateObjectiveText("Survive the roulette!");
 			ExecuteGunShotLogic();
 		}
 		else
 		{
 			// TODO: Implement player pulling the trigger phase!
 			// Debug.LogError("Hey! You shouldn't be here yet!!");
+			_uiScriptableObject.OnUpdateObjectiveText("Pull the trigger!");
 			_uiScriptableObject.OnSetShootButtonVisible(true);
 		}
 		
@@ -143,6 +146,20 @@ public class GameManagerGunState : GameManagerState
 		{
 			_targetPlayerScriptableObject.RemoveHeart();
 			
+			// if npc was shot
+			if (_targetPlayerScriptableObject.IsNpc())
+			{
+				((NpcScriptableObject) _targetPlayerScriptableObject).OnUpdateNpcSpeech(Random.Range(0,1) == 0 ? "Ouch, lost a couple of bolts there." : "Ach! No worries, I'll fix this up in no time.");
+			}
+			// else if player was shot
+			else
+			{
+				foreach (NpcScriptableObject npc in _npcScriptableObjects)
+				{
+					npc.OnUpdateNpcSpeech(Random.Range(0,2) == 0 ? "Oooo, that looked like it hurt human." : "Hahahaha! Poor human.");
+				}
+			}
+			
 			if (_playerScriptableObject.GetHeartsRemaining() < 2)
 			{
 				_uiScriptableObject.OnSetDamageColorizerVisible(true);
@@ -153,9 +170,21 @@ public class GameManagerGunState : GameManagerState
 			{
 				_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} was shot and killed!");
 				_uiScriptableObject.OnShowBanner();
-			
+
+				// remove all of this player's cards
+				List<CardSO> removedCards = _targetPlayerScriptableObject.RemoveAllCards();
+				_deckScriptableObject.OnDiscardCards(removedCards);
+
 				// move on to next player
 				_targetPlayerScriptableObject.OnPlayerDied();
+				
+				// update npc speech
+				if (_targetPlayerScriptableObject.IsNpc())
+				{
+					((NpcScriptableObject) _targetPlayerScriptableObject).OnUpdateNpcSpeech(Random.Range(0,2) == 0 ? "Ah, better luck next time I suppose." : "Aw man, tough luck for me.");
+				}
+				
+				
 				// GamePlayerScriptableObject nextTarget = _owner.GetNextPlayer(_targetPlayerScriptableObject);
 				// if (_gunScriptableObject.HasOnlyBulletsLeft())
 				// {
@@ -179,6 +208,19 @@ public class GameManagerGunState : GameManagerState
 		{
 			_uiScriptableObject.SetBannerText($"{_targetPlayerScriptableObject.GetPlayerName()} dodged a bullet!");
 			_uiScriptableObject.OnShowBanner();
+			
+			if (_targetPlayerScriptableObject.IsNpc())
+			{
+				((NpcScriptableObject) _targetPlayerScriptableObject).OnUpdateNpcSpeech(Random.Range(0,1) == 0 ? "My predictions were exactly correct: No Bullet." : "Of course there was no bullet.");
+			}
+			// else if player was shot
+			else
+			{
+				foreach (NpcScriptableObject npc in _npcScriptableObjects)
+				{
+					npc.OnUpdateNpcSpeech(Random.Range(0,2) == 0 ? "Wow, lucky human." : "Ah, the human caught a break.");
+				}
+			}
 		}
 		
 		
