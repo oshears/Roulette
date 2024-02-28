@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -25,11 +26,24 @@ public class UIHandCardSpriteController : MonoBehaviour, IPointerEnterHandler, I
 	[SerializeField]
 	PlayerScriptableObject playerScriptableObject;
 	
+	
+	[SerializeField]
+	GameObject _cardNameGameObject;
+	
+	[SerializeField]
+	GameObject _cardDescriptionGameObject;
+	
+	[SerializeField]
+	GameObject _cardInfo;
+	
+	CardSO _cardSO;
+	
 	// Start is called before the first frame update
 	void Awake()
 	{
 		uiScriptableObject.enableHandCardSelection.AddListener(EnableHandCardSelectionEventHandler);
 		uiScriptableObject.playCardEvent.AddListener(PlayCardEventHandler);
+		_cardInfo.SetActive(false);
 	}
 	
 	void Start()
@@ -54,11 +68,13 @@ public class UIHandCardSpriteController : MonoBehaviour, IPointerEnterHandler, I
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		isOver = true;
+		_cardInfo.SetActive(true);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		isOver = false;
+		_cardInfo.SetActive(false);
 	}
 
 	public void OnPointerClick(PointerEventData eventData){
@@ -80,7 +96,10 @@ public class UIHandCardSpriteController : MonoBehaviour, IPointerEnterHandler, I
 	public void SetCardIndex(int index)
 	{
 		_cardIndex = index;
-		GetComponent<Image>().sprite = playerScriptableObject.GetCard(index).GetFrontOfCard();
+		_cardSO = playerScriptableObject.GetCard(index);
+		GetComponent<Image>().sprite = _cardSO.GetFrontOfCard();
+		_cardNameGameObject.GetComponent<TextMeshProUGUI>().text = _cardSO.GetCardName();
+		_cardDescriptionGameObject.GetComponent<TextMeshProUGUI>().text = _cardSO.GetCardDescription();
 	}
 
 

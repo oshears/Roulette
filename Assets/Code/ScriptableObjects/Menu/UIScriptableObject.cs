@@ -297,7 +297,7 @@ public class UIScriptableObject : ScriptableObject
 		initializeGuiEvent.Invoke();
 	}
 	
-	public void OnUpdateObjectiveText(String text)
+	public void OnUpdateObjectiveText(string text)
 	{
 		objectiveText = text;
 		updateObjectiveEvent.Invoke(text);

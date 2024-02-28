@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.1900024}
+  m_AnchoredPosition: {x: 0, y: 2.1900635}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7284253868968964203
@@ -65,6 +65,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI_HandCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7471354212917342459, guid: c490aa1ede41dc0429d6d9c2c5a3a4f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054849025964866800, guid: c490aa1ede41dc0429d6d9c2c5a3a4f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8075245933339842868, guid: c490aa1ede41dc0429d6d9c2c5a3a4f7,
         type: 3}

@@ -88,7 +88,7 @@ public class UICardHandController : MonoBehaviour
 			card.transform.SetParent(transform,false);
 			
 			card.transform.position += Vector3.right * (currentCardPositionX - startingOffset) ;
-			card.transform.rotation = Quaternion.Euler(0f,0f,firstCardRotation + currentCardRotation);
+			// card.transform.rotation = Quaternion.Euler(0f,0f,firstCardRotation + currentCardRotation);
 			
 			_cardsInHand.Add(card);
 			
