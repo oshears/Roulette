@@ -28,7 +28,7 @@ public class GamePlayerScriptableObject : ScriptableObject
 	public UnityEvent playerPlayedCardEvent;
 	public UnityEvent playerRemoveCardEvent;
 	
-	public void OnInitializePlayer()
+	public virtual void OnInitializePlayer()
 	{
 		_heartRemaining = 2;
 		InitializePlayerHand();
@@ -176,7 +176,7 @@ public class GamePlayerScriptableObject : ScriptableObject
 		}
 	}
 	
-	public void OnPlayerDied()
+	public virtual void OnPlayerDied()
 	{
 		playerDiedEvent.Invoke();
 	}
