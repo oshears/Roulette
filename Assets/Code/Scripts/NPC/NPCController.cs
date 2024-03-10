@@ -5,8 +5,8 @@ using UnityEngine;
 public class NPCController : MonoBehaviour
 {
 
-	Animation anim = null;
-	Animator animator = null;
+	// Animation anim = null;
+	// Animator animator = null;
 	
 	[SerializeField]
 	List<GameObject> npcHeartContainer;
@@ -14,25 +14,27 @@ public class NPCController : MonoBehaviour
 	[SerializeField]
 	NpcScriptableObject npcScriptableObject;
 	
-	int _npcHeartsRemaining = 2;
+	[SerializeField] SpriteRenderer npcSpriteRenderer;
+	
+	// int _npcHeartsRemaining = 2;
 
 	// bool playingDeathAnimation = false;
 	
 	void Awake()
 	{
-		anim = GetComponent<Animation>();
-		animator = GetComponent<Animator>();
+		// anim = GetComponent<Animation>();
+		// animator = GetComponent<Animator>();
 		
 		npcScriptableObject.playerDiedEvent.AddListener(NpcDiedEventHandler);
 		npcScriptableObject.playerShotEvent.AddListener(NpcShotEventHandler);
 		npcScriptableObject.playerInitEvent.AddListener(PlayerInitEventHandler);
 		
-		_npcHeartsRemaining = 2;
+		// _npcHeartsRemaining = 2;
 		
-		foreach (GameObject npcHeart in npcHeartContainer)
-		{
-			npcHeart.SetActive(true);
-		}
+		// foreach (GameObject npcHeart in npcHeartContainer)
+		// {
+		// 	npcHeart.SetActive(true);
+		// }
 		
 		GetComponent<SpriteRenderer>().enabled = true;
 	}
@@ -56,9 +58,9 @@ public class NPCController : MonoBehaviour
 	
 	void PlayerInitEventHandler()
 	{
-		animator.SetBool("npcIsDead", false);
+		// animator.SetBool("npcIsDead", false);
 		
-		_npcHeartsRemaining = 2;
+		// _npcHeartsRemaining = 2;
 		
 		foreach (GameObject npcHeart in npcHeartContainer)
 		{
@@ -66,17 +68,20 @@ public class NPCController : MonoBehaviour
 		}
 		
 		GetComponent<SpriteRenderer>().enabled = true;
+		
+		npcSpriteRenderer.sprite = npcScriptableObject.npcAliveSprite;
 	}
 	
 	void NpcShotEventHandler()
 	{
-		npcHeartContainer[2 - _npcHeartsRemaining].SetActive(false);
-		_npcHeartsRemaining--;
+		// npcHeartContainer[2 - _npcHeartsRemaining].SetActive(false);
+		// _npcHeartsRemaining--;
 	}
 	
 	void NpcDiedEventHandler()
 	{
-		animator.SetBool("npcIsDead", true);
-		GetComponent<SpriteRenderer>().enabled = false;
+		// animator.SetBool("npcIsDead", true);
+		// GetComponent<SpriteRenderer>().enabled = false;
+		npcSpriteRenderer.sprite = npcScriptableObject.npcDeadSprite;
 	}
 }

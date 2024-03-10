@@ -154,6 +154,7 @@ public class GameManagerGunState : GameManagerState
 			// else if player was shot
 			else
 			{
+				_uiScriptableObject.OnIncrementPlayerScore(1000);
 				foreach (NpcScriptableObject npc in _npcScriptableObjects)
 				{
 					npc.OnUpdateNpcSpeech(Random.Range(0,2) == 0 ? "Oooo, that looked like it hurt human." : "Hahahaha! Poor human.");
@@ -216,6 +217,8 @@ public class GameManagerGunState : GameManagerState
 			// else if player was shot
 			else
 			{
+				// Increment Human Score
+				_uiScriptableObject.OnIncrementPlayerScore(1000);
 				foreach (NpcScriptableObject npc in _npcScriptableObjects)
 				{
 					npc.OnUpdateNpcSpeech(Random.Range(0,2) == 0 ? "Wow, lucky human." : "Ah, the human caught a break.");

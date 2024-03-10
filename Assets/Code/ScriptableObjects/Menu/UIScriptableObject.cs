@@ -16,6 +16,7 @@ public class UIScriptableObject : ScriptableObject
 	public UnityEvent increaseBulletCountEvent;
 	public UnityEvent shootGunEvent;
 	public UnityEvent resetScoresEvent;
+	public UnityEvent updateScoresEvent;
 	public UnityEvent startGameEvent;
 	public UnityEvent drawCardsEvent;
 	public UnityEvent<int> playCardEvent;
@@ -78,6 +79,8 @@ public class UIScriptableObject : ScriptableObject
 	public CardSO playerCardBannerCard;
 	
 	public bool playerWon {get; private set;} = false;
+	public int highScore {get; private set;} = 0;
+	public int playerScore {get; private set;} = 0;
 	
 	public enum UIStateEnum 
 	{
@@ -110,7 +113,11 @@ public class UIScriptableObject : ScriptableObject
 
 	public void OnShootGun() => shootGunEvent?.Invoke();
 	
-	public void OnResetScores() => resetScoresEvent.Invoke();
+	public void OnResetScores()
+	{
+		playerScore = 0;
+		resetScoresEvent.Invoke();
+	}
 
 	public void OnStartGame() => startGameEvent.Invoke();
 	
@@ -295,11 +302,27 @@ public class UIScriptableObject : ScriptableObject
 	public void OnInitializeGui()
 	{
 		initializeGuiEvent.Invoke();
+		playerScore = 0;
 	}
 	
 	public void OnUpdateObjectiveText(string text)
 	{
 		objectiveText = text;
 		updateObjectiveEvent.Invoke(text);
+	}
+	
+	public void OnUpdatePlayerScore(int score)
+	{
+		playerScore = score;
+		if (playerScore > highScore)
+		{
+			highScore = playerScore;
+		}
+		updateScoresEvent.Invoke();
+	}
+	
+	public void OnIncrementPlayerScore(int score)
+	{
+		OnUpdatePlayerScore(playerScore + score);
 	}
 }

@@ -106,6 +106,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -134,10 +147,10 @@ TextureImporter:
       name: backgroundwall_top_center
       rect:
         serializedVersion: 2
-        x: 2584
-        y: 1104
-        width: 1035
-        height: 696
+        x: 2587
+        y: 1107
+        width: 1032
+        height: 693
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,9 +169,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3640
-        y: 1105
+        y: 1108
         width: 2579
-        height: 695
+        height: 692
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +191,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 468
-        width: 2571
-        height: 626
+        width: 2572
+        height: 625
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +210,10 @@ TextureImporter:
       name: backgroundwall_center
       rect:
         serializedVersion: 2
-        x: 2585
+        x: 2586
         y: 464
-        width: 1037
-        height: 631
+        width: 1036
+        height: 629
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,7 +254,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2574
+        width: 2572
         height: 452
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -260,10 +273,10 @@ TextureImporter:
       name: backgroundwall_bottom_center
       rect:
         serializedVersion: 2
-        x: 2586
+        x: 2587
         y: 0
-        width: 1036
-        height: 454
+        width: 1033
+        height: 451
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,9 +294,9 @@ TextureImporter:
       name: backgroundwall_bottom_right
       rect:
         serializedVersion: 2
-        x: 3637
+        x: 3639
         y: 0
-        width: 2582
+        width: 2580
         height: 452
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

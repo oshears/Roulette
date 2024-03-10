@@ -7,6 +7,8 @@ public class NpcScriptableObject : GamePlayerScriptableObject
 {
 	
 	public UnityEvent<string> updateNpcSpeechEvent;
+	
+	[SerializeField] public Sprite npcAliveSprite, npcDeadSprite;
 
 	public CardSO PlayPreGunPhaseCard()
 	{

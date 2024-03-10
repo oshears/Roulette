@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
 	
 	void OnGUI()
 	{
+		// DEBUG: This is just to see the game manager state visually
 		stateMachine.OnGUI();
 	}
 	

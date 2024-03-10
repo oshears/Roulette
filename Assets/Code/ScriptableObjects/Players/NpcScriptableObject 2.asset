@@ -18,3 +18,23 @@ MonoBehaviour:
   playerDiedEvent:
     m_PersistentCalls:
       m_Calls: []
+  playerShotEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerAddCardEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerPlayedCardEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerRemoveCardEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  updateNpcSpeechEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  npcAliveSprite: {fileID: 21300000, guid: 938e22c5c3fb3f14aba87ab3390173f1, type: 3}
+  npcDeadSprite: {fileID: 21300000, guid: f9cf5de2c74d61747a9a962fae06bbd9, type: 3}

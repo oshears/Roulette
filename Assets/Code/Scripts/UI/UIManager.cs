@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
 	
 	[SerializeField] private GameObject gameOverBanner;
 	[SerializeField] GameObject _damageColorizer;
+	[SerializeField] GameObject scoreText;
 	
 	
 	// Start is called before the first frame update
@@ -73,6 +74,8 @@ public class UIManager : MonoBehaviour
 		SetGameOverBannerActive(false);
 		
 		SetDamageColorizerActive(false);
+		
+		// SetScoreTextActive(false);
 	}
 
 	// Update is called once per frame
@@ -177,6 +180,11 @@ public class UIManager : MonoBehaviour
 	public void SetDamageColorizerActive(bool active)
 	{
 		_damageColorizer.SetActive(active);
+	}
+	
+	public void SetScoreTextActive(bool active)
+	{
+		scoreText.SetActive(active);
 	}
 	
 }

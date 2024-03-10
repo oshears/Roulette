@@ -29,8 +29,8 @@ public abstract class GameManagerState : IManagerState
 	}
 	public virtual void OnGUI()
 	{
-		GUILayout.BeginArea(new Rect(0, 500, 500, 500));
-		GUILayout.Label($"Current GameManagerState: {this}");
-		GUILayout.EndArea();
+		// GUILayout.BeginArea(new Rect(0, 500, 500, 500));
+		// GUILayout.Label($"Current GameManagerState: {this}");
+		// GUILayout.EndArea();
 	}
 }
